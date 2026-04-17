@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Publication Review | HUJI IR Dept</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f1eb;
+  --surface:#fff;
+  --blue:#003366;
+  --gold:#8B6914;
+  --red:#c0392b;
+  --green:#1a6b3a;
+  --orange:#c0691a;
+  --border:#d8d4cc;
+  --muted:#7a7468;
+  --text:#1a1814;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'IBM Plex Serif',serif;
+  --sans:'IBM Plex Sans',sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:13px;min-height:100vh}
+
+/* ── LAYOUT ── */
+#app{display:flex;height:100vh;overflow:hidden}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:240px;flex-shrink:0;
+  background:var(--blue);color:white;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+#sidebar-header{padding:16px 16px 12px;border-bottom:1px solid rgba(255,255,255,0.12)}
+#sidebar-header h1{font-family:var(--serif);font-size:14px;font-weight:600;line-height:1.3}
+#sidebar-header p{font-size:10px;opacity:.6;margin-top:3px;font-family:var(--mono)}
+
+#faculty-list{flex:1;overflow-y:auto;padding:8px 0}
+#faculty-list::-webkit-scrollbar{width:3px}
+#faculty-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2)}
+
+.fac-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;cursor:pointer;
+  border-left:3px solid transparent;
+  transition:background .12s,border-color .12s;
+}
+.fac-item:hover{background:rgba(255,255,255,0.08)}
+.fac-item.active{background:rgba(255,255,255,0.12);border-left-color:#F5C842}
+.fac-avatar{
+  width:28px;height:28px;border-radius:50%;object-fit:cover;
+  background:rgba(255,255,255,0.15);flex-shrink:0;
+}
+.fac-avatar-ph{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,0.15);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:10px;font-weight:600;
+}
+.fac-info{flex:1;min-width:0}
+.fac-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fac-count{font-size:10px;opacity:.55;font-family:var(--mono)}
+.fac-flags{display:flex;gap:3px;margin-left:auto}
+.flag-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+#sidebar-footer{
+  padding:12px 14px;border-top:1px solid rgba(255,255,255,0.1);
+  font-size:10px;font-family:var(--mono);opacity:.5;
+}
+
+/* ── MAIN ── */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── TOP BAR ── */
+#topbar{
+  background:var(--surface);border-bottom:2px solid var(--blue);
+  padding:12px 24px;display:flex;align-items:center;gap:16px;flex-shrink:0;
+}
+#current-name{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--blue)}
+#current-stats{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.stat-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:3px;font-size:10px;font-family:var(--mono);
+  background:#eef2f8;color:#2d5fa3;border:1px solid #d0daf0;
+  margin-left:6px;
+}
+.stat-chip.flagged{background:#fdf0f0;color:var(--red);border-color:#f0c0c0}
+.stat-chip.ok{background:#f0fdf4;color:var(--green);border-color:#c0e0cc}
+
+#topbar-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{
+  padding:6px 12px;border-radius:3px;font-size:11px;font-family:var(--mono);
+  cursor:pointer;border:1px solid;font-weight:600;transition:all .12s;
+}
+.btn-export{border-color:var(--green);color:var(--green);background:white}
+.btn-export:hover{background:var(--green);color:white}
+.btn-reset{border-color:var(--border);color:var(--muted);background:white}
+.btn-reset:hover{background:#f0f0eb}
+
+/* ── FILTER BAR ── */
+#filterbar{
+  padding:8px 24px;background:#fafaf7;border-bottom:1px solid var(--border);
+  display:flex;gap:10px;align-items:center;flex-shrink:0;
+}
+#search{
+  flex:1;max-width:280px;padding:5px 10px;
+  border:1px solid var(--border);border-radius:3px;
+  font-size:12px;font-family:var(--sans);background:white;
+}
+#search:focus{outline:none;border-color:var(--blue)}
+.filter-btn{
+  padding:4px 10px;border-radius:3px;font-size:11px;font-family:var(--mono);
+  cursor:pointer;border:1px solid var(--border);background:white;color:var(--muted);
+  transition:all .12s;
+}
+.filter-btn.active{background:var(--blue);color:white;border-color:var(--blue)}
+#pub-count-label{font-size:11px;color:var(--muted);font-family:var(--mono);margin-left:auto}
+
+/* ── PUB LIST ── */
+#pub-area{flex:1;overflow-y:auto;padding:16px 24px}
+#pub-area::-webkit-scrollbar{width:4px}
+#pub-area::-webkit-scrollbar-thumb{background:#d0ccc4;border-radius:2px}
+
+.pub-row{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 14px;background:white;
+  border:1px solid var(--border);border-left:3px solid transparent;
+  border-radius:3px;margin-bottom:6px;
+  transition:border-color .12s,box-shadow .12s;
+}
+.pub-row:hover{box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.pub-row.flagged-wrong{border-left-color:var(--red);background:#fffafa}
+.pub-row.flagged-missing{border-left-color:var(--orange);background:#fffdf8}
+.pub-row.flagged-ok{border-left-color:var(--green);background:#f8fdf9}
+
+.pub-num{
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  min-width:24px;padding-top:2px;text-align:right;
+}
+.pub-body{flex:1;min-width:0}
+.pub-title{
+  font-family:var(--serif);font-size:13px;line-height:1.4;
+  color:var(--text);margin-bottom:4px;
+}
+.pub-title a{color:inherit;text-decoration:none}
+.pub-title a:hover{color:var(--blue);text-decoration:underline}
+.pub-meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11px;color:var(--muted)}
+.pub-journal{font-style:italic;color:var(--gold)}
+.pub-year{font-family:var(--mono);font-weight:600;color:var(--text)}
+.pub-source{
+  font-family:var(--mono);font-size:10px;padding:1px 5px;border-radius:2px;
+}
+.src-orcid{background:#d4f0d4;color:#1a5c1a}
+.src-crossref{background:#d4e4f0;color:#1a3c5c}
+.src-openalex{background:#f0e8d4;color:#5c3c1a}
+.src-manual{background:#e8d4f0;color:#3c1a5c}
+
+.pub-actions{display:flex;gap:6px;flex-shrink:0;padding-top:1px}
+.flag-btn{
+  width:26px;height:26px;border-radius:3px;border:1px solid var(--border);
+  background:white;cursor:pointer;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .12s;
+}
+.flag-btn:hover{transform:scale(1.1)}
+.flag-btn.active-wrong{background:#fdf0f0;border-color:var(--red)}
+.flag-btn.active-missing{background:#fdf8f0;border-color:var(--orange)}
+.flag-btn.active-ok{background:#f0fdf4;border-color:var(--green)}
+
+/* ── EMPTY / LOADING ── */
+#empty{
+  display:none;text-align:center;padding:60px 20px;
+  color:var(--muted);font-family:var(--serif);font-style:italic;font-size:15px;
+}
+#loading{
+  display:flex;align-items:center;justify-content:center;
+  height:100%;font-family:var(--mono);font-size:12px;color:var(--muted);
+}
+
+/* ── FLAGS PANEL ── */
+#flags-panel{
+  display:none;position:fixed;right:0;top:0;bottom:0;
+  width:340px;background:white;border-left:2px solid var(--border);
+  z-index:100;overflow-y:auto;padding:20px;
+  box-shadow:-4px 0 20px rgba(0,0,0,.08);
+}
+#flags-panel h2{font-family:var(--serif);font-size:16px;color:var(--blue);margin-bottom:16px}
+.flag-entry{
+  padding:10px 12px;border-radius:3px;border:1px solid var(--border);
+  margin-bottom:8px;font-size:12px;line-height:1.4;
+}
+.flag-entry .fe-name{font-weight:600;color:var(--blue);margin-bottom:2px;font-size:11px;font-family:var(--mono)}
+.flag-entry .fe-title{color:var(--text)}
+.fe-wrong{border-left:3px solid var(--red)}
+.fe-missing{border-left:3px solid var(--orange)}
+#close-flags{
+  position:absolute;top:16px;right:16px;
+  background:none;border:none;cursor:pointer;font-size:18px;color:var(--muted);
+}
+#close-flags:hover{color:var(--text)}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div id="sidebar-header">
+      <h1>Publication Review</h1>
+      <p>HUJI IR Dept · QA Tool</p>
+    </div>
+    <div id="faculty-list"></div>
+    <div id="sidebar-footer" id="last-updated"></div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+    <div id="topbar">
+      <div>
+        <div id="current-name">Select a faculty member →</div>
+        <div id="current-stats"></div>
+      </div>
+      <div id="topbar-right">
+        <button class="btn btn-reset" onclick="clearFlags()">Clear flags</button>
+        <button class="btn btn-export" onclick="showFlags()">📋 View all flags</button>
+      </div>
+    </div>
+
+    <div id="filterbar">
+      <input type="search" id="search" placeholder="Search titles, journals…" oninput="renderPubs()"/>
+      <button class="filter-btn active" data-f="all" onclick="setFilter(this,'all')">All</button>
+      <button class="filter-btn" data-f="orcid" onclick="setFilter(this,'orcid')">ORCID</button>
+      <button class="filter-btn" data-f="crossref" onclick="setFilter(this,'crossref')">Crossref</button>
+      <button class="filter-btn" data-f="openalex" onclick="setFilter(this,'openalex')">OpenAlex</button>
+      <button class="filter-btn" data-f="flagged" onclick="setFilter(this,'flagged')">⚑ Flagged</button>
+      <span id="pub-count-label"></span>
+    </div>
+
+    <div id="pub-area">
+      <div id="loading">Loading publications.json…</div>
+      <div id="empty">No publications match.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FLAGS PANEL -->
+<div id="flags-panel">
+  <button id="close-flags" onclick="document.getElementById('flags-panel').style.display='none'">✕</button>
+  <h2>Flagged Publications</h2>
+  <div id="flags-list"></div>
+</div>
+
+<script>
+// ── STATE ─────────────────────────────────────────────────────────────────
+
+let allPubs     = [];
+let facMeta     = {};
+let activeFac   = null;
+let sourceFilter = "all";
+let flags = JSON.parse(localStorage.getItem("ir_review_flags") || "{}");
+// flags = { [pubId]: "wrong" | "missing" | "ok" }
+
+function saveFlags() {
+  localStorage.setItem("ir_review_flags", JSON.stringify(flags));
+  updateSidebarDots();
+}
+
+// ── LOAD DATA ─────────────────────────────────────────────────────────────
+
+async function loadData() {
+  try {
+    const r = await fetch("publications.json");
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+
+    allPubs = d.publications || [];
+    facMeta = {};
+    (d.faculty_meta || []).forEach(f => facMeta[f.name] = f);
+
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("sidebar-footer").textContent =
+      d.generated_at ? new Date(d.generated_at).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}) : "";
+
+    buildSidebar();
+  } catch(e) {
+    document.getElementById("loading").innerHTML =
+      `<span style="color:#c0392b">⚠ Could not load publications.json<br><small>${e.message}</small></span>`;
+  }
+}
+
+// ── SIDEBAR ───────────────────────────────────────────────────────────────
+
+function ini(name) {
+  const p = name.split(" ");
+  return (p[0][0] + (p[p.length-1][0]||"")).toUpperCase();
+}
+
+function buildSidebar() {
+  const names = [...new Set(allPubs.map(p => p.faculty_author))].sort();
+  const list  = document.getElementById("faculty-list");
+  list.innerHTML = "";
+
+  names.forEach(name => {
+    const m     = facMeta[name] || {};
+    const pubs  = allPubs.filter(p => p.faculty_author === name);
+    const div   = document.createElement("div");
+    div.className = "fac-item";
+    div.dataset.name = name;
+
+    const avatar = m.photo_url
+      ? `<img class="fac-avatar" src="${m.photo_url}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : "";
+    const ph = `<div class="fac-avatar-ph" ${m.photo_url?"style='display:none'":""}>${ini(name)}</div>`;
+
+    div.innerHTML = `
+      ${avatar}${ph}
+      <div class="fac-info">
+        <div class="fac-name">${name.split(" ").pop()}, ${name.split(" ")[0]}</div>
+        <div class="fac-count">${pubs.length} pubs</div>
+      </div>
+      <div class="fac-flags" id="dots-${name.replace(/\W/g,"_")}"></div>
+    `;
+    div.addEventListener("click", () => selectFaculty(name));
+    list.appendChild(div);
+  });
+
+  updateSidebarDots();
+}
+
+function updateSidebarDots() {
+  const names = [...new Set(allPubs.map(p => p.faculty_author))];
+  names.forEach(name => {
+    const pubs = allPubs.filter(p => p.faculty_author === name);
+    const wrongCount   = pubs.filter(p => flags[p.id] === "wrong").length;
+    const missingCount = pubs.filter(p => flags[p.id] === "missing").length;
+    const container = document.getElementById("dots-" + name.replace(/\W/g,"_"));
+    if (!container) return;
+    container.innerHTML = "";
+    if (wrongCount)   container.innerHTML += `<div class="flag-dot" style="background:#c0392b" title="${wrongCount} wrong"></div>`;
+    if (missingCount) container.innerHTML += `<div class="flag-dot" style="background:#c0691a" title="${missingCount} missing"></div>`;
+  });
+}
+
+// ── SELECT FACULTY ────────────────────────────────────────────────────────
+
+function selectFaculty(name) {
+  activeFac = name;
+  document.querySelectorAll(".fac-item").forEach(el => {
+    el.classList.toggle("active", el.dataset.name === name);
+  });
+
+  const pubs = allPubs.filter(p => p.faculty_author === name);
+  const m    = facMeta[name] || {};
+
+  document.getElementById("current-name").textContent = name;
+
+  const wrong   = pubs.filter(p => flags[p.id] === "wrong").length;
+  const missing = pubs.filter(p => flags[p.id] === "missing").length;
+  const ok      = pubs.filter(p => flags[p.id] === "ok").length;
+
+  const srcCounts = {
+    orcid: pubs.filter(p => p.source === "orcid").length,
+    crossref: pubs.filter(p => p.source === "crossref").length,
+    openalex: pubs.filter(p => p.source === "openalex").length,
+    manual: pubs.filter(p => p.source === "manual").length,
+  };
+
+  let stats = `<span class="stat-chip">${pubs.length} total</span>`;
+  if (srcCounts.orcid)    stats += `<span class="stat-chip">ORCID: ${srcCounts.orcid}</span>`;
+  if (srcCounts.crossref) stats += `<span class="stat-chip">Crossref: ${srcCounts.crossref}</span>`;
+  if (srcCounts.openalex) stats += `<span class="stat-chip">OpenAlex: ${srcCounts.openalex}</span>`;
+  if (wrong)   stats += `<span class="stat-chip flagged">⚑ ${wrong} wrong</span>`;
+  if (missing) stats += `<span class="stat-chip flagged">? ${missing} missing?</span>`;
+  if (ok)      stats += `<span class="stat-chip ok">✓ ${ok} verified</span>`;
+
+  document.getElementById("current-stats").innerHTML = stats;
+  renderPubs();
+}
+
+// ── RENDER PUBS ───────────────────────────────────────────────────────────
+
+function setFilter(btn, val) {
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  sourceFilter = val;
+  renderPubs();
+}
+
+function renderPubs() {
+  if (!activeFac) return;
+  const q     = (document.getElementById("search").value || "").toLowerCase().trim();
+  let   pubs  = allPubs.filter(p => p.faculty_author === activeFac);
+
+  if (sourceFilter === "flagged") {
+    pubs = pubs.filter(p => flags[p.id]);
+  } else if (sourceFilter !== "all") {
+    pubs = pubs.filter(p => p.source === sourceFilter);
+  }
+  if (q) {
+    pubs = pubs.filter(p =>
+      (p.title||"").toLowerCase().includes(q) ||
+      (p.journal||"").toLowerCase().includes(q)
+    );
+  }
+
+  const area  = document.getElementById("pub-area");
+  const empty = document.getElementById("empty");
+  area.querySelectorAll(".pub-row").forEach(el => el.remove());
+
+  document.getElementById("pub-count-label").textContent =
+    `${pubs.length} publication${pubs.length!==1?"s":""}`;
+
+  if (!pubs.length) { empty.style.display = "block"; return; }
+  empty.style.display = "none";
+
+  pubs.sort((a,b) => (b.year||0) - (a.year||0));
+
+  pubs.forEach((p, idx) => {
+    const flag = flags[p.id] || "";
+    const row  = document.createElement("div");
+    row.className = `pub-row${flag === "wrong" ? " flagged-wrong" : flag === "missing" ? " flagged-missing" : flag === "ok" ? " flagged-ok" : ""}`;
+    row.id = "row-" + p.id.replace(/\W/g,"_");
+
+    const srcClass = p.source === "orcid" ? "src-orcid" :
+                     p.source === "crossref" ? "src-crossref" :
+                     p.source === "openalex" ? "src-openalex" : "src-manual";
+
+    row.innerHTML = `
+      <div class="pub-num">${idx+1}</div>
+      <div class="pub-body">
+        <div class="pub-title">
+          ${p.doi ? `<a href="${p.doi}" target="_blank" rel="noopener">${p.title||"Untitled"}</a>` : (p.title||"Untitled")}
+        </div>
+        <div class="pub-meta">
+          ${p.journal ? `<span class="pub-journal">${p.journal}</span>` : ""}
+          ${p.year    ? `<span class="pub-year">${p.year}</span>` : ""}
+          <span class="pub-source ${srcClass}">${p.source||"?"}</span>
+          ${p.cited_by > 0 ? `<span style="color:#7a7468">cited: ${p.cited_by}</span>` : ""}
+        </div>
+      </div>
+      <div class="pub-actions">
+        <button class="flag-btn ${flag==='ok'?'active-ok':''}"      title="Correct ✓"       onclick="setFlag('${p.id}','ok')">✓</button>
+        <button class="flag-btn ${flag==='missing'?'active-missing':''}" title="Suspicious / check" onclick="setFlag('${p.id}','missing')">?</button>
+        <button class="flag-btn ${flag==='wrong'?'active-wrong':''}" title="Wrong person"   onclick="setFlag('${p.id}','wrong')">✗</button>
+      </div>
+    `;
+    area.appendChild(row);
+  });
+}
+
+// ── FLAGS ─────────────────────────────────────────────────────────────────
+
+function setFlag(pubId, type) {
+  if (flags[pubId] === type) {
+    delete flags[pubId];
+  } else {
+    flags[pubId] = type;
+  }
+  saveFlags();
+  // refresh just this row's classes
+  const p   = allPubs.find(x => x.id === pubId);
+  const row = document.getElementById("row-" + pubId.replace(/\W/g,"_"));
+  if (row) {
+    row.className = `pub-row${flags[pubId]==="wrong"?" flagged-wrong":flags[pubId]==="missing"?" flagged-missing":flags[pubId]==="ok"?" flagged-ok":""}`;
+    row.querySelectorAll(".flag-btn").forEach(b => {
+      b.className = "flag-btn";
+      if (b.title.startsWith("Correct") && flags[pubId]==="ok") b.classList.add("active-ok");
+      if (b.title.startsWith("Suspicious") && flags[pubId]==="missing") b.classList.add("active-missing");
+      if (b.title.startsWith("Wrong") && flags[pubId]==="wrong") b.classList.add("active-wrong");
+    });
+  }
+  // update topbar counts
+  if (activeFac) selectFaculty(activeFac);
+}
+
+function clearFlags() {
+  if (!activeFac) return;
+  const pubs = allPubs.filter(p => p.faculty_author === activeFac);
+  pubs.forEach(p => delete flags[p.id]);
+  saveFlags();
+  renderPubs();
+  selectFaculty(activeFac);
+}
+
+function showFlags() {
+  const panel = document.getElementById("flags-panel");
+  const list  = document.getElementById("flags-list");
+  panel.style.display = "block";
+
+  const entries = Object.entries(flags);
+  if (!entries.length) {
+    list.innerHTML = `<p style="color:#7a7468;font-style:italic">No flags yet. Use ✓ ? ✗ buttons on publications.</p>`;
+    return;
+  }
+
+  // group by person
+  const byPerson = {};
+  entries.forEach(([id, type]) => {
+    const p = allPubs.find(x => x.id === id);
+    if (!p) return;
+    if (!byPerson[p.faculty_author]) byPerson[p.faculty_author] = [];
+    byPerson[p.faculty_author].push({...p, flag: type});
+  });
+
+  list.innerHTML = Object.entries(byPerson).map(([name, pubs]) => `
+    <div style="margin-bottom:16px">
+      <div style="font-family:var(--mono);font-size:11px;font-weight:600;color:var(--blue);margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--border)">${name}</div>
+      ${pubs.map(p => `
+        <div class="flag-entry ${p.flag==='wrong'?'fe-wrong':p.flag==='missing'?'fe-missing':''}">
+          <div class="fe-name">${p.flag==='wrong'?'✗ WRONG':p.flag==='missing'?'? CHECK':'✓ OK'} · ${p.source} · ${p.year||'?'}</div>
+          <div class="fe-title">${p.title||'Untitled'}</div>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>

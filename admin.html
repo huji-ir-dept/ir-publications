@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Faculty Manager | IR Dept Publications</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#003366;--gold:#8B6914;--green:#1a7a3c;--red:#c0392b;--border:#ddd;--bg:#f5f5f0;--surface:#fff;--muted:#666;--r:6px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#1a1a1a;font-size:14px}
+
+#hdr{background:var(--blue);color:white;padding:14px 26px;border-bottom:3px solid var(--gold);display:flex;justify-content:space-between;align-items:center}
+#hdr h1{font-size:17px;font-weight:600}
+#hdr p{font-size:11px;opacity:.7;margin-top:2px}
+#hdr-counts{text-align:right;font-size:12px;opacity:.75}
+
+#main{max-width:940px;margin:24px auto;padding:0 20px}
+
+/* TABS */
+#tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:22px}
+.tab{padding:9px 18px;cursor:pointer;font-size:13px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.tab:hover{color:var(--blue)}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.panel{display:none}.panel.active{display:block}
+
+/* TABLE */
+.sec-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.sec-ttl{font-size:14px;font-weight:600}
+.badge{background:var(--blue);color:white;font-size:11px;padding:2px 8px;border-radius:12px;font-weight:600}
+.badge.off{background:var(--muted)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+thead{background:#f0f0eb}
+th{padding:9px 13px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td{padding:9px 13px;border-top:1px solid #f0f0eb;vertical-align:middle}
+tr:hover td{background:#fafaf7}
+.fav{width:32px;height:32px;border-radius:50%;object-fit:cover;background:#ddd;vertical-align:middle}
+.fav-ph{width:32px;height:32px;border-radius:50%;background:var(--blue);color:white;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.nc{display:flex;align-items:center;gap:9px}
+.ne{font-weight:500}.nh{font-size:12px;color:var(--muted)}
+.rbadge{font-size:11px;padding:2px 7px;border-radius:10px;background:#eef2f8;color:#2d5fa3;font-weight:500}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot.on{background:var(--green)}.dot.off{background:var(--muted)}
+.btn{padding:4px 10px;border-radius:var(--r);border:1px solid;font-size:12px;cursor:pointer;font-family:inherit;font-weight:500;transition:all .12s}
+.btn-off{border-color:#e67e22;color:#e67e22;background:white}.btn-off:hover{background:#e67e22;color:white}
+.btn-on{border-color:var(--green);color:var(--green);background:white}.btn-on:hover{background:var(--green);color:white}
+.btn-del{border-color:var(--red);color:var(--red);background:white}.btn-del:hover{background:var(--red);color:white}
+.btn-pri{border-color:var(--blue);color:white;background:var(--blue);padding:8px 16px}.btn-pri:hover{background:#002255}
+.btn-sec{border-color:var(--border);color:var(--muted);background:white;padding:8px 14px}.btn-sec:hover{background:#f0f0eb}
+.inactive-row td{opacity:.45}
+
+/* FORM */
+.fcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.fcard h3{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:14px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{display:flex;flex-direction:column;gap:4px}.fg.full{grid-column:1/-1}
+label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+input,select{padding:7px 10px;border:1px solid var(--border);border-radius:var(--r);font-size:13px;font-family:inherit;background:var(--bg)}
+input:focus,select:focus{outline:none;border-color:var(--blue);background:white}
+.factions{display:flex;gap:10px;margin-top:16px}
+#add-fb{margin-top:10px;font-size:12px;color:var(--green);display:none}
+
+/* INFO BOX */
+.ibox{background:#fff8e1;border:1px solid #f0c040;border-radius:var(--r);padding:11px 15px;font-size:12px;color:#7a5800;margin-bottom:14px;line-height:1.5}
+.ibox strong{display:block;margin-bottom:2px}
+
+/* JSON */
+#json-out{width:100%;height:360px;font-family:'Courier New',monospace;font-size:12px;padding:13px;border:1px solid var(--border);border-radius:var(--r);background:#1e1e2e;color:#cdd6f4;resize:vertical}
+.cact{margin-top:10px;display:flex;gap:10px;align-items:center}
+#cp-fb{font-size:12px;color:var(--green);display:none}
+</style>
+</head>
+<body>
+
+<div id="hdr">
+  <div><h1>Faculty Manager</h1><p>IR Department — Publications System</p></div>
+  <div id="hdr-counts"><span id="cnt-active">—</span> active · <span id="cnt-total">—</span> total</div>
+</div>
+
+<div id="main">
+  <div id="tabs">
+    <div class="tab active" data-tab="list">👥 Faculty List</div>
+    <div class="tab" data-tab="add">➕ Add Member</div>
+    <div class="tab" data-tab="export">📋 Export JSON</div>
+  </div>
+
+  <!-- LIST -->
+  <div class="panel active" id="panel-list">
+    <div class="ibox">
+      <strong>💡 הסבר</strong>
+      <b>Deactivate</b> — מפסיק לסרוק פרסומים חדשים אך שומר פרסומים קיימים.<br>
+      <b>Delete</b> — מוחק לגמרי (הפרסומים ייעלמו בסריקה המלאה הבאה).
+    </div>
+    <div class="sec-hdr"><span class="sec-ttl">Active <span class="badge" id="b-on">0</span></span></div>
+    <table><thead><tr><th>Name</th><th>Rank</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody id="tb-on"></tbody></table>
+
+    <div class="sec-hdr" style="margin-top:24px"><span class="sec-ttl">Inactive / Former <span class="badge off" id="b-off">0</span></span></div>
+    <table><thead><tr><th>Name</th><th>Rank</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody id="tb-off"></tbody></table>
+  </div>
+
+  <!-- ADD -->
+  <div class="panel" id="panel-add">
+    <div class="fcard">
+      <h3>Add New Faculty Member</h3>
+      <div class="fgrid">
+        <div class="fg"><label>Full Name (English) *</label><input type="text" id="a-name" placeholder="e.g. Jane Smith"/></div>
+        <div class="fg"><label>Full Name (Hebrew)</label><input type="text" id="a-he" placeholder="ג'יין סמית'" dir="rtl"/></div>
+        <div class="fg"><label>Rank *</label>
+          <select id="a-rank">
+            <option value="Professor">Professor</option>
+            <option value="Associate Professor">Associate Professor</option>
+            <option value="Dr." selected>Dr.</option>
+            <option value="Lecturer">Lecturer</option>
+            <option value="Postdoc">Postdoc</option>
+            <option value="Visiting Scholar">Visiting Scholar</option>
+          </select>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" id="a-email" placeholder="name@mail.huji.ac.il"/></div>
+        <div class="fg full"><label>Role / Position</label><input type="text" id="a-role" placeholder="e.g. Postdoctoral Fellow, Head of MA Track…"/></div>
+        <div class="fg full"><label>Photo URL (optional)</label><input type="text" id="a-photo" placeholder="https://en.ir.huji.ac.il/sites/…"/></div>
+      </div>
+      <div class="factions">
+        <button class="btn btn-pri" onclick="addFaculty()">Add to List</button>
+        <button class="btn btn-sec" onclick="clearForm()">Clear</button>
+      </div>
+      <div id="add-fb"></div>
+    </div>
+    <div class="ibox">
+      <strong>📌 אחרי הוספה</strong>
+      עבור ל-<b>Export JSON</b>, הורד את הקובץ, ועלה אותו ל-GitHub כ-<code>faculty_config.json</code>.
+      הסריקה הבאה תאסוף אוטומטית את הפרסומים של החבר החדש.
+    </div>
+  </div>
+
+  <!-- EXPORT -->
+  <div class="panel" id="panel-export">
+    <div class="fcard">
+      <h3>Export faculty_config.json</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">העתק או הורד את הקובץ ועלה אותו ל-GitHub repository.</p>
+      <textarea id="json-out" readonly></textarea>
+      <div class="cact">
+        <button class="btn btn-pri" onclick="copyJson()">Copy to clipboard</button>
+        <button class="btn btn-sec" onclick="dlJson()">⬇ Download file</button>
+        <span id="cp-fb">✓ Copied!</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DEFAULTS = {
+  department:"Department of International Relations",
+  institution:"Hebrew University of Jerusalem",
+  institution_ror:"03qxff017"
+};
+
+function loadFaculty() {
+  const s = localStorage.getItem("ir_faculty");
+  if (s) { try { return JSON.parse(s); } catch(e){} }
+  return defaultFaculty();
+}
+function saveFaculty(f) { localStorage.setItem("ir_faculty", JSON.stringify(f)); }
+
+function defaultFaculty() {
+  return [
+    {name:"Daniel Schwartz",       name_he:"דניאל שוורץ",       rank:"Professor",  role:"Chair of the Department",                        email:"daniel.schwartz3@mail.huji.ac.il",      photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dnyl_shvvrts.jpg",      active:true},
+    {name:"Yehonatan Abramson",    name_he:"יהונתן אברמסון",    rank:"Dr.",         role:"",                                               email:"Yehonatan.Abramson@mail.huji.ac.il",    photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/abramson.jpg",           active:true},
+    {name:"Piki Ish-Shalom",       name_he:"פיקי איש-שלום",    rank:"Professor",   role:"",                                               email:"piki.ish-shalom@mail.huji.ac.il",       photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/pyqy_ysh_shlvm.jpg",      active:true},
+    {name:"Galia Press-Barnathan", name_he:"גליה פרס-ברנתן",    rank:"Professor",   role:"Director of the Leonard Davis Institute",        email:"Galia.Press-Barnathan@mail.huji.ac.il", photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/glyh_br_ntn.jpg",          active:true},
+    {name:"Tomer Broude",          name_he:"תומר ברודי",        rank:"Professor",   role:"Dean of the Faculty of Law",                     email:"Tomer.Broude@mail.huji.ac.il",          photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0303-2.jpg",          active:true},
+    {name:"Orit Gazit-Lederman",   name_he:"אורית גזית-לדרמן",  rank:"Dr.",         role:"Head of the Migration & Development Track",      email:"orit.gazit@mail.huji.ac.il",            photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/orit_gazit3.jpg",         active:true},
+    {name:"Gadi Heimann",          name_he:"גדי היימן",         rank:"Professor",   role:"Head of The Davis Graduate School (TELEM IR)",   email:"gadi.heimann@mail.huji.ac.il",          photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0296-2.jpg",          active:true},
+    {name:"Moshe Hirsch",          name_he:"משה הירש",          rank:"Professor",   role:"",                                               email:"moshe.hirsch@mail.huji.ac.il",          photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/mshh_hyrsh.jpg",           active:true},
+    {name:"Yoram Haftel",          name_he:"יורם הפטל",         rank:"Professor",   role:"",                                               email:"Yoram.Haftel@mail.huji.ac.il",          photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/yvrm_hptl.jpg",            active:true},
+    {name:"Lior Herman",           name_he:"ליאור הרמן",        rank:"Professor",   role:"Director MA Program in International Political Economy", email:"Lior.Herman@mail.huji.ac.il",    photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0469-2.jpg",          active:true},
+    {name:"Guy Harpaz",            name_he:"גיא הרפז",          rank:"Professor",   role:"Vice President for International Affairs",       email:"guy.harpaz@mail.huji.ac.il",            photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/guy_photo_2_.jpg",         active:true},
+    {name:"Daniel Wajner",         name_he:"דניאל ויינר",       rank:"Dr.",         role:"",                                               email:"daniel.wajner@mail.huji.ac.il",         photo_url:"",                                                                                                                    active:true},
+    {name:"Lior Lehrs",            name_he:"ליאור להרס",        rank:"Dr.",         role:"",                                               email:"lior.lehrs@mail.huji.ac.il",            photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/lyvr_lhrs.jpg",             active:true},
+    {name:"Oded Lowenheim",        name_he:"עודד לוונהיים",     rank:"Professor",   role:"MA Programs Advisor",                            email:"Oded.lowenheim@mail.huji.ac.il",        photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0339-2.jpg",          active:true},
+    {name:"Guy Laron",             name_he:"גיא לרון",          rank:"Dr.",         role:"",                                               email:"guy.laron@mail.huji.ac.il",             photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/gy_lrvn.jpg",              active:true},
+    {name:"Tamar Megiddo",         name_he:"תמר מגידו",         rank:"Dr.",         role:"",                                               email:"tamarmegiddo@gmail.com",                photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/tmr_mgydv.jpg",             active:true},
+    {name:"Dan Miodownik",         name_he:"דן מיודובניק",      rank:"Professor",   role:"",                                               email:"Dan.Miodownik@mail.huji.ac.il",         photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dan_miodownik.png",        active:true},
+    {name:"Devorah Manekin",       name_he:"דבורה מנקין",       rank:"Professor",   role:"",                                               email:"d.manekin@mail.huji.ac.il",             photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dbvrh_mnqyn.jpg",          active:true},
+    {name:"Daniel Sobelman",       name_he:"דניאל סובלמן",      rank:"Dr.",         role:"Head of International Security & Diplomacy Track",email:"daniel.sobelman@mail.huji.ac.il",      photo_url:"",                                                                                                                    active:true},
+    {name:"Omer Solodoch",         name_he:"עומר סולודוך",      rank:"Dr.",         role:"",                                               email:"omer.solodoch@mail.huji.ac.il",         photo_url:"",                                                                                                                    active:true},
+    {name:"Arie Kacowicz",         name_he:"אריה קצוביץ'",     rank:"Professor",   role:"",                                               email:"arie.kacowicz@mail.huji.ac.il",         photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/ryh_qtsvbyts.jpg",         active:true},
+    {name:"Deganit Paikowsky",     name_he:"דגנית פייקובסקי",   rank:"Dr.",         role:"",                                               email:"deganit.paikowsky@mail.huji.ac.il",     photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dgnyt_pyyqvbsqy.jpg",     active:true},
+    {name:"Roni Porat",            name_he:"רוני פורת",         rank:"Dr.",         role:"BA Program Advisor",                             email:"porat.roni@gmail.com",                  photo_url:"https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/rvny_pvrt.jpg",            active:true},
+    {name:"Or Rabinowitz",         name_he:"אור רבינוביץ'",    rank:"Dr.",         role:"",                                               email:"or.rabinowitz-batz@mail.huji.ac.il",    photo_url:"",                                                                                                                    active:true},
+    {name:"Oded Steinberg",        name_he:"עודד שטיינברג",     rank:"Dr.",         role:"",                                               email:"oded.steinberg@mail.huji.ac.il",        photo_url:"",                                                                                                                    active:true},
+    {name:"Veronica Lion",         name_he:"ורוניקה ליון",      rank:"Postdoc",     role:"Joining Fall 2026",     email:"",                                      photo_url:"",                                                                                                                    active:true},
+    {name:"Gal Bitton",            name_he:"גל ביטון",          rank:"Lecturer",    role:"Joining Spring 2027",                            email:"galbitton@mail.tau.ac.il",              photo_url:"https://i.postimg.cc/QN947T4d/temp-Image-HP3l-Uy.avif",                                                              active:true}
+  ];
+}
+
+let fac = loadFaculty();
+
+function ini(name){ const p=name.split(" "); return (p[0][0]+(p[p.length-1][0]||"")).toUpperCase(); }
+
+function row(f, idx) {
+  const on = f.active!==false;
+  return `<tr class="${on?"":"inactive-row"}">
+    <td><div class="nc">
+      ${f.photo_url
+        ? `<img class="fav" src="${f.photo_url}" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">`
+        : ""}<div class="fav-ph" ${f.photo_url?"style='display:none'":""}>${ini(f.name)}</div>
+      <div><div class="ne">${f.name}</div><div class="nh">${f.name_he||""}</div></div>
+    </div></td>
+    <td><span class="rbadge">${f.rank}</span></td>
+    <td style="font-size:12px;color:var(--muted);max-width:160px">${f.role||"—"}</td>
+    <td><span class="dot ${on?"on":"off"}"></span> ${on?"Active":"Inactive"}</td>
+    <td style="white-space:nowrap">
+      ${on
+        ? `<button class="btn btn-off" onclick="deact(${idx})">Deactivate</button>`
+        : `<button class="btn btn-on"  onclick="react(${idx})">Reactivate</button>`}
+      &nbsp;
+      <button class="btn btn-del" onclick="del(${idx},'${f.name.replace(/'/g,"\\'")}')">Delete</button>
+    </td>
+  </tr>`;
+}
+
+function render() {
+  const on  = fac.filter(f=>f.active!==false);
+  const off = fac.filter(f=>f.active===false);
+  document.getElementById("cnt-active").textContent = on.length;
+  document.getElementById("cnt-total").textContent  = fac.length;
+  document.getElementById("b-on").textContent  = on.length;
+  document.getElementById("b-off").textContent = off.length;
+  document.getElementById("tb-on").innerHTML  = on.map((f)=>row(f,fac.indexOf(f))).join("")||`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:18px">No active members</td></tr>`;
+  document.getElementById("tb-off").innerHTML = off.map((f)=>row(f,fac.indexOf(f))).join("")||`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:18px">No inactive members</td></tr>`;
+  buildJson();
+}
+
+function deact(i){ fac[i].active=false; saveFaculty(fac); render(); }
+function react(i){ fac[i].active=true;  saveFaculty(fac); render(); }
+function del(i,n){ if(confirm(`Delete "${n}" permanently?`)){ fac.splice(i,1); saveFaculty(fac); render(); } }
+
+function addFaculty() {
+  const name = document.getElementById("a-name").value.trim();
+  if (!name) { alert("Name (English) is required."); return; }
+  fac.push({
+    name, name_he:document.getElementById("a-he").value.trim(),
+    rank:document.getElementById("a-rank").value,
+    role:document.getElementById("a-role").value.trim(),
+    email:document.getElementById("a-email").value.trim(),
+    photo_url:document.getElementById("a-photo").value.trim(),
+    active:true
+  });
+  saveFaculty(fac); render(); clearForm();
+  const fb=document.getElementById("add-fb");
+  fb.textContent=`✓ ${name} added. Go to Export JSON to save.`;
+  fb.style.display="block";
+  setTimeout(()=>fb.style.display="none",5000);
+}
+function clearForm(){ ["a-name","a-he","a-role","a-email","a-photo"].forEach(id=>document.getElementById(id).value=""); document.getElementById("a-rank").value="Dr."; }
+
+function buildConfig(){ return {_comment:`Last updated: ${new Date().toISOString().slice(0,10)}`,...DEFAULTS,faculty:fac}; }
+function buildJson(){ const el=document.getElementById("json-out"); if(el) el.value=JSON.stringify(buildConfig(),null,2); }
+function copyJson(){ navigator.clipboard.writeText(JSON.stringify(buildConfig(),null,2)).then(()=>{ const f=document.getElementById("cp-fb"); f.style.display="inline"; setTimeout(()=>f.style.display="none",2500); }); }
+function dlJson(){ const b=new Blob([JSON.stringify(buildConfig(),null,2)],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(b); a.download="faculty_config.json"; a.click(); }
+
+document.querySelectorAll(".tab").forEach(t=>{
+  t.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    document.getElementById("panel-"+t.dataset.tab).classList.add("active");
+    if(t.dataset.tab==="export") buildJson();
+  });
+});
+
+render();
+</script>
+</body>
+</html>

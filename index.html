@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Publications | Department of International Relations — Hebrew University</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --blue:    #003366;
+  --gold:    #8B6914;
+  --green:   #2e7d32;
+  --bg:      #f7f6f2;
+  --surface: #ffffff;
+  --border:  #ddd9d0;
+  --text:    #1a1a1a;
+  --muted:   #6b6860;
+  --accent:  #1a4d8f;
+  --tag-bg:  #eef2f8;
+  --tag-col: #2d5fa3;
+  --radius:  6px;
+  --shadow:  0 1px 4px rgba(0,0,0,.08);
+}
+body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); font-size:14px; line-height:1.5; }
+
+/* HEADER */
+#page-header { background:var(--blue); color:white; padding:24px 32px 20px; border-bottom:4px solid var(--gold); }
+#page-header h1 { font-family:'Merriweather',serif; font-size:21px; font-weight:700; }
+#page-header p  { font-size:12px; opacity:.75; font-style:italic; margin-top:4px; }
+#header-stats { display:flex; gap:24px; margin-top:14px; flex-wrap:wrap; }
+.hstat-val { font-size:24px; font-weight:600; color:#a8c4e8; line-height:1; }
+.hstat-lbl { font-size:10px; text-transform:uppercase; letter-spacing:.08em; opacity:.65; margin-top:2px; }
+
+/* CONTROLS */
+#controls {
+  background:var(--surface); border-bottom:1px solid var(--border);
+  padding:12px 32px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+#search-box {
+  flex:1; min-width:200px; padding:8px 12px;
+  border:1px solid var(--border); border-radius:var(--radius);
+  font-size:13px; font-family:inherit; background:var(--bg);
+}
+#search-box:focus { outline:none; border-color:var(--accent); }
+.fsel {
+  padding:8px 10px; border:1px solid var(--border); border-radius:var(--radius);
+  font-size:13px; font-family:inherit; background:var(--bg); cursor:pointer;
+}
+.fsel:focus { outline:none; border-color:var(--accent); }
+#result-count { margin-left:auto; font-size:12px; color:var(--muted); white-space:nowrap; }
+#view-btns { display:flex; gap:4px; }
+.vbtn {
+  padding:6px 10px; border:1px solid var(--border); border-radius:var(--radius);
+  background:var(--bg); cursor:pointer; font-size:13px; color:var(--muted);
+}
+.vbtn.active { background:var(--blue); color:white; border-color:var(--blue); }
+
+/* FACULTY PILLS */
+#pills {
+  background:var(--surface); border-bottom:1px solid var(--border);
+  padding:9px 32px; display:flex; gap:7px; flex-wrap:wrap; align-items:center;
+}
+.pill-lbl { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-right:4px; }
+.pill {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:3px 10px; border:1px solid var(--border); border-radius:20px;
+  background:var(--bg); cursor:pointer; font-size:12px; color:var(--muted);
+  transition:all .15s;
+}
+.pill:hover { border-color:var(--accent); color:var(--accent); }
+.pill.active { background:var(--blue); color:white; border-color:var(--blue); }
+.pill img { width:18px; height:18px; border-radius:50%; object-fit:cover; }
+
+/* MAIN */
+#main { max-width:1080px; margin:0 auto; padding:24px 32px; }
+
+/* LIST VIEW */
+.year-div {
+  font-family:'Merriweather',serif; font-size:17px; font-weight:700;
+  color:var(--blue); padding:18px 0 8px; border-bottom:2px solid var(--blue);
+  margin-bottom:10px; margin-top:6px;
+}
+.pub-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid transparent; border-radius:var(--radius);
+  padding:16px 18px; margin-bottom:8px;
+  display:flex; gap:14px; align-items:flex-start;
+  transition:border-color .15s, box-shadow .15s;
+}
+.pub-card:hover { border-left-color:var(--blue); box-shadow:var(--shadow); }
+.fav { width:40px; height:40px; border-radius:50%; object-fit:cover; flex-shrink:0; background:var(--border); border:2px solid white; box-shadow:0 1px 3px rgba(0,0,0,.15); }
+.fav-ph { width:40px; height:40px; border-radius:50%; background:var(--blue); color:white; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.pub-body { flex:1; min-width:0; }
+.pub-title { font-family:'Merriweather',serif; font-size:14px; font-weight:400; line-height:1.45; margin-bottom:5px; }
+.pub-title a { color:var(--text); text-decoration:none; }
+.pub-title a:hover { color:var(--accent); text-decoration:underline; }
+.pub-meta { font-size:12px; color:var(--muted); margin-bottom:6px; display:flex; flex-wrap:wrap; gap:4px 10px; align-items:center; }
+.pub-journal { font-style:italic; color:var(--gold); }
+.pub-year { font-weight:600; color:var(--text); }
+.pub-type { background:var(--tag-bg); color:var(--tag-col); padding:1px 7px; border-radius:12px; font-size:11px; text-transform:capitalize; }
+.pub-cited { font-size:11px; color:var(--muted); }
+.pub-cited b { color:var(--text); }
+.pub-authors { font-size:12px; color:var(--muted); margin-bottom:6px; }
+.pub-authors strong { color:var(--accent); }
+.pub-abstract {
+  font-size:12px; color:#4a4a4a; line-height:1.55; margin-top:5px;
+  border-left:2px solid var(--border); padding-left:10px;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+}
+.pub-abstract.expanded { -webkit-line-clamp:unset; overflow:visible; }
+.pub-actions { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; align-items:center; }
+.plink {
+  font-size:11px; padding:3px 10px; border:1px solid var(--border); border-radius:12px;
+  color:var(--muted); text-decoration:none; transition:all .12s;
+}
+.plink:hover { background:var(--blue); color:white; border-color:var(--blue); }
+.plink.oa { border-color:var(--green); color:var(--green); }
+.plink.oa:hover { background:var(--green); color:white; }
+.togabs { font-size:11px; color:var(--muted); background:none; border:none; cursor:pointer; padding:3px 6px; text-decoration:underline; }
+.togabs:hover { color:var(--accent); }
+
+/* GRID VIEW */
+#pub-list.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:12px; }
+#pub-list.grid .pub-card { flex-direction:column; margin-bottom:0; }
+#pub-list.grid .fav, #pub-list.grid .fav-ph { display:none; }
+
+/* EMPTY / LOADING */
+#empty, #loading { text-align:center; padding:60px 20px; color:var(--muted); display:none; font-size:15px; }
+
+/* FOOTER */
+#footer { text-align:center; padding:24px; color:var(--muted); font-size:11px; border-top:1px solid var(--border); margin-top:28px; }
+#footer a { color:var(--accent); }
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  #page-header,#controls,#pills,#main { padding-left:14px; padding-right:14px; }
+  .pub-card { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<div id="page-header">
+  <h1>Department Publications</h1>
+  <p>Department of International Relations · The Hebrew University of Jerusalem</p>
+  <div id="header-stats">
+    <div><div class="hstat-val" id="s-pubs">—</div><div class="hstat-lbl">Publications</div></div>
+    <div><div class="hstat-val" id="s-fac">—</div><div class="hstat-lbl">Faculty</div></div>
+    <div><div class="hstat-val" id="s-span">—</div><div class="hstat-lbl">Year Span</div></div>
+    <div><div class="hstat-val" id="s-cite">—</div><div class="hstat-lbl">Total Citations</div></div>
+  </div>
+</div>
+
+<div id="controls">
+  <input type="search" id="search-box" placeholder="Search titles, authors, journals…" autocomplete="off"/>
+  <select class="fsel" id="f-year"><option value="">All years</option></select>
+  <select class="fsel" id="f-type">
+    <option value="">All types</option>
+    <option value="article">Journal articles</option>
+    <option value="book">Books</option>
+    <option value="book-chapter">Book chapters</option>
+  </select>
+  <span id="result-count"></span>
+  <div id="view-btns">
+    <button class="vbtn active" id="btn-list" title="List view">☰</button>
+    <button class="vbtn" id="btn-grid" title="Grid view">⊞</button>
+  </div>
+</div>
+
+<div id="pills">
+  <span class="pill-lbl">Filter by:</span>
+  <div class="pill active" data-name="" style="font-weight:600">All faculty</div>
+</div>
+
+<div id="main">
+  <div id="loading">Loading publications…</div>
+  <div id="empty">No publications match your search.</div>
+  <div id="pub-list"></div>
+</div>
+
+<div id="footer">
+  Data sourced from <a href="https://openalex.org" target="_blank">OpenAlex</a>.
+  <span id="last-upd"></span>
+</div>
+
+<script>
+let allPubs = [], facMeta = {}, activeF = {search:"",year:"",type:"",faculty:""}, viewMode="list";
+
+async function loadData() {
+  try {
+    const r = await fetch("publications.json");
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+    allPubs = d.publications || [];
+    facMeta = {};
+    (d.faculty_meta||[]).forEach(f => facMeta[f.name] = f);
+
+    const years = allPubs.map(p=>p.year).filter(Boolean);
+    document.getElementById("s-pubs").textContent  = allPubs.length.toLocaleString();
+    document.getElementById("s-fac").textContent   = Object.keys(facMeta).length;
+    document.getElementById("s-span").textContent  = years.length ? Math.min(...years)+"–"+Math.max(...years) : "—";
+    const tc = (d.faculty_meta||[]).reduce((s,f)=>s+(f.cited_total||0),0);
+    document.getElementById("s-cite").textContent  = tc > 0 ? tc.toLocaleString() : "—";
+    document.getElementById("last-upd").textContent = d.generated_at
+      ? " · Last updated: " + new Date(d.generated_at).toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})
+      : "";
+    if (d.until_year) {
+      document.getElementById("last-upd").textContent += ` · Publications up to ${d.until_year} only`;
+    }
+
+    buildYearFilter();
+    buildPills();
+    render();
+    document.getElementById("loading").style.display = "none";
+  } catch(e) {
+    document.getElementById("loading").innerHTML =
+      `<b style="color:#c0392b">⚠ Could not load publications.json</b><br>
+       Run: <code>python3 fetch_publications.py --test</code><br><small>${e.message}</small>`;
+    document.getElementById("loading").style.display = "block";
+  }
+}
+
+function buildYearFilter() {
+  const years = [...new Set(allPubs.map(p=>p.year).filter(Boolean))].sort((a,b)=>b-a);
+  const sel = document.getElementById("f-year");
+  years.forEach(y => { const o=document.createElement("option"); o.value=y; o.textContent=y; sel.appendChild(o); });
+}
+
+function buildPills() {
+  const cont = document.getElementById("pills");
+  const names = [...new Set(allPubs.map(p=>p.faculty_author))].sort();
+  names.forEach(name => {
+    const m = facMeta[name]||{};
+    const p = document.createElement("div");
+    p.className = "pill"; p.dataset.name = name;
+    if (m.photo_url) {
+      p.innerHTML = `<img src="${m.photo_url}" alt="" onerror="this.style.display='none'"/> ${name.split(" ").pop()}`;
+    } else {
+      p.textContent = name.split(" ").pop();
+    }
+    p.addEventListener("click", () => {
+      document.querySelectorAll(".pill").forEach(x=>x.classList.remove("active"));
+      p.classList.add("active");
+      activeF.faculty = name; render();
+    });
+    cont.appendChild(p);
+  });
+}
+
+function filterPubs() {
+  const q = activeF.search.toLowerCase().trim();
+  return allPubs.filter(p => {
+    if (activeF.faculty && p.faculty_author !== activeF.faculty) return false;
+    if (activeF.year   && String(p.year) !== activeF.year) return false;
+    if (activeF.type   && p.type !== activeF.type) return false;
+    if (q) {
+      const hay = [p.title, p.journal, p.faculty_author,
+        (p.authors||[]).map(a=>a.name).join(" "), p.abstract].join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function initials(name) {
+  const p = name.split(" "); return (p[0][0]+(p[p.length-1][0]||"")).toUpperCase();
+}
+
+function pubCard(p) {
+  const m   = facMeta[p.faculty_author]||{};
+  const doi = p.doi||"", pdf = p.pdf_url||"";
+  const hasAbs = p.abstract && p.abstract.length > 80;
+  const authHtml = (p.authors||[]).map(a => {
+    const isFac = Object.keys(facMeta).some(fn => a.name.toLowerCase().includes(fn.split(" ").pop().toLowerCase()));
+    return isFac ? `<strong>${a.name}</strong>` : a.name;
+  }).join(", ");
+  const absId = "abs-"+p.id.replace(/\W/g,"");
+  const card = document.createElement("div");
+  card.className = "pub-card";
+  card.innerHTML = `
+    ${m.photo_url
+      ? `<img class="fav" src="${m.photo_url}" alt="${p.faculty_author}" loading="lazy" onerror="this.style.display='none'">`
+      : `<div class="fav-ph">${initials(p.faculty_author)}</div>`}
+    <div class="pub-body">
+      <div class="pub-title">${doi?`<a href="${doi}" target="_blank" rel="noopener">${p.title||"Untitled"}</a>`:(p.title||"Untitled")}</div>
+      <div class="pub-meta">
+        ${p.journal?`<span class="pub-journal">${p.journal}</span>`:""}
+        ${p.year?`<span class="pub-year">${p.year}</span>`:""}
+        ${p.type?`<span class="pub-type">${p.type.replace(/-/g," ")}</span>`:""}
+        ${p.cited_by>0?`<span class="pub-cited">Cited: <b>${p.cited_by}</b></span>`:""}
+      </div>
+      ${authHtml?`<div class="pub-authors">${authHtml}</div>`:""}
+      ${hasAbs?`<div class="pub-abstract" id="${absId}">${p.abstract}</div>`:""}
+      <div class="pub-actions">
+        ${doi?`<a class="plink" href="${doi}" target="_blank">DOI ↗</a>`:""}
+        ${pdf?`<a class="plink oa" href="${pdf}" target="_blank">📄 Open Access PDF</a>`:""}
+        ${hasAbs?`<button class="togabs" onclick="toggleAbs('${absId}',this)">Show abstract ▾</button>`:""}
+      </div>
+    </div>`;
+  return card;
+}
+
+function toggleAbs(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle("expanded");
+  btn.textContent = el.classList.contains("expanded") ? "Hide abstract ▴" : "Show abstract ▾";
+}
+
+function render() {
+  const pubs  = filterPubs();
+  const list  = document.getElementById("pub-list");
+  const empty = document.getElementById("empty");
+  document.getElementById("result-count").textContent = `${pubs.length} publication${pubs.length!==1?"s":""}`;
+  list.innerHTML = "";
+  list.className = viewMode === "grid" ? "grid" : "";
+  if (!pubs.length) { empty.style.display="block"; return; }
+  empty.style.display = "none";
+
+  if (viewMode === "list") {
+    const byYear = {};
+    pubs.forEach(p => { const y=p.year||"Unknown"; (byYear[y]=byYear[y]||[]).push(p); });
+    Object.keys(byYear).sort((a,b)=>b-a).forEach(yr => {
+      const d=document.createElement("div"); d.className="year-div"; d.textContent=yr; list.appendChild(d);
+      byYear[yr].forEach(p => list.appendChild(pubCard(p)));
+    });
+  } else {
+    pubs.forEach(p => list.appendChild(pubCard(p)));
+  }
+}
+
+// Events
+document.getElementById("search-box").addEventListener("input", e => { activeF.search=e.target.value; render(); });
+document.getElementById("f-year").addEventListener("change",    e => { activeF.year=e.target.value;   render(); });
+document.getElementById("f-type").addEventListener("change",    e => { activeF.type=e.target.value;   render(); });
+document.getElementById("btn-list").addEventListener("click", () => { viewMode="list"; document.getElementById("btn-list").classList.add("active"); document.getElementById("btn-grid").classList.remove("active"); render(); });
+document.getElementById("btn-grid").addEventListener("click", () => { viewMode="grid"; document.getElementById("btn-grid").classList.add("active"); document.getElementById("btn-list").classList.remove("active"); render(); });
+document.querySelector('.pill[data-name=""]').addEventListener("click", function(){ document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active")); this.classList.add("active"); activeF.faculty=""; render(); });
+
+loadData();
+</script>
+</body>
+</html>
