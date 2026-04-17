@@ -1,0 +1,46 @@
+name: Update Publications
+
+on:
+  schedule:
+    - cron: "0 6 1 * *"   # ← ב-1 לכל חודש בשעה 06:00
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "recent = שנתיים אחרונות (מהיר) | full = כל השנים"
+        required: false
+        default: "recent"
+
+jobs:
+  fetch-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run fetcher
+        run: |
+          MODE="${{ github.event.inputs.mode || 'recent' }}"
+          if [ "$MODE" = "full" ]; then
+            python3 fetch_publications.py
+          else
+            python3 fetch_publications.py --recent
+          fi
+
+      - name: Commit updated publications.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add publications.json
+          git diff --staged --quiet || git commit -m "auto-update publications $(date +'%Y-%m-%d')"
+          git push
