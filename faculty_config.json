@@ -1,0 +1,282 @@
+{
+  "_comment": "רשימה מאומתת — 27 חברי סגל (כולל פוסטדוק ומרצה עתידית). אומת: אפריל 2026.",
+  "department": "Department of International Relations",
+  "institution": "Hebrew University of Jerusalem",
+  "institution_ror": "03qxff017",
+  "faculty": [
+    {
+      "name": "Daniel Schwartz",
+      "name_he": "דניאל שוורץ",
+      "rank": "Professor",
+      "role": "Chair of the Department",
+      "email": "daniel.schwartz3@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dnyl_shvvrts.jpg",
+      "active": true,
+      "skip_openalex": true,
+      "skip_reason": "Not in OpenAlex — publications to be added manually",
+      "orcid": "0000-0002-7634-5414"
+    },
+    {
+      "name": "Yehonatan Abramson",
+      "name_he": "יהונתן אברמסון",
+      "rank": "Dr.",
+      "role": "",
+      "email": "Yehonatan.Abramson@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/abramson.jpg",
+      "active": true,
+      "orcid": "0000-0001-6410-1212"
+    },
+    {
+      "name": "Piki Ish-Shalom",
+      "name_he": "פיקי איש-שלום",
+      "rank": "Professor",
+      "role": "",
+      "email": "piki.ish-shalom@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/pyqy_ysh_shlvm.jpg",
+      "active": true,
+      "orcid": "0000-0002-7328-955X"
+    },
+    {
+      "name": "Galia Press-Barnathan",
+      "name_he": "גליה פרס-ברנתן",
+      "rank": "Professor",
+      "role": "Director of the Leonard Davis Institute",
+      "email": "Galia.Press-Barnathan@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/glyh_br_ntn.jpg",
+      "active": true,
+      "orcid": "0000-0003-3909-4641"
+    },
+    {
+      "name": "Tomer Broude",
+      "name_he": "תומר ברודי",
+      "rank": "Professor",
+      "role": "Dean of the Faculty of Law",
+      "email": "Tomer.Broude@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0303-2.jpg",
+      "active": true,
+      "orcid": "0000-0002-2340-1398"
+    },
+    {
+      "name": "Orit Gazit-Lederman",
+      "name_he": "אורית גזית-לדרמן",
+      "rank": "Dr.",
+      "role": "Head of the Migration & Development Track",
+      "email": "orit.gazit@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/orit_gazit3.jpg",
+      "active": true,
+      "orcid": "0000-0001-8793-8912"
+    },
+    {
+      "name": "Gadi Heimann",
+      "name_he": "גדי היימן",
+      "rank": "Professor",
+      "role": "Head of The Davis Graduate School (TELEM IR)",
+      "email": "gadi.heimann@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0296-2.jpg",
+      "active": true,
+      "orcid": "0000-0002-0083-2953"
+    },
+    {
+      "name": "Moshe Hirsch",
+      "name_he": "משה הירש",
+      "rank": "Professor",
+      "role": "",
+      "email": "moshe.hirsch@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/mshh_hyrsh.jpg",
+      "active": true,
+      "orcid": "0000-0003-2962-1751"
+    },
+    {
+      "name": "Yoram Haftel",
+      "name_he": "יורם הפטל",
+      "rank": "Professor",
+      "role": "",
+      "email": "Yoram.Haftel@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/yvrm_hptl.jpg",
+      "active": true,
+      "orcid": "0000-0002-8142-9647"
+    },
+    {
+      "name": "Lior Herman",
+      "name_he": "ליאור הרמן",
+      "rank": "Professor",
+      "role": "Director MA Program in International Political Economy",
+      "email": "Lior.Herman@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0469-2.jpg",
+      "active": true,
+      "orcid": "0000-0002-5201-3677"
+    },
+    {
+      "name": "Guy Harpaz",
+      "name_he": "גיא הרפז",
+      "rank": "Professor",
+      "role": "Vice President for International Affairs",
+      "email": "guy.harpaz@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/guy_photo_2_.jpg",
+      "active": true,
+      "orcid": "0000-0002-8416-6942"
+    },
+    {
+      "name": "Daniel Wajner",
+      "name_he": "דניאל ויינר",
+      "rank": "Dr.",
+      "role": "",
+      "email": "daniel.wajner@mail.huji.ac.il",
+      "photo_url": "https://ir.huji.ac.il/sites/default/files/styles/190_250/public/internationalrelations/files/dnyl_vyynr.jpg?m=1766311173&itok=JDSzBC6O",
+      "active": true,
+      "orcid": "0000-0002-9038-0478"
+    },
+    {
+      "name": "Lior Lehrs",
+      "name_he": "ליאור להרס",
+      "rank": "Dr.",
+      "role": "",
+      "email": "lior.lehrs@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/lyvr_lhrs.jpg",
+      "active": true,
+      "orcid": "0000-0002-6488-4760"
+    },
+    {
+      "name": "Oded Lowenheim",
+      "name_he": "עודד לוונהיים",
+      "rank": "Professor",
+      "role": "MA Programs Advisor",
+      "email": "Oded.lowenheim@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/369a0339-2.jpg",
+      "active": true,
+      "orcid": "0000-0002-1528-9244"
+    },
+    {
+      "name": "Guy Laron",
+      "name_he": "גיא לרון",
+      "rank": "Dr.",
+      "role": "",
+      "email": "guy.laron@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/gy_lrvn.jpg",
+      "active": true,
+      "orcid": "0000-0001-6995-4871"
+    },
+    {
+      "name": "Tamar Megiddo",
+      "name_he": "תמר מגידו",
+      "rank": "Dr.",
+      "role": "",
+      "email": "tamarmegiddo@gmail.com",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/tmr_mgydv.jpg",
+      "active": true,
+      "orcid": "0000-0003-0427-6867"
+    },
+    {
+      "name": "Dan Miodownik",
+      "name_he": "דן מיודובניק",
+      "rank": "Professor",
+      "role": "",
+      "email": "Dan.Miodownik@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dan_miodownik.png",
+      "active": true,
+      "orcid": "0000-0003-3825-3911"
+    },
+    {
+      "name": "Devorah Manekin",
+      "name_he": "דבורה מנקין",
+      "rank": "Professor",
+      "role": "",
+      "email": "d.manekin@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dbvrh_mnqyn.jpg",
+      "active": true,
+      "orcid": "0000-0002-5651-3396"
+    },
+    {
+      "name": "Daniel Sobelman",
+      "name_he": "דניאל סובלמן",
+      "rank": "Dr.",
+      "role": "Head of International Security & Diplomacy Track",
+      "email": "daniel.sobelman@mail.huji.ac.il",
+      "photo_url": "https://ir.huji.ac.il/sites/default/files/styles/190_250/public/internationalrelations/files/sobelman2.jpg?m=1715335769&itok=jCKwhQQF",
+      "active": true,
+      "orcid": "0000-0002-8679-9356"
+    },
+    {
+      "name": "Omer Solodoch",
+      "name_he": "עומר סולודוך",
+      "rank": "Dr.",
+      "role": "",
+      "email": "omer.solodoch@mail.huji.ac.il",
+      "photo_url": "https://ir.huji.ac.il/sites/default/files/styles/190_250/public/internationalrelations/files/vmr_svlvdvk.jpg?m=1766308447&itok=LYFP4iyt",
+      "active": true,
+      "orcid": "0000-0003-0347-5434"
+    },
+    {
+      "name": "Arie Kacowicz",
+      "name_he": "אריה קצוביץ'",
+      "rank": "Professor",
+      "role": "",
+      "email": "arie.kacowicz@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/ryh_qtsvbyts.jpg",
+      "active": true,
+      "orcid": "0000-0002-2458-1140"
+    },
+    {
+      "name": "Deganit Paikowsky",
+      "name_he": "דגנית פייקובסקי",
+      "rank": "Dr.",
+      "role": "",
+      "email": "deganit.paikowsky@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dgnyt_pyyqvbsqy.jpg",
+      "active": true,
+      "orcid": "0000-0002-2780-7440"
+    },
+    {
+      "name": "Roni Porat",
+      "name_he": "רוני פורת",
+      "rank": "Dr.",
+      "role": "BA Program Advisor",
+      "email": "porat.roni@gmail.com",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/rvny_pvrt.jpg",
+      "active": true,
+      "orcid": "0000-0002-0665-4131"
+    },
+    {
+      "name": "Or Rabinowitz",
+      "name_he": "אור רבינוביץ'",
+      "rank": "Dr.",
+      "role": "",
+      "email": "or.rabinowitz-batz@mail.huji.ac.il",
+      "photo_url": "",
+      "active": false,
+      "orcid": "",
+      "skip_openalex": true,
+      "departure_note": "Left the department"
+    },
+    {
+      "name": "Oded Steinberg",
+      "name_he": "עודד שטיינברג",
+      "rank": "Dr.",
+      "role": "",
+      "email": "oded.steinberg@mail.huji.ac.il",
+      "photo_url": "https://ir.huji.ac.il/sites/default/files/styles/190_250/public/internationalrelations/files/vdd_shtyynbrg.jpg?m=1766389896&itok=Rz6PSMqr",
+      "active": true,
+      "orcid": "0000-0002-4399-7889"
+    },
+    {
+      "name": "Veronica Lion",
+      "name_he": "ורוניקה ליון",
+      "rank": "Postdoc",
+      "role": "Joining Fall 2026",
+      "email": "",
+      "photo_url": "https://i1.rgstatic.net/ii/profile.image/1071137488371712-1632390486017_Q512/Veronica-Lion.jpg",
+      "orcid": "0000-0002-3952-3584",
+      "active": true
+    },
+    {
+      "name": "Gal Bitton",
+      "name_he": "גל ביטון",
+      "rank": "Lecturer",
+      "role": "Joining Spring 2027",
+      "email": "galbitton@mail.tau.ac.il",
+      "photo_url": "https://i.postimg.cc/QN947T4d/temp-Image-HP3l-Uy.avif",
+      "orcid": "0000-0003-1862-501X",
+      "active": true
+    }
+  ]
+}

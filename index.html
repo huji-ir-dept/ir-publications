@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Publications | Department of International Relations — Hebrew University</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#1a9ab5;
+  --teal-dark:#0e7a92;
+  --text:#222222;
+  --muted:#888888;
+  --border:#e5e5e5;
+  --bg:#ffffff;
+  --bg-subtle:#f7f7f7;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+
+/* ── STICKY TOP BAR (stats) ── */
+#page-header{
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  padding:8px 32px;
+  display:flex;gap:32px;align-items:center;flex-wrap:wrap;
+  position:sticky;top:0;z-index:102;
+}
+.hs-item{display:flex;flex-direction:column}
+.hs-val{font-size:17px;font-weight:700;color:var(--teal);line-height:1}
+.hs-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:2px}
+
+/* ── STICKY CONTROLS ── */
+#controls{
+  background:var(--bg);border-bottom:1px solid var(--border);
+  padding:10px 32px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  position:sticky;top:41px;z-index:101;
+}
+#search-box{
+  flex:1;min-width:200px;padding:7px 12px 7px 32px;
+  border:1px solid var(--border);border-radius:3px;
+  font-size:13px;font-family:var(--sans);background:var(--bg-subtle);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:10px center;
+}
+#search-box:focus{outline:none;border-color:var(--teal);background-color:var(--bg)}
+.fsel{padding:7px 10px;border:1px solid var(--border);border-radius:3px;font-size:13px;font-family:var(--sans);background:var(--bg-subtle);cursor:pointer;color:var(--text)}
+#result-count{margin-left:auto;font-size:12px;color:var(--muted)}
+
+/* ── STICKY FACULTY PILLS ── */
+#pills{
+  background:var(--bg);border-bottom:1px solid var(--border);
+  padding:8px 32px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;
+  position:sticky;top:87px;z-index:100;
+}
+.pill-lbl{font-size:10px;color:var(--muted);margin-right:4px}
+.pill{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 10px;border:1px solid var(--border);border-radius:20px;
+  background:var(--bg);cursor:pointer;font-size:12px;color:var(--muted);
+  transition:all .12s;
+}
+.pill:hover{border-color:var(--teal);color:var(--teal)}
+.pill.active{background:var(--teal);color:white;border-color:var(--teal)}
+.pill img{width:18px;height:18px;border-radius:50%;object-fit:cover}
+
+/* ── MAIN ── */
+#main{max-width:860px;margin:0 auto;padding:24px 32px}
+
+.year-div{font-size:15px;font-weight:600;color:var(--text);
+  padding:14px 0 6px;border-bottom:1px solid var(--border);margin-bottom:12px}
+
+/* ── CARD ── */
+.pub-card{padding:18px 0;border-bottom:1px solid var(--border)}
+.pub-card:last-child{border-bottom:none}
+
+.pub-topline{font-size:12px;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:0 6px;margin-bottom:6px;align-items:center}
+.pub-sep{color:#ccc}
+
+.pub-title{font-size:15px;font-weight:400;line-height:1.4;margin-bottom:8px}
+.pub-title a{color:var(--teal);text-decoration:none;font-weight:500}
+.pub-title a:hover{text-decoration:underline}
+
+.pub-authors-row{display:flex;align-items:center;gap:0;margin-bottom:8px;flex-wrap:wrap}
+.author-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.12);margin-right:-5px}
+.author-avatar-ph{width:34px;height:34px;border-radius:50%;background:#ccc;color:white;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:2px solid white;margin-right:-5px}
+.pub-author-names{font-size:13px;color:var(--text);margin-left:12px}
+.pub-author-names strong{font-weight:600;color:var(--teal)}
+
+.pub-abstract-wrap{margin-bottom:8px}
+.pub-abstract-label{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.pub-abstract-text{font-size:13px;color:#555;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pub-abstract-text.expanded{-webkit-line-clamp:unset;overflow:visible}
+.show-more{color:var(--teal);font-size:12px;cursor:pointer;background:none;border:none;padding:0}
+.show-more:hover{text-decoration:underline}
+
+.pub-actions{display:flex;gap:12px;align-items:center;margin-top:6px}
+.pub-act-link,.pub-act-btn{color:var(--muted);text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:3px;transition:color .12s;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)}
+.pub-act-link:hover,.pub-act-btn:hover{color:var(--teal)}
+.pub-act-link svg,.pub-act-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+#empty,#loading{text-align:center;padding:60px 20px;color:var(--muted);display:none;font-size:15px}
+#footer{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);margin-top:20px}
+#footer a{color:var(--teal)}
+
+@media(max-width:640px){
+  #page-header,#controls,#pills,#main{padding-left:16px;padding-right:16px}
+  #pills{top:80px}
+}
+
+/* ── CITATION MODAL ── */
+#cite-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:999;align-items:center;justify-content:center}
+#cite-modal.open{display:flex}
+#cite-box{background:white;border-radius:4px;padding:24px;max-width:560px;width:90%;box-shadow:0 4px 24px rgba(0,0,0,.15);position:relative}
+#cite-box h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+#cite-box .cite-style{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+#cite-text{font-size:13px;line-height:1.8;color:var(--text);background:var(--bg-subtle);border:1px solid var(--border);border-radius:3px;padding:12px 14px;margin-bottom:12px;font-family:var(--serif)}
+.cite-footer{display:flex;gap:8px;align-items:center}
+#copy-btn{padding:6px 14px;background:var(--teal);color:white;border:none;border-radius:3px;font-size:12px;cursor:pointer;font-family:var(--sans);font-weight:600;transition:background .12s}
+#copy-btn:hover{background:var(--teal-dark)}
+#copy-confirm{font-size:12px;color:var(--teal);display:none;font-weight:500}
+#close-cite{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);line-height:1}
+#close-cite:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<!-- CITATION MODAL -->
+<div id="cite-modal" onclick="if(event.target===this)closeCite()">
+  <div id="cite-box">
+    <button id="close-cite" onclick="closeCite()">×</button>
+    <h3>Cite this publication</h3>
+    <div class="cite-style">APSA Citation Style</div>
+    <div id="cite-text"></div>
+    <div class="cite-footer">
+      <button id="copy-btn" onclick="copyCite()">Copy to clipboard</button>
+      <span id="copy-confirm">✓ Copied!</span>
+    </div>
+  </div>
+</div>
+
+<div id="page-header">
+  <div class="hs-item"><div class="hs-val" id="s-pubs">—</div><div class="hs-lbl">Publications</div></div>
+  <div class="hs-item"><div class="hs-val" id="s-fac">—</div><div class="hs-lbl">Faculty</div></div>
+  <div class="hs-item"><div class="hs-val" id="s-span">—</div><div class="hs-lbl">Year Span</div></div>
+  <div class="hs-item"><div class="hs-val" id="s-cite">—</div><div class="hs-lbl">Total Citations</div></div>
+  <span id="last-upd" style="margin-left:auto;font-size:10px;opacity:.5"></span>
+</div>
+
+<div id="controls">
+  <input type="search" id="search-box" placeholder="Search titles, authors, journals…" autocomplete="off"/>
+  <select class="fsel" id="f-year"><option value="">All years</option></select>
+  <select class="fsel" id="f-type">
+    <option value="">All types</option>
+    <option value="article">Journal articles</option>
+    <option value="book">Books</option>
+    <option value="book-chapter">Book chapters</option>
+  </select>
+  <span id="result-count"></span>
+</div>
+
+<div id="pills">
+  <span class="pill-lbl">Filter by:</span>
+  <div class="pill active" data-name="" style="font-weight:600">All faculty</div>
+</div>
+
+<div id="main">
+  <div id="loading">Loading publications…</div>
+  <div id="empty">No publications match your search.</div>
+  <div id="pub-list"></div>
+</div>
+
+<div id="footer">
+  Data sourced from <a href="https://openalex.org" target="_blank">OpenAlex</a>, ORCID and Crossref.
+</div>
+
+<script>
+let allPubs=[], facMeta={}, activeF={search:"",year:"",type:"",faculty:""};
+
+async function loadData(){
+  try{
+    const r=await fetch("publications.json");
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const d=await r.json();
+    allPubs=d.publications||[];
+    facMeta={};
+    (d.faculty_meta||[]).forEach(f=>facMeta[f.name]=f);
+
+    const years=allPubs.map(p=>p.year).filter(Boolean);
+    document.getElementById("s-pubs").textContent=allPubs.length.toLocaleString();
+    document.getElementById("s-fac").textContent=Object.keys(facMeta).length;
+    document.getElementById("s-span").textContent=years.length?Math.min(...years)+"–"+Math.max(...years):"—";
+    const cited=allPubs.reduce((s,p)=>s+(p.cited_by||0),0);
+    document.getElementById("s-cite").textContent=cited>0?cited.toLocaleString():"—";
+    document.getElementById("last-upd").textContent=d.generated_at
+      ?" Updated: "+new Date(d.generated_at).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}):"";
+    buildFilters(); buildPills(); render();
+    document.getElementById("loading").style.display="none";
+  }catch(e){
+    document.getElementById("loading").innerHTML=`<b style="color:#c0392b">⚠ Could not load publications.json</b><br><small>${e.message}</small>`;
+    document.getElementById("loading").style.display="block";
+  }
+}
+
+function buildFilters(){
+  const years=[...new Set(allPubs.map(p=>p.year).filter(Boolean))].sort((a,b)=>b-a);
+  const sel=document.getElementById("f-year");
+  years.forEach(y=>{const o=document.createElement("option");o.value=y;o.textContent=y;sel.appendChild(o)});
+}
+
+function buildPills(){
+  const cont=document.getElementById("pills");
+  const names=[...new Set(allPubs.map(p=>p.faculty_author))].sort();
+  names.forEach(name=>{
+    const m=facMeta[name]||{};
+    const p=document.createElement("div");
+    p.className="pill";p.dataset.name=name;
+    if(m.photo_url){p.innerHTML=`<img src="${m.photo_url}" alt="" onerror="this.style.display='none'"/> ${name.split(" ").pop()}`}
+    else{p.textContent=name.split(" ").pop()}
+    p.addEventListener("click",()=>{
+      document.querySelectorAll(".pill").forEach(x=>x.classList.remove("active"));
+      p.classList.add("active");activeF.faculty=name;render();
+    });
+    cont.appendChild(p);
+  });
+}
+
+function filterPubs(){
+  const q=(activeF.search||"").toLowerCase().trim();
+  return allPubs.filter(p=>{
+    if(activeF.faculty&&p.faculty_author!==activeF.faculty)return false;
+    if(activeF.year&&String(p.year)!==activeF.year)return false;
+    if(activeF.type&&p.type!==activeF.type)return false;
+    if(q){
+      const hay=[p.title,p.journal,p.faculty_author,(p.authors||[]).map(a=>a.name).join(" "),p.abstract].join(" ").toLowerCase();
+      if(!hay.includes(q))return false;
+    }
+    return true;
+  });
+}
+
+function ini(name){const p=name.split(" ");return(p[0][0]+(p[p.length-1][0]||"")).toUpperCase()}
+
+function fmtDate(pub){
+  if(pub.date&&pub.date.length>=7){
+    const d=new Date(pub.date+"T00:00:00");
+    if(!isNaN(d))return d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+  }
+  return pub.year?""+pub.year:"";
+}
+
+function typLabel(t){
+  const m={"article":"Journal Article","book":"Book","book-chapter":"Book Chapter","review":"Review","report":"Report","dissertation":"Dissertation","preprint":"Preprint"};
+  return m[t]||(t||"").replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase());
+}
+
+function isFacultyAuthor(authorName, facName) {
+  if (!authorName || !facName) return false;
+  const a = authorName.toLowerCase();
+  const f = facName.toLowerCase();
+  const fParts = f.split(" ");
+  const fFirst = fParts[0];
+  const fLast  = fParts[fParts.length - 1];
+  // שם משפחה חייב להיות נוכח
+  if (!a.includes(fLast)) return false;
+  // שם פרטי: מלא, ראשית, או ראשית עם נקודה
+  if (a.includes(fFirst)) return true;
+  if (a.includes(fFirst[0] + ".") || a.includes(fFirst[0] + " ")) return true;
+  // שם משפחה בלבד — אפשרי רק אם ייחודי
+  return false;
+}
+
+function findFacCoAuthors(pub){
+  const facNames=Object.keys(facMeta);
+  const found=new Set([pub.faculty_author]);
+  (pub.authors||[]).forEach(a=>{
+    if(!a.name)return;
+    facNames.forEach(fn=>{
+      if(isFacultyAuthor(a.name, fn)) found.add(fn);
+    });
+  });
+  return[...found];
+}
+
+function pubCard(pub){
+  const doi=pub.doi||"",pdf=pub.pdf_url||"";
+  const hasAbs=pub.abstract&&pub.abstract.length>60;
+  const coFac=findFacCoAuthors(pub);
+
+  // Avatars
+  const avatars=coFac.map(name=>{
+    const m=facMeta[name]||{};
+    const safeN=name.replace(/'/g,"\\'");
+    return m.photo_url
+      ?`<img class="author-avatar" src="${m.photo_url}" alt="${name}" title="${name}" loading="lazy" onerror="this.outerHTML='<div class=author-avatar-ph title=\\'${safeN}\\'>${ini(name)}</div>'">`
+      :`<div class="author-avatar-ph" title="${name}">${ini(name)}</div>`;
+  }).join("");
+
+  // Author names — faculty in bold blue, others in dark
+  const authorNames=(pub.authors||[]).map(a=>{
+    if(!a.name)return"";
+    const isFac=Object.keys(facMeta).some(fn=>isFacultyAuthor(a.name,fn));
+    return isFac?`<strong>${a.name}</strong>`:a.name;
+  }).filter(Boolean).join(", ");
+
+  const absId="abs-"+pub.id.replace(/\W/g,"_");
+  const card=document.createElement("div");
+  card.className="pub-card";
+  // Topline: for chapters show book title, for articles show journal
+  const isChapter = pub.type === "book-chapter" || pub.type === "book-section" || pub.type === "book-part";
+  const toplineContext = isChapter
+    ? (pub.book_title ? `<span class="pub-sep">·</span><span style="font-style:italic">${pub.book_title}</span>` : "")
+    : (pub.journal    ? `<span class="pub-sep">·</span><span>${pub.journal}</span>` : "");
+
+  card.innerHTML=`
+    <div class="pub-body">
+      <div class="pub-topline">
+        ${fmtDate(pub)?`<span>${fmtDate(pub)}</span><span class="pub-sep">·</span>`:""}
+        <span>${typLabel(pub.type)}</span>
+        ${toplineContext}
+      </div>
+      <div class="pub-title">${doi?`<a href="${doi}" target="_blank" rel="noopener">${pub.title||"Untitled"}</a>`:(pub.title||"Untitled")}</div>
+      <div class="pub-authors-row">
+        ${avatars}
+        ${authorNames?`<div class="pub-author-names">${authorNames}</div>`:""}
+      </div>
+      ${hasAbs?`<div class="pub-abstract-wrap">
+        <div class="pub-abstract-label">Abstract</div>
+        <div class="pub-abstract-text" id="${absId}">${pub.abstract.replace(/^abstract[:\s]*/i,'')}</div>
+        <button class="show-more" onclick="toggleAbs('${absId}',this)">… show more</button>
+      </div>`:""}
+      <div class="pub-actions">
+        ${pdf?`<a class="pub-act-link" href="${pdf}" target="_blank" title="Open Access PDF">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>PDF</a>`:""}
+        ${doi?`<a class="pub-act-link" href="${doi}" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>DOI</a>`:pub.title?`<span class="pub-act-link" style="cursor:default;opacity:.4">No DOI</span>`:""}
+        <button class="pub-act-btn" onclick="showCite('${pub.id.replace(/'/g,"\\'")}')">
+          <svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>Cite</button>
+        ${pub.cited_by>0?`<span class="pub-act-link" style="cursor:default">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${pub.cited_by} citations</span>`:""}
+      </div>
+    </div>`;
+  return card;
+}
+
+// ── APSA CITATION ────────────────────────────────────────────────────────────
+function formatAuthorAPSA(nameStr) {
+  if (!nameStr) return "";
+  const parts = nameStr.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0];
+  const last  = parts[parts.length - 1];
+  const first = parts.slice(0, -1).join(" ");
+  return `${last}, ${first}`;
+}
+
+function buildAPSA(pub) {
+  const authors = (pub.authors || []).map(a => a.name).filter(Boolean);
+  const year    = pub.year || "n.d.";
+  const title   = pub.title || "Untitled";
+  const type    = pub.type  || "article";
+
+  // Format authors: first author Last, First; rest First Last
+  let authorStr = "";
+  if (authors.length === 0) {
+    authorStr = pub.faculty_author || "";
+  } else if (authors.length === 1) {
+    authorStr = formatAuthorAPSA(authors[0]);
+  } else {
+    const first = formatAuthorAPSA(authors[0]);
+    const rest  = authors.slice(1).join(", ");
+    authorStr = `${first}, and ${rest}`;
+  }
+
+  const isBook    = type === "book" || type === "edited-book" || type === "monograph";
+  const isChapter = type === "book-chapter" || type === "book-section";
+
+  let citation = "";
+
+  if (isBook) {
+    // Last, First. Year. Title. City: Publisher.
+    const publisher = pub.publisher || "";
+    citation = `${authorStr}. ${year}. <em>${title}</em>.${publisher ? " " + publisher + "." : ""}`;
+  } else if (isChapter) {
+    // Last, First. Year. "Chapter Title." In Book Title, ed. Editor. City: Publisher, Pages.
+    const bookTitle = pub.book_title || "";
+    const pages     = pub.pages ? `, ${pub.pages}` : "";
+    const inPart    = bookTitle ? ` In <em>${bookTitle}</em>` : "";
+    citation = `${authorStr}. ${year}. "${title}."${inPart}${pages}.`;
+  } else {
+    // Last, First. Year. "Article Title." Journal Volume(Issue): Pages.
+    const journal = pub.journal || "";
+    const vol     = pub.volume  || "";
+    const iss     = pub.issue   || "";
+    const pages   = pub.pages   || "";
+    let ref = "";
+    if (journal) {
+      ref = ` <em>${journal}</em>`;
+      if (vol) ref += ` ${vol}`;
+      if (iss) ref += `(${iss})`;
+      if (pages) ref += `: ${pages}`;
+      ref += ".";
+    }
+    citation = `${authorStr}. ${year}. "${title}."${ref}`;
+    if (pub.doi) citation += ` doi:${pub.doi.replace("https://doi.org/","")}`;
+  }
+  return citation;
+}
+
+function showCite(pubId) {
+  const pub = allPubs.find(p => p.id === pubId);
+  if (!pub) return;
+  const html = buildAPSA(pub);
+  document.getElementById("cite-text").innerHTML = html;
+  document.getElementById("cite-modal").classList.add("open");
+  document.getElementById("copy-confirm").style.display = "none";
+}
+function closeCite() {
+  document.getElementById("cite-modal").classList.remove("open");
+}
+function copyCite() {
+  const text = document.getElementById("cite-text").innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const c = document.getElementById("copy-confirm");
+    c.style.display = "inline";
+    setTimeout(() => c.style.display = "none", 2000);
+  });
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeCite(); });
+
+function toggleAbs(id,btn){
+  const el=document.getElementById(id);if(!el)return;
+  const exp=el.classList.toggle("expanded");
+  btn.textContent=exp?"show less":"… show more";
+}
+
+function render(){
+  const pubs=filterPubs();
+  const list=document.getElementById("pub-list");
+  const empty=document.getElementById("empty");
+  document.getElementById("result-count").textContent=`${pubs.length} publication${pubs.length!==1?"s":""}`;
+  list.innerHTML="";
+  if(!pubs.length){empty.style.display="block";return}
+  empty.style.display="none";
+  const byYear={};
+  pubs.forEach(p=>{const y=p.year||"Unknown";(byYear[y]=byYear[y]||[]).push(p)});
+  Object.keys(byYear).sort((a,b)=>b-a).forEach(yr=>{
+    const d=document.createElement("div");d.className="year-div";d.textContent=yr;list.appendChild(d);
+    byYear[yr].forEach(p=>list.appendChild(pubCard(p)));
+  });
+}
+
+document.getElementById("search-box").addEventListener("input",e=>{activeF.search=e.target.value;render()});
+document.getElementById("f-year").addEventListener("change",e=>{activeF.year=e.target.value;render()});
+document.getElementById("f-type").addEventListener("change",e=>{activeF.type=e.target.value;render()});
+document.querySelector('.pill[data-name=""]').addEventListener("click",function(){
+  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
+  this.classList.add("active");activeF.faculty="";render();
+});
+
+loadData();
+</script>
+</body>
+</html>
