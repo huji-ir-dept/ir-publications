@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Publications | Department of International Relations — Hebrew University</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal:#1a9ab5;
+  --teal-dark:#0e7a92;
+  --text:#222222;
+  --muted:#888888;
+  --border:#e5e5e5;
+  --bg:#ffffff;
+  --bg-subtle:#f7f7f7;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+
+/* ── STICKY TOP BAR (stats) ── */
+#page-header{
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  padding:8px 32px;
+  display:flex;gap:32px;align-items:center;flex-wrap:wrap;
+  position:sticky;top:0;z-index:102;
+}
+.hs-item{display:flex;flex-direction:column}
+.hs-val{font-size:17px;font-weight:700;color:var(--teal);line-height:1}
+.hs-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:2px}
+
+/* ── STICKY CONTROLS ── */
+#controls{
+  background:var(--bg);border-bottom:1px solid var(--border);
+  padding:10px 32px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  position:sticky;top:41px;z-index:101;
+}
+#search-box{
+  flex:1;min-width:200px;padding:7px 12px 7px 32px;
+  border:1px solid var(--border);border-radius:3px;
+  font-size:13px;font-family:var(--sans);background:var(--bg-subtle);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:10px center;
+}
+#search-box:focus{outline:none;border-color:var(--teal);background-color:var(--bg)}
+.fsel{padding:7px 10px;border:1px solid var(--border);border-radius:3px;font-size:13px;font-family:var(--sans);background:var(--bg-subtle);cursor:pointer;color:var(--text)}
+#result-count{margin-left:auto;font-size:12px;color:var(--muted)}
+
+/* ── MAIN ── */
+#main{max-width:860px;margin:0 auto;padding:24px 32px}
+
+.year-div{font-size:15px;font-weight:600;color:var(--text);
+  padding:14px 0 6px;border-bottom:1px solid var(--border);margin-bottom:12px}
+
+/* ── CARD ── */
+.pub-card{padding:18px 0;border-bottom:1px solid var(--border)}
+.pub-card:last-child{border-bottom:none}
+
+.pub-topline{font-size:12px;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:0 6px;margin-bottom:6px;align-items:center}
+.pub-sep{color:#ccc}
+
+.pub-title{font-size:15px;font-weight:400;line-height:1.4;margin-bottom:8px}
+.pub-title a{color:var(--teal);text-decoration:none;font-weight:500}
+.pub-title a:hover{text-decoration:underline}
+
+.pub-authors-row{display:flex;align-items:center;gap:0;margin-bottom:8px;flex-wrap:wrap}
+.author-avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.12);margin-right:-5px}
+.author-avatar-ph{width:34px;height:34px;border-radius:50%;background:#ccc;color:white;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:2px solid white;margin-right:-5px}
+.pub-author-names{font-size:13px;color:var(--text);margin-left:12px}
+.pub-author-names strong{font-weight:600;color:var(--teal)}
+
+.pub-abstract-wrap{margin-bottom:8px}
+.pub-abstract-label{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.pub-abstract-text{font-size:13px;color:#555;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pub-abstract-text.expanded{-webkit-line-clamp:unset;overflow:visible}
+.show-more{color:var(--teal);font-size:12px;cursor:pointer;background:none;border:none;padding:0}
+.show-more:hover{text-decoration:underline}
+
+.pub-actions{display:flex;gap:12px;align-items:center;margin-top:6px}
+.pub-act-link,.pub-act-btn{color:var(--muted);text-decoration:none;font-size:12px;display:inline-flex;align-items:center;gap:3px;transition:color .12s;background:none;border:none;cursor:pointer;padding:0;font-family:var(--sans)}
+.pub-act-link:hover,.pub-act-btn:hover{color:var(--teal)}
+.pub-act-link svg,.pub-act-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+#empty,#loading{text-align:center;padding:60px 20px;color:var(--muted);display:none;font-size:15px}
+#footer{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);margin-top:20px}
+#footer a{color:var(--teal)}
+
+@media(max-width:640px){
+  #page-header,#controls,#pills,#main{padding-left:16px;padding-right:16px}
+  #pills{top:80px}
+}
+
+/* ── PROFILE MODAL ── */
+#profile-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:998;align-items:center;justify-content:center}
+#profile-modal.open{display:flex}
+#profile-box{
+  background:#fff;border-radius:8px;width:92%;max-width:820px;
+  max-height:90vh;overflow:hidden;position:relative;
+  display:flex;flex-direction:column;
+  box-shadow:0 8px 40px rgba(0,0,0,.15);
+  border:1px solid var(--border);
+}
+#profile-header{
+  padding:18px 22px 14px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:14px;
+  background:var(--bg-subtle);flex-shrink:0;
+}
+#profile-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--border)}
+#profile-photo-ph{width:52px;height:52px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0}
+#profile-info{flex:1}
+#profile-name{font-size:17px;font-weight:600;color:var(--text)}
+#profile-stats{display:flex;gap:20px;margin-top:8px}
+.ps-val{font-size:16px;font-weight:700;color:var(--teal);line-height:1}
+.ps-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+#close-profile{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1}
+#close-profile:hover{color:var(--text)}
+#profile-tabs{display:flex;padding:0 22px;border-bottom:1px solid var(--border);background:#fff;flex-shrink:0}
+.ptab{padding:10px 16px;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);transition:all .12s}
+.ptab:hover{color:var(--text)}
+.ptab.active{color:var(--teal);border-bottom-color:var(--teal)}
+#profile-body{flex:1;overflow:hidden;display:flex;background:#fff}
+
+/* collab network tab */
+#pnet-wrap{flex:1;position:relative;background:var(--bg-subtle)}
+#pnet-svg{width:100%;height:100%;display:block;min-height:380px}
+#pnet-legend{position:absolute;bottom:12px;left:12px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:10px 12px;max-width:160px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.pnet-legend-title{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:7px}
+.pnet-legend-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.pnet-legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.pnet-legend-label{font-size:11px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* department map tab */
+#dmap-wrap{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--bg-subtle);position:relative}
+#dmap-svg{flex:1;display:block;min-height:340px}
+.dmap-legend{display:flex;gap:16px;font-size:11px;color:var(--muted);align-items:center}
+
+/* map tooltip shared */
+#collab-tooltip{
+  position:fixed;background:#fff;border:1px solid var(--border);
+  border-radius:5px;padding:8px 11px;font-size:12px;
+  pointer-events:none;opacity:0;z-index:1100;
+  transition:opacity .1s;line-height:1.6;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);color:var(--text);
+}
+
+/* department map button */
+#dept-map-btn{
+  padding:6px 14px;border-radius:4px;font-size:11px;cursor:pointer;
+  border:1px solid var(--teal);background:rgba(26,154,181,.08);
+  color:var(--teal);transition:all .12s;margin-left:auto;
+  font-family:var(--sans);font-weight:600;letter-spacing:.02em;
+}
+#dept-map-btn:hover{background:var(--teal);color:white;}
+#cite-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:999;align-items:center;justify-content:center}
+#cite-modal.open{display:flex}
+#cite-box{background:white;border-radius:4px;padding:24px;max-width:560px;width:90%;box-shadow:0 4px 24px rgba(0,0,0,.15);position:relative}
+#cite-box h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+#cite-box .cite-style{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+#cite-text{font-size:13px;line-height:1.8;color:var(--text);background:var(--bg-subtle);border:1px solid var(--border);border-radius:3px;padding:12px 14px;margin-bottom:12px;font-family:var(--serif)}
+.cite-footer{display:flex;gap:8px;align-items:center}
+#copy-btn{padding:6px 14px;background:var(--teal);color:white;border:none;border-radius:3px;font-size:12px;cursor:pointer;font-family:var(--sans);font-weight:600;transition:background .12s}
+#copy-btn:hover{background:var(--teal-dark)}
+#copy-confirm{font-size:12px;color:var(--teal);display:none;font-weight:500}
+#close-cite{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);line-height:1}
+#close-cite:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<!-- CITATION MODAL -->
+<div id="cite-modal" onclick="if(event.target===this)closeCite()">
+  <div id="cite-box">
+    <button id="close-cite" onclick="closeCite()">×</button>
+    <h3>Cite this publication</h3>
+    <div class="cite-style">APSA Citation Style</div>
+    <div id="cite-text"></div>
+    <div class="cite-footer">
+      <button id="copy-btn" onclick="copyCite()">Copy to clipboard</button>
+      <span id="copy-confirm">✓ Copied!</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div id="profile-modal" onclick="if(event.target===this)closeProfile()">
+  <div id="profile-box">
+    <button id="close-profile" onclick="closeProfile()">×</button>
+    <div id="profile-header">
+      <div id="profile-photo-ph">?</div>
+      <div id="profile-info">
+        <div id="profile-name">—</div>
+        <div id="profile-stats">
+          <div><div class="ps-val" id="pp-pubs">—</div><div class="ps-lbl">Publications</div></div>
+          <div><div class="ps-val" id="pp-collabs">—</div><div class="ps-lbl">Co-authors</div></div>
+          <div><div class="ps-val" id="pp-countries">—</div><div class="ps-lbl">Countries</div></div>
+          <div><div class="ps-val" id="pp-cites">—</div><div class="ps-lbl">Citations</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="profile-tabs">
+      <div class="ptab active" data-ptab="net">Co-author network (since 2020)</div>
+      <div class="ptab" data-ptab="pubs">Publications</div>
+    </div>
+    <div id="profile-body">
+      <div id="pnet-wrap">
+        <svg id="pnet-svg"></svg>
+        <div id="pnet-legend">
+          <div class="pnet-legend-title">Countries</div>
+          <div id="pnet-legend-items"></div>
+        </div>
+      </div>
+      <div id="ppubs-wrap" style="display:none;flex:1;overflow-y:auto;padding:16px;max-width:320px;border-left:1px solid #1e2d45">
+        <div id="ppubs-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEPARTMENT MAP MODAL -->
+<div id="dmap-modal" onclick="if(event.target===this)closeDeptMap()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:997;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:8px;width:92%;max-width:960px;max-height:92vh;overflow:hidden;position:relative;border:1px solid var(--border);box-shadow:0 8px 40px rgba(0,0,0,.15);display:flex;flex-direction:column">
+    <button onclick="closeDeptMap()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);z-index:2">×</button>
+    <div style="padding:14px 22px 0;border-bottom:1px solid var(--border);background:var(--bg-subtle);flex-shrink:0">
+      <div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:2px">Department Collaborations · Since 2020</div>
+      <div style="display:flex;gap:0">
+        <div class="dtab active" data-dtab="map" onclick="switchDeptTab('map')" style="padding:8px 18px;font-size:12px;cursor:pointer;border-bottom:2px solid var(--teal);color:var(--teal)">🌍 Geographic Map</div>
+        <div class="dtab" data-dtab="net" onclick="switchDeptTab('net')" style="padding:8px 18px;font-size:12px;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted)">🕸 Collaboration Network</div>
+      </div>
+    </div>
+    <!-- Map panel -->
+    <div id="dmap-wrap" style="flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--bg-subtle);position:relative">
+      <svg id="dmap-svg" style="flex:1;display:block;min-height:380px"></svg>
+      <div class="dmap-legend">
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:50%;background:#e8a020;display:inline-block"></span>Hebrew University</span>
+        <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:50%;background:var(--teal);display:inline-block"></span>Collaborating countries</span>
+        <span style="color:var(--muted)">Line thickness = collaborations · Click country to zoom</span>
+      </div>
+    </div>
+    <!-- Network panel -->
+    <div id="dnet-wrap" style="display:none;flex:1;background:var(--bg-subtle);position:relative;min-height:480px">
+      <!-- Faculty focus dropdown -->
+      <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:5px 14px;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+        <span style="font-size:11px;color:var(--muted);white-space:nowrap">Focus on:</span>
+        <select id="dnet-focus-select" style="border:none;font-size:12px;color:var(--text);background:transparent;cursor:pointer;outline:none;max-width:180px">
+          <option value="">— All faculty —</option>
+        </select>
+        <button id="dnet-focus-clear" onclick="dnetClearFocus()" title="Clear focus" style="display:none;background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;line-height:1;padding:0">×</button>
+      </div>
+      <svg id="dnet-svg" style="width:100%;height:100%;min-height:480px;display:block"></svg>
+      <div id="dnet-legend" style="position:absolute;bottom:12px;left:12px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:11px">
+        <div style="font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:7px">Legend</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><span style="width:14px;height:14px;border-radius:50%;background:#e8a020;display:inline-block;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span>Faculty member</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><span style="width:8px;height:8px;border-radius:50%;background:#1a9ab5;display:inline-block"></span>External collaborator</div>
+        <div style="color:var(--muted);margin-top:6px;border-top:1px solid var(--border);padding-top:6px">Click faculty node to expand · Drag · Scroll to zoom</div>
+      </div>
+      <div id="dnet-tooltip" style="position:fixed;background:#fff;border:1px solid var(--border);border-radius:5px;padding:8px 11px;font-size:12px;pointer-events:none;opacity:0;z-index:1100;box-shadow:0 2px 8px rgba(0,0,0,.08);line-height:1.6"></div>
+    </div>
+  </div>
+</div>
+
+<div id="collab-tooltip"></div>
+
+<div id="page-header">
+  <div class="hs-item"><div class="hs-val" id="s-pubs">—</div><div class="hs-lbl">Publications</div></div>
+  <div class="hs-item"><div class="hs-val" id="s-fac">—</div><div class="hs-lbl">Faculty</div></div>
+  <div class="hs-item"><div class="hs-val" id="s-span">—</div><div class="hs-lbl">Year Span</div></div>
+  <div class="hs-item"><div class="hs-val" id="s-cite">—</div><div class="hs-lbl">Total Citations</div></div>
+  <span id="last-upd" style="margin-left:auto;font-size:10px;opacity:.5"></span>
+  <button id="dept-map-btn" onclick="openDeptMap()">🌍 Department Map of Collaborations</button>
+</div>
+
+<div id="controls">
+  <input type="search" id="search-box" placeholder="Search titles, authors, journals…" autocomplete="off"/>
+  <select class="fsel" id="f-year"><option value="">All years</option></select>
+  <select class="fsel" id="f-type">
+    <option value="">All types</option>
+    <option value="article">Journal articles</option>
+    <option value="book">Books</option>
+    <option value="book-chapter">Book chapters</option>
+  </select>
+  <select class="fsel" id="f-faculty" style="min-width:160px">
+    <option value="">All faculty</option>
+  </select>
+  <button id="fac-profile-btn" onclick="handleFacProfileBtn()" title="View collaboration map for selected faculty"
+    style="display:none;padding:6px 11px;border:1px solid var(--teal);border-radius:3px;
+    background:rgba(26,154,181,.07);color:var(--teal);font-size:12px;cursor:pointer;
+    font-family:var(--sans);transition:all .12s">↗ Collabs</button>
+  <span id="result-count"></span>
+</div>
+
+<div id="main">
+  <div id="loading">Loading publications…</div>
+  <div id="empty">No publications match your search.</div>
+  <div id="pub-list"></div>
+</div>
+
+<div id="footer">
+  Data sourced from <a href="https://openalex.org" target="_blank">OpenAlex</a>, ORCID and Crossref.
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+let allPubs=[], facMeta={}, activeF={search:"",year:"",type:"",faculty:""};
+
+async function loadData(){
+  try{
+    const r=await fetch("publications.json");
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const d=await r.json();
+    allPubs=d.publications||[];
+    facMeta={};
+    (d.faculty_meta||[]).forEach(f=>facMeta[f.name]=f);
+
+    const years=allPubs.map(p=>p.year).filter(Boolean);
+    document.getElementById("s-pubs").textContent=allPubs.length.toLocaleString();
+    document.getElementById("s-fac").textContent=Object.keys(facMeta).length;
+    document.getElementById("s-span").textContent=years.length?Math.min(...years)+"–"+Math.max(...years):"—";
+    const cited=allPubs.reduce((s,p)=>s+(p.cited_by||0),0);
+    document.getElementById("s-cite").textContent=cited>0?cited.toLocaleString():"—";
+    document.getElementById("last-upd").textContent=d.generated_at
+      ?" Updated: "+new Date(d.generated_at).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}):"";
+    buildFilters(); buildFacultyDropdown(); render();
+    document.getElementById("loading").style.display="none";
+  }catch(e){
+    document.getElementById("loading").innerHTML=`<b style="color:#c0392b">⚠ Could not load publications.json</b><br><small>${e.message}</small>`;
+    document.getElementById("loading").style.display="block";
+  }
+}
+
+function buildFilters(){
+  const years=[...new Set(allPubs.map(p=>p.year).filter(Boolean))].sort((a,b)=>b-a);
+  const sel=document.getElementById("f-year");
+  years.forEach(y=>{const o=document.createElement("option");o.value=y;o.textContent=y;sel.appendChild(o)});
+}
+
+function buildFacultyDropdown(){
+  const sel=document.getElementById("f-faculty");
+  const btn=document.getElementById("fac-profile-btn");
+  const names=[...new Set(allPubs.map(p=>p.faculty_author))].filter(Boolean)
+    .sort((a,b)=>a.split(" ").pop().localeCompare(b.split(" ").pop()));
+  names.forEach(name=>{
+    const o=document.createElement("option");
+    o.value=name; o.textContent=name;
+    sel.appendChild(o);
+  });
+  sel.addEventListener("change",()=>{
+    activeF.faculty=sel.value;
+    btn.style.display=sel.value?"inline-flex":"none";
+    render();
+  });
+}
+function handleFacProfileBtn(){
+  const sel=document.getElementById("f-faculty");
+  if(sel.value) openProfile(sel.value);
+}
+
+function filterPubs(){
+  const q=(activeF.search||"").toLowerCase().trim();
+  return allPubs.filter(p=>{
+    if(activeF.faculty&&p.faculty_author!==activeF.faculty)return false;
+    if(activeF.year&&String(p.year)!==activeF.year)return false;
+    if(activeF.type&&p.type!==activeF.type)return false;
+    if(q){
+      const hay=[p.title,p.journal,p.faculty_author,(p.authors||[]).map(a=>a.name).join(" "),p.abstract].join(" ").toLowerCase();
+      if(!hay.includes(q))return false;
+    }
+    return true;
+  });
+}
+
+function ini(name){const p=name.split(" ");return(p[0][0]+(p[p.length-1][0]||"")).toUpperCase()}
+
+function fmtDate(pub){
+  if(pub.date&&pub.date.length>=7){
+    const d=new Date(pub.date+"T00:00:00");
+    if(!isNaN(d))return d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+  }
+  return pub.year?""+pub.year:"";
+}
+
+function typLabel(t){
+  const m={"article":"Journal Article","book":"Book","book-chapter":"Book Chapter","review":"Review","report":"Report","dissertation":"Dissertation","preprint":"Preprint"};
+  return m[t]||(t||"").replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase());
+}
+
+// ── CLEAN AUTHOR NAME (strip birth years, extra chars) ───────────────────────
+function cleanAuthorName(name) {
+  if (!name) return "";
+  // Strip birth years like "(1965)" or ", 1965-" or "1945-2020"
+  return name.replace(/\s*\(?\d{4}[-–]\d{0,4}\)?/g, "")
+             .replace(/\s*\(\d{4}\)/g, "")
+             .replace(/,\s*\d{4}$/g, "")
+             .trim();
+}
+
+function isFacultyAuthor(authorName, facName) {
+  if (!authorName || !facName) return false;
+  const a = cleanAuthorName(authorName).toLowerCase().trim();
+  const f = facName.toLowerCase().trim();
+  if (a === f) return true;
+
+  const fParts = f.split(/\s+/);
+  const fFirst = fParts[0];
+  const fLast  = fParts[fParts.length - 1];
+
+  // Handle hyphenated last names on BOTH sides:
+  // facName "Press-Barnathan" vs author "Press Barnathan" or vice versa
+  const fLastVariants = [fLast, ...fLast.split("-"), fLast.replace("-"," ")];
+  const aLastVariants = [a.split(/\s+/).pop(), ...a.split(/\s+/).pop().split("-")];
+
+  // CRITICAL FIX: compare author's last name only against faculty's LAST name (not full name)
+  // This prevents "Netta Moshe" matching "Moshe Hirsch" (where Moshe is a first name)
+  const lastMatch = fLastVariants.some(v => v.length > 2 && a.includes(v)) ||
+                    aLastVariants.some(v => v.length > 2 && fLastVariants.some(fl => fl === v));
+  if (!lastMatch) return false;
+
+  // First name: full, initial with dot, or initial at word boundary
+  if (a.includes(fFirst)) return true;
+  if (fFirst.length > 0) {
+    const ini = fFirst[0];
+    if (a.includes(ini + ".") || new RegExp("\\b" + ini + "\\b").test(a)) return true;
+  }
+
+  // Reverse order: "Kacowicz, Arie"
+  if (new RegExp(fLast + ",?\\s*" + fFirst[0]).test(a)) return true;
+
+  return false;
+}
+
+function findFacCoAuthors(pub){
+  const facNames=Object.keys(facMeta);
+  const found=new Set([pub.faculty_author]);
+  (pub.authors||[]).forEach(a=>{
+    if(!a.name)return;
+    const cleaned=cleanAuthorName(a.name);
+    facNames.forEach(fn=>{
+      if(isFacultyAuthor(cleaned, fn)) found.add(fn);
+    });
+  });
+  return[...found].filter(Boolean);
+}
+
+function pubCard(pub){
+  const doi=pub.doi||"",pdf=pub.pdf_url||"";
+  const hasAbs=pub.abstract&&pub.abstract.length>60;
+  const coFac=findFacCoAuthors(pub);
+  const facNameSet=new Set(Object.keys(facMeta));
+
+  // Avatars — show all faculty co-authors
+  const avatars=coFac.map(name=>{
+    const m=facMeta[name]||{};
+    const safeN=name.replace(/'/g,"\\'");
+    return m.photo_url
+      ?`<img class="author-avatar" src="${m.photo_url}" alt="${name}" title="${name}" loading="lazy" onerror="this.outerHTML='<div class=author-avatar-ph title=\\'${safeN}\\'>${ini(name)}</div>'">`
+      :`<div class="author-avatar-ph" title="${name}">${ini(name)}</div>`;
+  }).join("");
+
+  // Author names — faculty as clickable teal links, others in dark, skip birth-year entries
+  const authorNames=(pub.authors||[]).map(a=>{
+    if(!a.name)return"";
+    const cleaned=cleanAuthorName(a.name);
+    if(!cleaned||/^\d+$/.test(cleaned))return""; // skip pure numbers
+    const matchedFac=Object.keys(facMeta).find(fn=>isFacultyAuthor(cleaned,fn));
+    if(matchedFac){
+      const safe=matchedFac.replace(/'/g,"\\'");
+      return `<a href="#" class="fac-author-link" onclick="event.preventDefault();openProfile('${safe}')" style="color:var(--teal);font-weight:600;text-decoration:none">${cleaned}</a>`;
+    }
+    return cleaned;
+  }).filter(Boolean).join(", ");
+
+  const absId="abs-"+pub.id.replace(/\W/g,"_");
+  const card=document.createElement("div");
+  card.className="pub-card";
+  const isChapter = pub.type === "book-chapter" || pub.type === "book-section" || pub.type === "book-part";
+  const toplineContext = isChapter
+    ? (pub.book_title ? `<span class="pub-sep">·</span><span style="font-style:italic">${pub.book_title}</span>` : "")
+    : (pub.journal    ? `<span class="pub-sep">·</span><span>${pub.journal}</span>` : "");
+
+  card.innerHTML=`
+    <div class="pub-body">
+      <div class="pub-topline">
+        ${fmtDate(pub)?`<span>${fmtDate(pub)}</span><span class="pub-sep">·</span>`:""}
+        <span>${typLabel(pub.type)}</span>
+        ${toplineContext}
+      </div>
+      <div class="pub-title">${doi?`<a href="${doi}" target="_blank" rel="noopener">${pub.title||"Untitled"}</a>`:(pub.title||"Untitled")}</div>
+      <div class="pub-authors-row">
+        ${avatars}
+        ${authorNames?`<div class="pub-author-names">${authorNames}</div>`:""}
+      </div>
+      ${hasAbs?`<div class="pub-abstract-wrap">
+        <div class="pub-abstract-label">Abstract</div>
+        <div class="pub-abstract-text" id="${absId}">${pub.abstract.replace(/^abstract[:\s]*/i,'')}</div>
+        <button class="show-more" onclick="toggleAbs('${absId}',this)">… show more</button>
+      </div>`:""}
+      <div class="pub-actions">
+        ${pdf?`<a class="pub-act-link" href="${pdf}" target="_blank" title="Open Access PDF">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>PDF</a>`:""}
+        ${doi?`<a class="pub-act-link" href="${doi}" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>DOI</a>`:pub.title?`<span class="pub-act-link" style="cursor:default;opacity:.4">No DOI</span>`:""}
+        <button class="pub-act-btn" onclick="showCite('${pub.id.replace(/'/g,"\\'")}')">
+          <svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>Cite</button>
+        ${pub.cited_by>0?`<span class="pub-act-link" style="cursor:default">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${pub.cited_by} citations</span>`:""}
+      </div>
+    </div>`;
+  return card;
+}
+
+// ── APSA CITATION ────────────────────────────────────────────────────────────
+function formatAuthorAPSA(nameStr) {
+  if (!nameStr) return "";
+  const parts = nameStr.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0];
+  const last  = parts[parts.length - 1];
+  const first = parts.slice(0, -1).join(" ");
+  return `${last}, ${first}`;
+}
+
+function buildAPSA(pub) {
+  const authors = (pub.authors || []).map(a => a.name).filter(Boolean);
+  const year    = pub.year || "n.d.";
+  const title   = pub.title || "Untitled";
+  const type    = pub.type  || "article";
+
+  // Format authors: first author Last, First; rest First Last
+  let authorStr = "";
+  if (authors.length === 0) {
+    authorStr = pub.faculty_author || "";
+  } else if (authors.length === 1) {
+    authorStr = formatAuthorAPSA(authors[0]);
+  } else {
+    const first = formatAuthorAPSA(authors[0]);
+    const rest  = authors.slice(1).join(", ");
+    authorStr = `${first}, and ${rest}`;
+  }
+
+  const isBook    = type === "book" || type === "edited-book" || type === "monograph";
+  const isChapter = type === "book-chapter" || type === "book-section";
+
+  let citation = "";
+
+  if (isBook) {
+    // Last, First. Year. Title. City: Publisher.
+    const publisher = pub.publisher || "";
+    citation = `${authorStr}. ${year}. <em>${title}</em>.${publisher ? " " + publisher + "." : ""}`;
+  } else if (isChapter) {
+    // Last, First. Year. "Chapter Title." In Book Title, ed. Editor. City: Publisher, Pages.
+    const bookTitle = pub.book_title || "";
+    const pages     = pub.pages ? `, ${pub.pages}` : "";
+    const inPart    = bookTitle ? ` In <em>${bookTitle}</em>` : "";
+    citation = `${authorStr}. ${year}. "${title}."${inPart}${pages}.`;
+  } else {
+    // Last, First. Year. "Article Title." Journal Volume(Issue): Pages.
+    const journal = pub.journal || "";
+    const vol     = pub.volume  || "";
+    const iss     = pub.issue   || "";
+    const pages   = pub.pages   || "";
+    let ref = "";
+    if (journal) {
+      ref = ` <em>${journal}</em>`;
+      if (vol) ref += ` ${vol}`;
+      if (iss) ref += `(${iss})`;
+      if (pages) ref += `: ${pages}`;
+      ref += ".";
+    }
+    citation = `${authorStr}. ${year}. "${title}."${ref}`;
+    if (pub.doi) citation += ` doi:${pub.doi.replace("https://doi.org/","")}`;
+  }
+  return citation;
+}
+
+function showCite(pubId) {
+  const pub = allPubs.find(p => p.id === pubId);
+  if (!pub) return;
+  const html = buildAPSA(pub);
+  document.getElementById("cite-text").innerHTML = html;
+  document.getElementById("cite-modal").classList.add("open");
+  document.getElementById("copy-confirm").style.display = "none";
+}
+function closeCite() {
+  document.getElementById("cite-modal").classList.remove("open");
+}
+function copyCite() {
+  const text = document.getElementById("cite-text").innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const c = document.getElementById("copy-confirm");
+    c.style.display = "inline";
+    setTimeout(() => c.style.display = "none", 2000);
+  });
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeCite(); });
+
+function toggleAbs(id,btn){
+  const el=document.getElementById(id);if(!el)return;
+  const exp=el.classList.toggle("expanded");
+  btn.textContent=exp?"show less":"… show more";
+}
+
+function render(){
+  const pubs=filterPubs();
+  const list=document.getElementById("pub-list");
+  const empty=document.getElementById("empty");
+  document.getElementById("result-count").textContent=`${pubs.length} publication${pubs.length!==1?"s":""}`;
+  list.innerHTML="";
+  if(!pubs.length){empty.style.display="block";return}
+  empty.style.display="none";
+  const byYear={};
+  pubs.forEach(p=>{const y=p.year||"Unknown";(byYear[y]=byYear[y]||[]).push(p)});
+  Object.keys(byYear).sort((a,b)=>b-a).forEach(yr=>{
+    const d=document.createElement("div");d.className="year-div";d.textContent=yr;list.appendChild(d);
+    byYear[yr].forEach(p=>list.appendChild(pubCard(p)));
+  });
+}
+
+document.getElementById("search-box").addEventListener("input",e=>{activeF.search=e.target.value;render()});
+document.getElementById("f-year").addEventListener("change",e=>{activeF.year=e.target.value;render()});
+document.getElementById("f-type").addEventListener("change",e=>{activeF.type=e.target.value;render()});
+
+// ── DEPT MODAL TABS ──────────────────────────────────────────────────────────
+let dnetBuilt=false;
+function switchDeptTab(tab){
+  document.querySelectorAll(".dtab").forEach(t=>{
+    const isActive=t.dataset.dtab===tab;
+    t.style.borderBottomColor=isActive?"var(--teal)":"transparent";
+    t.style.color=isActive?"var(--teal)":"var(--muted)";
+  });
+  document.getElementById("dmap-wrap").style.display=tab==="map"?"flex":"none";
+  document.getElementById("dnet-wrap").style.display=tab==="net"?"block":"none";
+  if(tab==="net"&&!dnetBuilt){buildDeptNet();dnetBuilt=true;}
+}
+
+// ── DEPARTMENT COLLABORATION NETWORK ─────────────────────────────────────────
+let dnetSim=null, dnetFocusFn=null;
+function dnetClearFocus(){
+  const sel=document.getElementById("dnet-focus-select");
+  if(sel)sel.value="";
+  document.getElementById("dnet-focus-clear").style.display="none";
+  if(dnetFocusFn)dnetFocusFn(null);
+}
+function buildDeptNet(){
+  if(dnetSim){dnetSim.stop();dnetSim=null;}
+  const svg=d3.select("#dnet-svg");
+  svg.selectAll("*").remove();
+  const W=900,H=500;
+  svg.attr("viewBox",`0 0 ${W} ${H}`).attr("preserveAspectRatio","xMidYMid meet");
+
+  const facList=Object.keys(facMeta);
+
+  // ── Strict matching: both first name AND last name required ──
+  function strictFacMatch(authorName, facName){
+    const a=(cleanAuthorName(authorName)||"").replace(/\s+[a-zA-Z]\.\s*/g," ").replace(/\s+/g," ").toLowerCase().trim();
+    const f=facName.replace(/\s+[a-zA-Z]\.\s*/g," ").replace(/\s+/g," ").toLowerCase().trim();
+    if(a===f) return true;
+    const fParts=f.split(/\s+/);
+    if(fParts.length<2) return false;
+    const fFirst=fParts[0], fLast=fParts[fParts.length-1];
+    // Both full first AND last name must be present
+    if(a.includes(fFirst) && a.includes(fLast)) return true;
+    // Hyphenated last names: "Press-Barnathan"
+    if(fLast.includes("-") && fLast.split("-").every(p=>a.includes(p)) && a.includes(fFirst)) return true;
+    return false;
+  }
+
+  function isIsraeliInst(a){
+    const inst=(a.institution||"").toLowerCase();
+    const country=a.country||"";
+    if(country==="Israel") return true;
+    return ["hebrew university","huji","tel aviv university","technion","weizmann institute",
+      "bar-ilan","bar ilan","ben-gurion","ben gurion","university of haifa",
+      "reichman","ariel university","open university of israel",
+      "bezalel","shenkar","sapir college","ort braude","hebrew college"].some(k=>inst.includes(k));
+  }
+
+  // ── Build faculty-faculty links (strict) ──
+  const facLinkMap={};
+  const facPapers={};
+  allPubs.forEach(pub=>{
+    const fa=pub.faculty_author; if(!fa) return;
+    facPapers[fa]=(facPapers[fa]||0)+1;
+    (pub.authors||[]).forEach(a=>{
+      if(!a.name) return;
+      const cleaned=cleanAuthorName(a.name);
+      const otherFac=facList.find(fn=>fn!==fa&&strictFacMatch(cleaned,fn));
+      if(!otherFac) return;
+      const lk=[fa,otherFac].sort().join("|||");
+      if(!facLinkMap[lk]) facLinkMap[lk]={source:fa,target:otherFac,value:0};
+      facLinkMap[lk].value++;
+    });
+  });
+
+  // ── Build external collaborator map (ALL unique external collabs) ──
+  const extMap={};  // id → {id, country, inst, facsSet, count}
+  allPubs.forEach(pub=>{
+    const fa=pub.faculty_author; if(!fa) return;
+    (pub.authors||[]).forEach(a=>{
+      if(!a.name) return;
+      const cleaned=cleanAuthorName(a.name);
+      if(!cleaned || cleaned.length<3) return;
+      if(strictFacMatch(cleaned,fa)) return;         // skip self
+      if(facList.some(fn=>strictFacMatch(cleaned,fn))) return;  // skip other faculty
+      if(isIsraeliInst(a)) return;                   // skip Israelis
+      if(!extMap[cleaned]) extMap[cleaned]={
+        id:cleaned, country:a.country||inferCountry(a.institution)||"Unknown",
+        inst:a.institution||"", facsSet:new Set(), count:0
+      };
+      extMap[cleaned].facsSet.add(fa);
+      extMap[cleaned].count++;
+      if(!extMap[cleaned].inst && a.institution) extMap[cleaned].inst=a.institution;
+      if(extMap[cleaned].country==="Unknown" && (a.country||inferCountry(a.institution))) extMap[cleaned].country=a.country||inferCountry(a.institution);
+    });
+  });
+
+  // ── Nodes: faculty + ALL external collabs ──
+  const facNodes=facList.map(name=>({
+    id:name, isFac:true, papers:facPapers[name]||0,
+    photo:(facMeta[name]||{}).photo_url||null,
+    facs:new Set([name])
+  }));
+  const extNodes=Object.values(extMap).map(e=>({
+    id:e.id, isFac:false, country:e.country, inst:e.inst,
+    papers:e.count, facs:e.facsSet,
+    visible:e.facsSet.size>=2||e.count>=3  // visible by default if bridge/frequent
+  }));
+
+  const allNodes=[...facNodes,...extNodes];
+
+  // ── Links: fac-fac + fac-ext ──
+  const facLinks=Object.values(facLinkMap);
+  const extLinks=[];
+  extNodes.forEach(ext=>{
+    ext.facs.forEach(fa=>{
+      extLinks.push({source:ext.id, target:fa, value:ext.papers, isExt:true,
+        visible:ext.visible});
+    });
+  });
+  const allLinks=[...facLinks,...extLinks];
+
+  if(!allNodes.length) return;
+
+  // ── Populate focus dropdown ──
+  const sel=document.getElementById("dnet-focus-select");
+  if(sel){
+    sel.innerHTML='<option value="">— All faculty —</option>'+
+      facList.slice().sort((a,b)=>a.split(" ").pop().localeCompare(b.split(" ").pop()))
+        .map(n=>`<option value="${n}">${n}</option>`).join("");
+    sel.onchange=function(){
+      const v=this.value;
+      document.getElementById("dnet-focus-clear").style.display=v?"inline":"none";
+      if(dnetFocusFn)dnetFocusFn(v||null);
+    };
+  }
+
+  // ── D3 setup ──
+  const tooltip=document.getElementById("collab-tooltip");
+  let focusedFac=null;
+
+  const g=svg.append("g");
+  const netZoom=d3.zoom().scaleExtent([0.15,8]).on("zoom",e=>g.attr("transform",e.transform));
+  svg.call(netZoom);
+
+  // Zoom buttons
+  [["+",W-20,H-42,1.5],["−",W-20,H-20,0.67]].forEach(([txt,x,y,f])=>{
+    svg.append("circle").attr("cx",x).attr("cy",y).attr("r",13)
+      .attr("fill","#f5f5f5").attr("stroke","#ddd").style("cursor","pointer")
+      .on("click",()=>svg.transition().duration(300).call(netZoom.scaleBy,f));
+    svg.append("text").text(txt).attr("x",x).attr("y",y+1)
+      .attr("text-anchor","middle").attr("dominant-baseline","middle")
+      .attr("font-size","14px").attr("fill","#555").attr("pointer-events","none");
+  });
+
+  // ── Simulation (only active nodes) ──
+  function getActiveNodes(){ return allNodes.filter(n=>n.isFac||(focusedFac?n.facs.has(focusedFac):n.visible)); }
+  function getActiveLinks(){ return allLinks.filter(l=>!l.isExt||(focusedFac?l.source===focusedFac||l.target===focusedFac:l.visible)); }
+
+  function restartSim(){
+    if(dnetSim){ dnetSim.stop(); }
+    const anodes=getActiveNodes();
+    const alinks=getActiveLinks();
+    dnetSim=d3.forceSimulation(anodes)
+      .force("link",d3.forceLink(alinks).id(d=>d.id).distance(d=>d.isExt?80:120).strength(d=>d.isExt?0.25:0.55))
+      .force("charge",d3.forceManyBody().strength(d=>d.isFac?-380:-70))
+      .force("center",d3.forceCenter(W/2,H/2))
+      .force("collision",d3.forceCollide(d=>d.isFac?24:9))
+      .alpha(1).alphaDecay(0.025);
+    dnetSim.on("tick",()=>{
+      linkSel.attr("display",l=>!l.isExt||(focusedFac?l.source.id===focusedFac||l.target.id===focusedFac:l.visible)?"inline":"none")
+        .attr("x1",l=>l.source.x||0).attr("y1",l=>l.source.y||0)
+        .attr("x2",l=>l.target.x||0).attr("y2",l=>l.target.y||0);
+      nodeG.attr("display",d=>d.isFac||(focusedFac?d.facs.has(focusedFac):d.visible)?"inline":"none")
+        .attr("transform",d=>`translate(${d.x||0},${d.y||0})`);
+    });
+  }
+
+  // ── Draw all links ──
+  const linkSel=g.append("g").selectAll("line").data(allLinks).join("line")
+    .attr("stroke",d=>d.isExt?"#b0c4d8":"#c8d8e8")
+    .attr("stroke-width",d=>d.isExt?0.5:0.8+d.value*0.5)
+    .attr("stroke-dasharray",d=>d.isExt?"3,2":"none")
+    .attr("display","none");
+
+  // ── Draw all nodes ──
+  const nodeG=g.append("g").selectAll("g").data(allNodes).join("g")
+    .style("cursor","pointer").attr("display","none")
+    .call(d3.drag()
+      .on("start",(e,d)=>{if(!e.active)dnetSim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y})
+      .on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y})
+      .on("end",(e,d)=>{if(!e.active)dnetSim.alphaTarget(0);d.fx=null;d.fy=null}));
+
+  // Faculty nodes
+  nodeG.filter(d=>d.isFac).each(function(d){
+    const el=d3.select(this);
+    el.append("circle").attr("r",18).attr("fill","#e8b84b").attr("stroke","#fff").attr("stroke-width",2);
+    if(d.photo){
+      const cid="dc-"+d.id.replace(/\W/g,"-")+"-"+Date.now();
+      d3.select("#dnet-svg").select("defs").empty()&&d3.select("#dnet-svg").append("defs");
+      d3.select("#dnet-svg defs").append("clipPath").attr("id",cid).append("circle").attr("r",17);
+      el.append("image").attr("href",d.photo).attr("width",34).attr("height",34)
+        .attr("x",-17).attr("y",-17).attr("clip-path",`url(#${cid})`)
+        .attr("preserveAspectRatio","xMidYMid slice");
+      el.append("circle").attr("r",18).attr("fill","none").attr("stroke","#e8b84b").attr("stroke-width",2);
+    } else {
+      el.append("text").text(ini(d.id)).attr("text-anchor","middle").attr("dominant-baseline","central")
+        .attr("fill","#fff").attr("font-size","11px").attr("font-weight","700").attr("pointer-events","none");
+    }
+    el.append("text").text(d.id.split(" ").pop())
+      .attr("text-anchor","middle").attr("dy",27)
+      .attr("fill","#333").attr("font-size","9px").attr("font-weight","600").attr("pointer-events","none");
+  });
+
+  // External collaborator nodes
+  nodeG.filter(d=>!d.isFac).append("circle").attr("r",5.5)
+    .attr("fill",d=>countryColorMap[d.country]||"#1a9ab5")
+    .attr("fill-opacity",0.82).attr("stroke","#fff").attr("stroke-width",1);
+
+  // ── Interactions ──
+  // ── Shared focus/unfocus function ──
+  function applyFocus(facName){
+    focusedFac=facName;
+    // Sync dropdown
+    const sel=document.getElementById("dnet-focus-select");
+    if(sel&&sel.value!==facName) sel.value=facName||"";
+    document.getElementById("dnet-focus-clear").style.display=facName?"inline":"none";
+
+    if(!facName){
+      nodeG.attr("opacity",1);
+      linkSel.attr("opacity",1).attr("stroke-width",l=>l.isExt?0.5:0.8+l.value*0.5);
+      restartSim();
+      svg.transition().duration(400).call(netZoom.transform,d3.zoomIdentity);
+    } else {
+      nodeG.attr("opacity",n=>n.isFac||n.facs.has(facName)?1:0.12);
+      linkSel.attr("opacity",l=>{
+        const s=l.source.id||l.source,t=l.target.id||l.target;
+        return(s===facName||t===facName)?0.9:0.05;
+      }).attr("stroke-width",l=>{
+        const s=l.source.id||l.source,t=l.target.id||l.target;
+        return(s===facName||t===facName)?1.5:0.3;
+      });
+      restartSim();
+      setTimeout(()=>{
+        const nd=allNodes.find(n=>n.id===facName);
+        if(nd&&nd.x){
+          const scale=1.8;
+          svg.transition().duration(500).call(
+            netZoom.transform,d3.zoomIdentity.translate(W/2-scale*nd.x,H/2-scale*nd.y).scale(scale)
+          );
+        }
+      },300);
+    }
+  }
+  dnetFocusFn=applyFocus;
+
+  nodeG.on("mousemove",(e,d)=>{
+    tooltip.style.opacity=1;tooltip.style.left=(e.clientX+12)+"px";tooltip.style.top=(e.clientY-30)+"px";
+    const myExt=d.isFac?Object.values(extMap).filter(x=>x.facsSet.has(d.id)).length:0;
+    tooltip.innerHTML=`<strong style="color:${d.isFac?"#d97706":countryColorMap[d.country]||"#1a9ab5"}">${d.id}</strong>`+
+      (d.inst&&!d.isFac?`<br><span style="color:#aaa;font-size:11px">${d.inst.slice(0,48)}</span>`:"")+
+      (!d.isFac&&d.country?`<br><span style="color:#888">${d.country}</span>`:"")+
+      `<br><span style="color:#aaa;font-size:11px">${d.isFac
+        ?`${d.papers} pubs · ${myExt} external collab${myExt!==1?"s":""} · click to expand`
+        :`${d.facs.size} faculty · ${d.papers} papers`}</span>`;
+  }).on("mouseleave",()=>{tooltip.style.opacity=0;})
+  .on("click",(e,d)=>{
+    e.stopPropagation();
+    if(!d.isFac) return;
+    applyFocus(focusedFac===d.id ? null : d.id);
+  });
+
+  svg.on("click",()=>{
+    if(!focusedFac) return;
+    applyFocus(null);
+  });
+
+  restartSim();
+}
+
+loadData();
+
+// ── COUNTRY PALETTE ──────────────────────────────────────────────────────────
+const COUNTRY_PALETTE = ["#1a9ab5","#e8b84b","#2ECC71","#E74C3C","#9b59b6",
+  "#e67e22","#1abc9c","#e91e63","#3498db","#f39c12","#00bcd4","#ff5722"];
+const COUNTRY_COORDS = {
+  "United States":[-98,39],"United Kingdom":[-2,54],"Germany":[10,51],
+  "France":[2,46],"Canada":[-95,60],"Australia":[133,-27],
+  "Netherlands":[5,52],"Israel":[35.2,31.8],"Sweden":[18,62],
+  "Norway":[10,62],"Denmark":[10,56],"Finland":[26,62],
+  "Switzerland":[8,47],"Austria":[14,47],"Belgium":[4,51],
+  "Italy":[12,43],"Spain":[-4,40],"Japan":[138,36],
+  "China":[105,35],"South Korea":[128,37],"India":[78,22],
+  "Brazil":[-52,-10],"Mexico":[-102,24],"Argentina":[-64,-34],
+  "South Africa":[25,-29],"Egypt":[30,27],"Turkey":[35,39],
+  "Russia":[60,55],"Poland":[20,52],"Czech Republic":[15,50],
+  "Hungary":[19,47],"Greece":[22,38],"Portugal":[-8,39],
+  "Ireland":[-8,53],"New Zealand":[172,-41],"Singapore":[104,1],
+  "Hong Kong":[114,22],"Ukraine":[32,49],"Jordan":[37,31],
+  "Lebanon":[35,34],"Palestine":[35,32],"Chile":[-71,-30],
+};
+let countryColorMap={}, worldTopo=null;
+
+function getCountryColor(c){return countryColorMap[c]||"#334155"}
+
+// ── INSTITUTION → CITY LOOKUP ─────────────────────────────────────────────────
+const INST_TO_CITY = {
+  // Israel (excluded from map but kept for reference)
+  "hebrew university":{city:"Jerusalem",lat:31.78,lng:35.22},"haifa":{city:"Haifa",lat:32.79,lng:34.99},
+  "tel aviv university":{city:"Tel Aviv",lat:32.11,lng:34.80},"technion":{city:"Haifa",lat:32.77,lng:35.02},
+  "bar-ilan":{city:"Ramat Gan",lat:32.07,lng:34.84},"bar ilan":{city:"Ramat Gan",lat:32.07,lng:34.84},
+  "ben-gurion":{city:"Beer Sheva",lat:31.26,lng:34.80},"ben gurion":{city:"Beer Sheva",lat:31.26,lng:34.80},
+  "weizmann":{city:"Rehovot",lat:31.90,lng:34.81},"reichman":{city:"Herzliya",lat:32.17,lng:34.84},
+  "interdisciplinary center":{city:"Herzliya",lat:32.17,lng:34.84},
+  // United States
+  "harvard":{city:"Cambridge, MA",lat:42.37,lng:-71.12},"mit ":{city:"Cambridge, MA",lat:42.36,lng:-71.09},
+  "massachusetts institute":{city:"Cambridge, MA",lat:42.36,lng:-71.09},
+  "yale":{city:"New Haven, CT",lat:41.31,lng:-72.92},"princeton":{city:"Princeton, NJ",lat:40.35,lng:-74.66},
+  "columbia":{city:"New York, NY",lat:40.81,lng:-73.96},"new york university":{city:"New York, NY",lat:40.73,lng:-73.99},
+  "nyu":{city:"New York, NY",lat:40.73,lng:-73.99},"city university of new york":{city:"New York, NY",lat:40.74,lng:-73.99},
+  "fordham":{city:"New York, NY",lat:40.86,lng:-73.88},"stony brook":{city:"Stony Brook, NY",lat:40.91,lng:-73.12},
+  "university of pennsylvania":{city:"Philadelphia, PA",lat:39.95,lng:-75.19},"annenberg":{city:"Philadelphia, PA",lat:39.95,lng:-75.19},
+  "drexel":{city:"Philadelphia, PA",lat:39.95,lng:-75.19},"temple university":{city:"Philadelphia, PA",lat:39.98,lng:-75.15},
+  "stanford":{city:"Stanford, CA",lat:37.43,lng:-122.17},"uc berkeley":{city:"Berkeley, CA",lat:37.87,lng:-122.26},
+  "university of california, berkeley":{city:"Berkeley, CA",lat:37.87,lng:-122.26},
+  "ucsd":{city:"San Diego, CA",lat:32.88,lng:-117.23},"university of california, san diego":{city:"San Diego, CA",lat:32.88,lng:-117.23},
+  "ucla":{city:"Los Angeles, CA",lat:34.07,lng:-118.44},"university of california, los angeles":{city:"Los Angeles, CA",lat:34.07,lng:-118.44},
+  "university of southern california":{city:"Los Angeles, CA",lat:34.02,lng:-118.29},
+  "university of chicago":{city:"Chicago, IL",lat:41.79,lng:-87.60},"northwestern":{city:"Evanston, IL",lat:42.05,lng:-87.68},
+  "university of michigan":{city:"Ann Arbor, MI",lat:42.28,lng:-83.74},"michigan state":{city:"East Lansing, MI",lat:42.73,lng:-84.48},
+  "ohio state":{city:"Columbus, OH",lat:40.00,lng:-83.02},"duke":{city:"Durham, NC",lat:36.00,lng:-78.94},
+  "vanderbilt":{city:"Nashville, TN",lat:36.14,lng:-86.80},"emory":{city:"Atlanta, GA",lat:33.79,lng:-84.32},
+  "georgetown":{city:"Washington, DC",lat:38.91,lng:-77.07},"george washington":{city:"Washington, DC",lat:38.90,lng:-77.05},
+  "american university":{city:"Washington, DC",lat:38.93,lng:-77.09},"johns hopkins":{city:"Baltimore, MD",lat:39.33,lng:-76.62},
+  "university of maryland":{city:"College Park, MD",lat:38.99,lng:-76.94},"university of virginia":{city:"Charlottesville, VA",lat:38.03,lng:-78.51},
+  "university of texas":{city:"Austin, TX",lat:30.29,lng:-97.74},"texas a&m":{city:"College Station, TX",lat:30.61,lng:-96.34},
+  "rice university":{city:"Houston, TX",lat:29.71,lng:-95.40},"university of washington":{city:"Seattle, WA",lat:47.66,lng:-122.31},
+  "university of colorado":{city:"Boulder, CO",lat:40.01,lng:-105.27},"university of arizona":{city:"Tucson, AZ",lat:32.23,lng:-110.95},
+  "university of florida":{city:"Gainesville, FL",lat:29.65,lng:-82.35},"florida state":{city:"Tallahassee, FL",lat:30.44,lng:-84.30},
+  "university of wisconsin":{city:"Madison, WI",lat:43.07,lng:-89.40},"university of minnesota":{city:"Minneapolis, MN",lat:44.97,lng:-93.23},
+  "cornell":{city:"Ithaca, NY",lat:42.45,lng:-76.48},"rutgers":{city:"New Brunswick, NJ",lat:40.50,lng:-74.45},
+  "boston university":{city:"Boston, MA",lat:42.35,lng:-71.10},"northeastern":{city:"Boston, MA",lat:42.34,lng:-71.09},
+  "tufts":{city:"Medford, MA",lat:42.41,lng:-71.12},"brandeis":{city:"Waltham, MA",lat:42.36,lng:-71.26},
+  "carnegie mellon":{city:"Pittsburgh, PA",lat:40.44,lng:-79.94},"university of pittsburgh":{city:"Pittsburgh, PA",lat:40.44,lng:-79.96},
+  "purdue":{city:"West Lafayette, IN",lat:40.43,lng:-86.92},"indiana university":{city:"Bloomington, IN",lat:39.17,lng:-86.52},
+  "university of illinois":{city:"Champaign, IL",lat:40.10,lng:-88.23},"southern illinois":{city:"Carbondale, IL",lat:37.71,lng:-89.22},
+  "university of iowa":{city:"Iowa City, IA",lat:41.66,lng:-91.54},"university of nebraska":{city:"Lincoln, NE",lat:40.82,lng:-96.70},
+  "university of notre dame":{city:"Notre Dame, IN",lat:41.70,lng:-86.24},
+  "brookings":{city:"Washington, DC",lat:38.91,lng:-77.04},"rand corporation":{city:"Santa Monica, CA",lat:34.02,lng:-118.48},
+  "wilson center":{city:"Washington, DC",lat:38.90,lng:-77.05},"carnegie endowment":{city:"Washington, DC",lat:38.90,lng:-77.05},
+  // United Kingdom
+  "oxford":{city:"Oxford",lat:51.76,lng:-1.26},"cambridge":{city:"Cambridge",lat:52.20,lng:0.12},
+  "london school of economics":{city:"London",lat:51.51,lng:-0.12},"lse ":{city:"London",lat:51.51,lng:-0.12},
+  "king's college london":{city:"London",lat:51.51,lng:-0.12},"kings college london":{city:"London",lat:51.51,lng:-0.12},
+  "university college london":{city:"London",lat:51.53,lng:-0.13},"ucl ":{city:"London",lat:51.53,lng:-0.13},
+  "imperial college":{city:"London",lat:51.50,lng:-0.17},"queen mary":{city:"London",lat:51.52,lng:-0.04},
+  "chatham house":{city:"London",lat:51.51,lng:-0.14},"iiss":{city:"London",lat:51.51,lng:-0.14},
+  "edinburgh":{city:"Edinburgh",lat:55.95,lng:-3.19},"glasgow":{city:"Glasgow",lat:55.87,lng:-4.29},
+  "manchester":{city:"Manchester",lat:53.47,lng:-2.24},"university of warwick":{city:"Coventry",lat:52.38,lng:-1.56},
+  "bristol":{city:"Bristol",lat:51.46,lng:-2.60},"sheffield":{city:"Sheffield",lat:53.38,lng:-1.49},
+  "leeds":{city:"Leeds",lat:53.80,lng:-1.55},"birmingham":{city:"Birmingham",lat:52.45,lng:-1.93},
+  "nottingham":{city:"Nottingham",lat:52.94,lng:-1.20},"exeter":{city:"Exeter",lat:50.74,lng:-3.53},
+  "durham university":{city:"Durham",lat:54.77,lng:-1.58},"southampton":{city:"Southampton",lat:50.93,lng:-1.40},
+  "cardiff":{city:"Cardiff",lat:51.49,lng:-3.18},"st andrews":{city:"St Andrews",lat:56.34,lng:-2.80},
+  "sussex":{city:"Brighton",lat:50.87,lng:-0.09},"aberystwyth":{city:"Aberystwyth",lat:52.42,lng:-4.08},
+  // Germany
+  "freie universität":{city:"Berlin",lat:52.46,lng:13.30},"freie universitat":{city:"Berlin",lat:52.46,lng:13.30},
+  "humboldt-universität":{city:"Berlin",lat:52.52,lng:13.39},"humboldt university":{city:"Berlin",lat:52.52,lng:13.39},
+  "tu berlin":{city:"Berlin",lat:52.51,lng:13.33},"hertie school":{city:"Berlin",lat:52.52,lng:13.38},
+  "wzb":{city:"Berlin",lat:52.52,lng:13.38},"max planck institute":{city:"Berlin",lat:52.52,lng:13.38},
+  "lmu munich":{city:"Munich",lat:48.15,lng:11.58},"ludwig maximilian":{city:"Munich",lat:48.15,lng:11.58},
+  "tu munich":{city:"Munich",lat:48.15,lng:11.57},"heidelberg":{city:"Heidelberg",lat:49.41,lng:8.71},
+  "mannheim":{city:"Mannheim",lat:49.48,lng:8.47},"goethe university":{city:"Frankfurt",lat:50.12,lng:8.66},
+  "hamburg":{city:"Hamburg",lat:53.57,lng:10.02},"university of cologne":{city:"Cologne",lat:50.94,lng:6.93},
+  "university of bonn":{city:"Bonn",lat:50.73,lng:7.10},"iza ":{city:"Bonn",lat:50.73,lng:7.10},
+  "tübingen":{city:"Tübingen",lat:48.52,lng:9.06},"tubingen":{city:"Tübingen",lat:48.52,lng:9.06},
+  "göttingen":{city:"Göttingen",lat:51.55,lng:9.93},"gottingen":{city:"Göttingen",lat:51.55,lng:9.93},
+  "freiburg":{city:"Freiburg",lat:47.99,lng:7.84},"bielefeld":{city:"Bielefeld",lat:52.04,lng:8.49},
+  "konstanz":{city:"Konstanz",lat:47.69,lng:9.19},
+  // France
+  "sciences po":{city:"Paris",lat:48.85,lng:2.33},"sorbonne":{city:"Paris",lat:48.85,lng:2.34},
+  "université de paris":{city:"Paris",lat:48.85,lng:2.35},"cnrs":{city:"Paris",lat:48.85,lng:2.35},
+  "ehess":{city:"Paris",lat:48.85,lng:2.35},"ecole polytechnique":{city:"Palaiseau",lat:48.71,lng:2.21},
+  "toulouse":{city:"Toulouse",lat:43.61,lng:1.44},"bordeaux":{city:"Bordeaux",lat:44.84,lng:-0.58},
+  "aix":{city:"Aix-en-Provence",lat:43.53,lng:5.45},"strasbourg":{city:"Strasbourg",lat:48.58,lng:7.75},
+  "lyon":{city:"Lyon",lat:45.75,lng:4.85},"grenoble":{city:"Grenoble",lat:45.19,lng:5.72},
+  // Switzerland
+  "eth zurich":{city:"Zurich",lat:47.38,lng:8.55},"eth zürich":{city:"Zurich",lat:47.38,lng:8.55},
+  "university of zurich":{city:"Zurich",lat:47.37,lng:8.55},"universität zürich":{city:"Zurich",lat:47.37,lng:8.55},
+  "graduate institute":{city:"Geneva",lat:46.20,lng:6.14},"university of geneva":{city:"Geneva",lat:46.20,lng:6.14},
+  "université de genève":{city:"Geneva",lat:46.20,lng:6.14},"epfl":{city:"Lausanne",lat:46.52,lng:6.56},
+  "university of lausanne":{city:"Lausanne",lat:46.52,lng:6.63},"university of bern":{city:"Bern",lat:46.95,lng:7.45},
+  "university of st. gallen":{city:"St. Gallen",lat:47.43,lng:9.37},"university of basel":{city:"Basel",lat:47.56,lng:7.59},
+  // Netherlands
+  "university of amsterdam":{city:"Amsterdam",lat:52.37,lng:4.90},"vrije universiteit":{city:"Amsterdam",lat:52.33,lng:4.87},
+  "leiden":{city:"Leiden",lat:52.16,lng:4.49},"utrecht":{city:"Utrecht",lat:52.09,lng:5.12},
+  "groningen":{city:"Groningen",lat:53.22,lng:6.57},"erasmus":{city:"Rotterdam",lat:51.92,lng:4.48},
+  "tilburg":{city:"Tilburg",lat:51.56,lng:5.08},"maastricht":{city:"Maastricht",lat:50.85,lng:5.69},
+  "radboud":{city:"Nijmegen",lat:51.82,lng:5.87},
+  // Sweden
+  "stockholm university":{city:"Stockholm",lat:59.37,lng:18.06},"karolinska":{city:"Stockholm",lat:59.35,lng:18.02},
+  "kth":{city:"Stockholm",lat:59.35,lng:18.07},"stockholm school of economics":{city:"Stockholm",lat:59.34,lng:18.07},
+  "sipri":{city:"Stockholm",lat:59.37,lng:17.95},"uppsala":{city:"Uppsala",lat:59.86,lng:17.63},
+  "university of gothenburg":{city:"Gothenburg",lat:57.69,lng:11.98},"lund":{city:"Lund",lat:55.71,lng:13.21},
+  // Nordic
+  "university of oslo":{city:"Oslo",lat:59.94,lng:10.72},"prio":{city:"Oslo",lat:59.94,lng:10.72},
+  "peace research institute oslo":{city:"Oslo",lat:59.94,lng:10.72},"university of bergen":{city:"Bergen",lat:60.39,lng:5.33},
+  "university of copenhagen":{city:"Copenhagen",lat:55.68,lng:12.57},"aarhus":{city:"Aarhus",lat:56.17,lng:10.20},
+  "university of southern denmark":{city:"Odense",lat:55.40,lng:10.39},"aalborg":{city:"Aalborg",lat:57.05,lng:9.93},
+  "university of helsinki":{city:"Helsinki",lat:60.19,lng:24.97},"tampere":{city:"Tampere",lat:61.50,lng:23.76},
+  // Austria & Belgium
+  "university of vienna":{city:"Vienna",lat:48.21,lng:16.37},"wu vienna":{city:"Vienna",lat:48.21,lng:16.36},
+  "university of graz":{city:"Graz",lat:47.07,lng:15.44},"innsbruck":{city:"Innsbruck",lat:47.27,lng:11.39},
+  "ku leuven":{city:"Leuven",lat:50.88,lng:4.70},"ghent":{city:"Ghent",lat:51.05,lng:3.72},
+  "université libre de bruxelles":{city:"Brussels",lat:50.81,lng:4.38},"vrije universiteit brussel":{city:"Brussels",lat:50.82,lng:4.40},
+  "university of liège":{city:"Liège",lat:50.58,lng:5.57},"university of antwerp":{city:"Antwerp",lat:51.22,lng:4.41},
+  // Italy
+  "la sapienza":{city:"Rome",lat:41.90,lng:12.51},"sapienza":{city:"Rome",lat:41.90,lng:12.51},
+  "luiss":{city:"Rome",lat:41.92,lng:12.47},"bocconi":{city:"Milan",lat:45.45,lng:9.19},
+  "university of milan":{city:"Milan",lat:45.46,lng:9.19},"university of bologna":{city:"Bologna",lat:44.49,lng:11.34},
+  "university of florence":{city:"Florence",lat:43.77,lng:11.25},"university of turin":{city:"Turin",lat:45.06,lng:7.69},
+  "scuola normale":{city:"Pisa",lat:43.72,lng:10.40},"trento":{city:"Trento",lat:46.07,lng:11.12},
+  // Spain & Portugal
+  "complutense":{city:"Madrid",lat:40.45,lng:-3.73},"autónoma de madrid":{city:"Madrid",lat:40.55,lng:-3.69},
+  "carlos iii":{city:"Madrid",lat:40.32,lng:-3.77},"pompeu fabra":{city:"Barcelona",lat:41.39,lng:2.19},
+  "autónoma de barcelona":{city:"Barcelona",lat:41.50,lng:2.11},"university of barcelona":{city:"Barcelona",lat:41.39,lng:2.16},
+  "university of seville":{city:"Seville",lat:37.39,lng:-5.99},"university of granada":{city:"Granada",lat:37.18,lng:-3.60},
+  "university of lisbon":{city:"Lisbon",lat:38.75,lng:-9.16},"nova university":{city:"Lisbon",lat:38.72,lng:-9.16},
+  "university of porto":{city:"Porto",lat:41.16,lng:-8.62},"university of coimbra":{city:"Coimbra",lat:40.21,lng:-8.43},
+  // Poland, Czech, Russia
+  "university of warsaw":{city:"Warsaw",lat:52.24,lng:21.02},"jagiellonian":{city:"Kraków",lat:50.06,lng:19.93},
+  "charles university":{city:"Prague",lat:50.08,lng:14.42},"masaryk":{city:"Brno",lat:49.21,lng:16.62},
+  "higher school of economics":{city:"Moscow",lat:55.76,lng:37.60},"moscow state":{city:"Moscow",lat:55.70,lng:37.52},
+  // Canada & Australia
+  "university of toronto":{city:"Toronto",lat:43.66,lng:-79.40},"mcgill":{city:"Montreal",lat:45.50,lng:-73.58},
+  "université de montréal":{city:"Montreal",lat:45.50,lng:-73.62},"concordia":{city:"Montreal",lat:49.26,lng:-73.58},
+  "university of british columbia":{city:"Vancouver",lat:49.26,lng:-123.25},"ubc ":{city:"Vancouver",lat:49.26,lng:-123.25},
+  "university of alberta":{city:"Edmonton",lat:53.52,lng:-113.53},"university of calgary":{city:"Calgary",lat:51.08,lng:-114.13},
+  "carleton university":{city:"Ottawa",lat:45.38,lng:-75.70},"university of ottawa":{city:"Ottawa",lat:45.42,lng:-75.70},
+  "dalhousie":{city:"Halifax",lat:44.63,lng:-63.59},"simon fraser":{city:"Burnaby",lat:49.28,lng:-122.92},
+  "australian national":{city:"Canberra",lat:-35.28,lng:149.12},"anu ":{city:"Canberra",lat:-35.28,lng:149.12},
+  "university of sydney":{city:"Sydney",lat:-33.89,lng:151.19},"unsw":{city:"Sydney",lat:-33.92,lng:151.23},
+  "macquarie":{city:"Sydney",lat:-33.77,lng:151.11},"university of melbourne":{city:"Melbourne",lat:-37.80,lng:144.96},
+  "monash":{city:"Melbourne",lat:-37.91,lng:145.13},"university of queensland":{city:"Brisbane",lat:-27.50,lng:153.01},
+  // Middle East
+  "american university of beirut":{city:"Beirut",lat:33.90,lng:35.48},"aub ":{city:"Beirut",lat:33.90,lng:35.48},
+  "university of jordan":{city:"Amman",lat:31.99,lng:35.93},"cairo university":{city:"Cairo",lat:30.03,lng:31.21},
+  "american university in cairo":{city:"Cairo",lat:30.02,lng:31.50},"bilkent":{city:"Ankara",lat:39.87,lng:32.75},
+  "middle east technical":{city:"Ankara",lat:39.89,lng:32.77},"boğaziçi":{city:"Istanbul",lat:41.08,lng:29.05},
+  "bogazici":{city:"Istanbul",lat:41.08,lng:29.05},"sabancı":{city:"Istanbul",lat:40.89,lng:29.38},
+  // Asia & Americas
+  "university of tokyo":{city:"Tokyo",lat:35.71,lng:139.76},"waseda":{city:"Tokyo",lat:35.71,lng:139.72},
+  "keio":{city:"Tokyo",lat:35.65,lng:139.72},"kyoto university":{city:"Kyoto",lat:35.03,lng:135.78},
+  "osaka university":{city:"Osaka",lat:34.82,lng:135.52},"peking university":{city:"Beijing",lat:39.99,lng:116.31},
+  "tsinghua":{city:"Beijing",lat:40.00,lng:116.33},"fudan":{city:"Shanghai",lat:31.30,lng:121.50},
+  "national university of singapore":{city:"Singapore",lat:1.30,lng:103.78},"nus ":{city:"Singapore",lat:1.30,lng:103.78},
+  "seoul national":{city:"Seoul",lat:37.46,lng:126.95},"yonsei":{city:"Seoul",lat:37.56,lng:126.94},
+  "university of cape town":{city:"Cape Town",lat:-33.96,lng:18.46},"witwatersrand":{city:"Johannesburg",lat:-26.19,lng:28.03},
+  "mcgill university":{city:"Montreal",lat:45.50,lng:-73.58},
+  "university of buenos aires":{city:"Buenos Aires",lat:-34.60,lng:-58.43},
+  "pontificia universidad católica de chile":{city:"Santiago",lat:-33.44,lng:-70.64},
+  "unam":{city:"Mexico City",lat:19.32,lng:-99.18},"universidad de los andes":{city:"Bogotá",lat:4.60,lng:-74.07},
+};
+
+// Sort by key length (longest first) for better matching
+const CITY_LOOKUP = Object.entries(INST_TO_CITY).sort((a,b)=>b[0].length-a[0].length);
+
+function getInstCity(instName) {
+  if (!instName) return null;
+  const lower = instName.toLowerCase();
+  for (const [key, val] of CITY_LOOKUP) {
+    if (lower.includes(key)) return val;
+  }
+  return null;
+}
+
+// ── Institution → Country inference (fallback when country field is empty) ──
+const INST_COUNTRY_PATTERNS = [
+  // United States
+  [/\b(university of (alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|new hampshire|new jersey|new mexico|new york|north carolina|north dakota|ohio|oklahoma|oregon|pennsylvania|rhode island|south carolina|south dakota|tennessee|texas|utah|vermont|virginia|washington|west virginia|wisconsin|wyoming))\b/i,"United States"],
+  [/\b(harvard|yale|princeton|columbia|cornell|stanford|mit|caltech|nyu|ucla|usc|ucsd|uc berkeley|university of chicago|northwestern|duke|vanderbilt|emory|georgetown|johns hopkins|carnegie mellon|purdue|indiana university|ohio state|michigan state|penn state|rutgers|boston university|tufts|brandeis|rice|tulane|american university|george washington)\b/i,"United States"],
+  [/\buniversity\b.*\b(usa|u\.s\.a?|united states)\b/i,"United States"],
+  // United Kingdom
+  [/\b(oxford|cambridge|imperial college|london school of economics|lse|university college london|ucl|king's college london|edinburgh|glasgow|manchester|warwick|bristol|sheffield|leeds|birmingham|nottingham|southampton|exeter|durham|cardiff|st andrews|sussex|york university|aberdeen|bath)\b/i,"United Kingdom"],
+  [/\b(university of london|london metropolitan|city university of london)\b/i,"United Kingdom"],
+  // Germany
+  [/\b(freie universit|humboldt.universit|tu berlin|lmu munich|ludwig.maximilian|heidelberg|mannheim|goethe|frankfurt|hamburg|cologne|bonn|t.bingen|freiburg|bielefeld|konstanz|göttingen|gottingen|berlin|munich|münchen)\b.*\b(universit|institut)\b/i,"Germany"],
+  [/\buniversit\b.*(berlin|münchen|munich|hamburg|frankfurt|köln|cologne|bonn|heidelberg|freiburg)\b/i,"Germany"],
+  // France
+  [/\b(sciences po|sorbonne|paris|cnrs|ehess|ecole normale|ecole polytechnique|toulouse|bordeaux|strasbourg|lyon|grenoble|aix.marseille|montpellier|rennes|nantes|lille)\b.*\b(universit|école|institut)\b/i,"France"],
+  [/\buniversit[eé]\b.*(paris|toulouse|bordeaux|strasbourg|lyon|grenoble|montpellier|nantes|lille)\b/i,"France"],
+  // Switzerland
+  [/\b(eth zurich|eth z.rich|epfl|university of zurich|universit.t z.rich|university of geneva|graduate institute|university of bern|university of basel|lausanne)\b/i,"Switzerland"],
+  // Netherlands
+  [/\b(university of amsterdam|vrije universiteit|leiden|utrecht|groningen|erasmus|tilburg|maastricht|radboud|eindhoven)\b/i,"Netherlands"],
+  // Sweden
+  [/\b(stockholm|uppsala|lund|gothenburg|göteborg|chalmers|karolinska|sipri|linkoping|umeå|umea)\b.*\b(universit|institute)\b/i,"Sweden"],
+  // Norway
+  [/\b(oslo|bergen|tromsø|trondheim|ntnu|prio|fafo|nupi)\b.*\b(universit|institute|college)\b/i,"Norway"],
+  // Denmark
+  [/\b(copenhagen|aarhus|aalborg|roskilde|sdu|danish)\b.*\b(universit|institute)\b/i,"Denmark"],
+  // Canada
+  [/\b(university of toronto|mcgill|université de montreal|concordia|ubc|university of british columbia|university of alberta|university of calgary|carleton|dalhousie|queen's university|western university|simon fraser)\b/i,"Canada"],
+  // Australia
+  [/\b(australian national university|anu|university of sydney|unsw|university of melbourne|monash|university of queensland|university of western australia|university of adelaide|macquarie|curtin)\b/i,"Australia"],
+  // Japan
+  [/\b(university of tokyo|waseda|keio|kyoto|osaka|nagoya|tohoku|hiroshima|kobe|hokkaido)\b.*\b(universit|institute)\b/i,"Japan"],
+  // South Korea
+  [/\b(seoul national|yonsei|korea university|kaist|sungkyunkwan|postech|ewha|sogang|hanyang)\b/i,"South Korea"],
+  // China
+  [/\b(peking university|tsinghua|fudan|zhejiang|nanjing|wuhan|tongji|renmin|beijing|shanghai|guangzhou|hong kong)\b.*\b(universit|institute)\b/i,"China"],
+  // India
+  [/\b(iit|iim|jawaharlal nehru|university of delhi|bombay|calcutta|madras|hyderabad|bangalore)\b/i,"India"],
+  // Belgium
+  [/\b(ku leuven|ghent|université libre de bruxelles|ulb|vrije universiteit brussel|vub|liège|antwerp|namur)\b/i,"Belgium"],
+  // Austria
+  [/\b(university of vienna|wu vienna|graz|innsbruck|salzburg|linz|austrian academy)\b/i,"Austria"],
+  // Italy
+  [/\b(sapienza|bocconi|università|universita).*(rome|roma|milan|milano|florence|firenze|bologna|naples|napoli|turin|torino|padova|pisa|trento)\b/i,"Italy"],
+  // Spain
+  [/\b(complutense|autónoma|pompeu fabra|university of barcelona|university of madrid|university of seville|university of granada|carlos iii|universidad)\b/i,"Spain"],
+  // Portugal
+  [/\b(university of lisbon|nova university|university of porto|university of coimbra|universidade)\b/i,"Portugal"],
+  // Poland
+  [/\b(university of warsaw|jagiellonian|warsaw|kraków|wrocław|poznan|lodz)\b.*\b(universit|academ)\b/i,"Poland"],
+  // Czech Republic
+  [/\b(charles university|masaryk|czech academy|brno|prague)\b/i,"Czech Republic"],
+  // Turkey
+  [/\b(bilkent|metu|middle east technical|bogazici|boğaziçi|sabancı|istanbul|ankara|koç)\b/i,"Turkey"],
+  // Israel — also infer from institution name
+  [/\b(hebrew university|huji|tel aviv university|technion|weizmann|bar.ilan|ben.gurion|university of haifa|reichman|interdisciplinary center herzliya|ariel university)\b/i,"Israel"],
+  // Jordan
+  [/\b(university of jordan|jordan university|yarmouk|amman)\b/i,"Jordan"],
+  // Egypt
+  [/\b(cairo university|american university in cairo|ain shams|alexandria university)\b/i,"Egypt"],
+  // South Africa
+  [/\b(university of cape town|uct|witwatersrand|wits|stellenbosch|pretoria|kwazulu)\b/i,"South Africa"],
+  // Brazil
+  [/\b(universidade|usp|unicamp|fgv|ufrj|unifesp|puc.rio|iuperj)\b/i,"Brazil"],
+];
+
+function inferCountry(instName){
+  if(!instName)return null;
+  const inst=instName.toLowerCase();
+  for(const[pattern,country] of INST_COUNTRY_PATTERNS){
+    if(pattern.test(inst)) return country;
+  }
+  return null;
+}
+
+const COUNTRY_ZOOM_LEVELS = {
+  "United States":4,"Canada":3,"United Kingdom":9,"Germany":8,"France":7,
+  "Switzerland":12,"Netherlands":12,"Belgium":13,"Austria":10,"Denmark":11,
+  "Sweden":6,"Norway":5.5,"Finland":6,"Italy":6.5,"Spain":6.5,"Portugal":10,
+  "Poland":7,"Czech Republic":11,"Hungary":11,"Greece":9,"Russia":2.5,
+  "Turkey":6,"Israel":16,"Jordan":11,"Lebanon":14,"Egypt":6,
+  "Australia":3,"New Zealand":7,"Japan":6.5,"South Korea":10,"China":3.5,
+  "India":4,"Singapore":25,"Hong Kong":25,"Brazil":3.5,"Argentina":4,
+  "Chile":5,"Mexico":5,"Colombia":7,"South Africa":6,"Ukraine":6,
+};
+
+
+
+// ── GLOBAL ISRAELI INSTITUTION FILTER ────────────────────────────────────────
+const ISRAELI_INST_KEYWORDS = [
+  "hebrew university","tel aviv university","technion","weizmann","bar-ilan","bar ilan",
+  "ben-gurion","ben gurion","university of haifa","haifa university","open university of israel",
+  "reichman","interdisciplinary center","ariel university","ruppin","sapir","shenkar",
+  "bezalel","truman research","leonard davis","van leer","israel democracy",
+  "huji","idc herzliya","bgu ","bgn ","haifa research","interdisciplinary center herzliya",
+  "academic college tel aviv","college of management","colman","netanya academic",
+  "peres academic","ono academic","jerusalem academy",
+  // OpenAlex לפעמים מחזיר "Hebrew College" בטעות במקום "Hebrew University of Jerusalem"
+  "hebrew college",
+];
+function isIsraeliAffiliated(a){
+  if(!a) return false;
+  if((a.country||"").toLowerCase()==="israel") return true;
+  const inst=(a.institution||"").toLowerCase();
+  return ISRAELI_INST_KEYWORDS.some(k=>inst.includes(k));
+}
+
+let profileD3Sim=null;
+
+// Profile tabs
+document.querySelectorAll(".ptab").forEach(t=>{
+  t.addEventListener("click",()=>{
+    document.querySelectorAll(".ptab").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    const tab=t.dataset.ptab;
+    document.getElementById("pnet-wrap").style.display=tab==="net"?"flex":"none";
+    document.getElementById("ppubs-wrap").style.display=tab==="pubs"?"block":"none";
+  });
+});
+
+function openProfile(name){
+  const pubs=allPubs.filter(p=>p.faculty_author===name);
+  if(!pubs.length)return;
+  const m=facMeta[name]||{};
+
+  // Header
+  document.getElementById("profile-name").textContent=name;
+  const ph=document.getElementById("profile-photo-ph");
+  if(m.photo_url){
+    ph.outerHTML=`<img id="profile-photo-ph" src="${m.photo_url}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #1e2d45">`;
+  } else {
+    ph.textContent=ini(name);
+  }
+
+  // Stats
+  const collabs=new Set(pubs.flatMap(p=>(p.authors||[]).map(a=>a.name)));
+  const countries=new Set(pubs.flatMap(p=>(p.authors||[]).map(a=>a.country)).filter(c=>c&&c!=="Israel"));
+  const cites=pubs.reduce((s,p)=>s+(p.cited_by||0),0);
+  document.getElementById("pp-pubs").textContent=pubs.length;
+  document.getElementById("pp-collabs").textContent=collabs.size;
+  document.getElementById("pp-countries").textContent=countries.size;
+  document.getElementById("pp-cites").textContent=cites;
+
+  // Show modal first (so SVG has dimensions)
+  document.getElementById("profile-modal").classList.add("open");
+  document.getElementById("pnet-wrap").style.display="flex";
+  document.getElementById("ppubs-wrap").style.display="none";
+  document.querySelectorAll(".ptab").forEach((t,i)=>t.classList.toggle("active",i===0));
+
+  // Build publications list
+  const pubsList=document.getElementById("ppubs-list");
+  pubsList.innerHTML=pubs.sort((a,b)=>(b.year||0)-(a.year||0)).map(p=>`
+    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #1e2d45">
+      <div style="font-size:12px;color:#e2e8f0;line-height:1.4;margin-bottom:4px">
+        ${p.doi?`<a href="${p.doi}" target="_blank" style="color:var(--teal);text-decoration:none">${p.title}</a>`:p.title}
+      </div>
+      <div style="font-size:11px;color:#6b7a99">${p.journal||p.book_title||""} ${p.year?'· '+p.year:''}</div>
+    </div>
+  `).join("");
+
+  // Build network after a tick
+  setTimeout(()=>buildProfileNet(pubs,name),50);
+}
+
+function closeProfile(){
+  document.getElementById("profile-modal").classList.remove("open");
+  if(profileD3Sim){profileD3Sim.stop();profileD3Sim=null;}
+  d3.select("#pnet-svg").selectAll("*").remove();
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeProfile();closeDeptMap();}});
+
+function buildProfileNet(pubs, facName){
+  if(profileD3Sim){profileD3Sim.stop(); profileD3Sim=null;}
+  const svg=d3.select("#pnet-svg");
+  svg.selectAll("*").remove();
+  const W=560, H=420;
+  svg.attr("viewBox",`0 0 ${W} ${H}`).attr("preserveAspectRatio","xMidYMid meet");
+
+  // ── Israeli detection (institution-based, covers all Israeli universities) ──
+  const ISRAELI_INST_KEYWORDS=[
+    "hebrew university","huji","tel aviv university","technion","weizmann institute",
+    "bar-ilan","bar ilan","ben-gurion","ben gurion","university of haifa",
+    "reichman university","interdisciplinary center","herzliya","ariel university",
+    "open university of israel","bgu","bgn","ruppin","ort braude","sapir college",
+    "shenkar","bezalel","mount scopus","givat ram","truman institute","davis institute",
+    "van leer","israel democracy institute","jerusalem","tel-aviv","rehovot","haifa",
+    "beer sheva","beersheba","ramat gan","petah tikva","herzliya","netanya"
+  ];
+  function isIsraeliAuthor(a){
+    if(a.country==="Israel")return true;
+    const inst=(a.institution||"").toLowerCase();
+    return ISRAELI_INST_KEYWORDS.some(k=>inst.includes(k));
+  }
+  const allFacNames=Object.keys(facMeta);
+
+  // ── Build co-author map (deduplicated by canonical name) ──
+  // Map: canonical_name → {id, country, isFac, inst, papers}
+  const authorMap={};
+  // Name → canonical name lookup (for link building)
+  const nameToCanonical={};
+
+  function getCanonical(cleaned, authorObj){
+    // Check if already seen
+    if(nameToCanonical[cleaned]) return nameToCanonical[cleaned];
+    // Match against faculty
+    const facMatch=allFacNames.find(fn=>isFacultyAuthor(cleaned,fn));
+    const canonical=facMatch||cleaned;
+    nameToCanonical[cleaned]=canonical;
+    return canonical;
+  }
+
+  pubs.forEach(pub=>{
+    (pub.authors||[]).forEach(a=>{
+      if(!a.name) return;
+      const cleaned=cleanAuthorName(a.name);
+      if(!cleaned||/^\d+$/.test(cleaned)||cleaned.length<2) return;
+      // Skip self
+      if(isFacultyAuthor(cleaned, facName)||cleaned===facName) return;
+
+      const canonical=getCanonical(cleaned, a);
+      if(canonical===facName) return; // skip self under other name
+
+      const isFac=allFacNames.includes(canonical);
+      const isIsraeli=isFac||isIsraeliAuthor(a);
+      const country=isIsraeli?"Israel":(a.country||inferCountry(a.institution)||"Unknown");
+
+      if(!authorMap[canonical]){
+        authorMap[canonical]={
+          id:canonical, country, isFac,
+          inst:a.institution||"", papers:0
+        };
+      } else {
+        // Update country if we now know it
+        if(authorMap[canonical].country==="Unknown"&&country!=="Unknown")
+          authorMap[canonical].country=country;
+        const betterCountry=a.country||inferCountry(a.institution);
+        if(authorMap[canonical].country==="Unknown"&&betterCountry)
+          authorMap[canonical].country=betterCountry;
+        if(!authorMap[canonical].inst&&a.institution)
+          authorMap[canonical].inst=a.institution;
+      }
+      authorMap[canonical].papers++;
+    });
+  });
+
+  // Center node
+  authorMap[facName]={id:facName,country:"Israel",isFac:true,inst:"Hebrew University",papers:pubs.length};
+  const nodes=Object.values(authorMap);
+  const nodeIds=new Set(nodes.map(n=>n.id));
+
+  // ── Build links: facName ↔ each co-author only ──
+  const linkMap={};
+  pubs.forEach(pub=>{
+    const coauthors=[];
+    (pub.authors||[]).forEach(a=>{
+      if(!a.name)return;
+      const cleaned=cleanAuthorName(a.name);
+      if(!cleaned)return;
+      if(isFacultyAuthor(cleaned,facName)||cleaned===facName)return;
+      const canonical=nameToCanonical[cleaned]||cleaned;
+      if(nodeIds.has(canonical)&&canonical!==facName) coauthors.push(canonical);
+    });
+    // Only links from facName to co-authors (star topology from center)
+    coauthors.forEach(ca=>{
+      const k=facName+"|||"+ca;
+      linkMap[k]=(linkMap[k]||0)+1;
+    });
+  });
+  const links=Object.entries(linkMap).map(([k,v])=>{
+    const[s,t]=k.split("|||");
+    return{source:s,target:t,value:v};
+  });
+
+  // ── Colors ──
+  const countryList=[...new Set(nodes.map(n=>n.country).filter(c=>c!=="Unknown"&&c!=="Israel"))];
+  countryList.forEach((c,i)=>{if(!countryColorMap[c])countryColorMap[c]=COUNTRY_PALETTE[i%COUNTRY_PALETTE.length];});
+  countryColorMap["Israel"]="#e8b84b";
+  countryColorMap["Unknown"]="#aab0c0";
+
+  function nodeColor(n){
+    if(n.id===facName) return"#1a9ab5"; // center = teal
+    if(n.isFac) return"#e8b84b";        // other faculty = gold
+    return getCountryColor(n.country);
+  }
+
+  // ── Legend ──
+  const topC=Object.entries(
+    nodes.reduce((acc,n)=>{if(n.country)acc[n.country]=(acc[n.country]||0)+1;return acc;},{})
+  ).sort((a,b)=>b[1]-a[1]).slice(0,9);
+  document.getElementById("pnet-legend-items").innerHTML=topC.map(([c,cnt])=>`
+    <div class="pnet-legend-row">
+      <div class="pnet-legend-dot" style="background:${c==="Israel"?"#e8b84b":getCountryColor(c)}"></div>
+      <span class="pnet-legend-label" title="${c}">${c}</span>
+      <span style="font-size:10px;color:var(--muted);margin-left:auto">${cnt}</span>
+    </div>`).join("");
+
+  const tooltip=document.getElementById("collab-tooltip");
+  const g=svg.append("g");
+
+  // Zoom + focus controls
+  const zoomBeh=d3.zoom().scaleExtent([0.2,5]).on("zoom",e=>g.attr("transform",e.transform));
+  svg.call(zoomBeh);
+
+  profileD3Sim=d3.forceSimulation(nodes)
+    .force("link",d3.forceLink(links).id(d=>d.id).distance(d=>d.value>1?50:70).strength(0.45))
+    .force("charge",d3.forceManyBody().strength(d=>d.id===facName?-300:-100))
+    .force("center",d3.forceCenter(W/2,H/2))
+    .force("collision",d3.forceCollide(d=>d.id===facName?22:d.isFac?16:10));
+
+  const linkSel=g.append("g").selectAll("line").data(links).join("line")
+    .attr("stroke","rgba(0,0,0,0.1)")
+    .attr("stroke-width",d=>0.8+d.value*0.4);
+
+  const nodeG=g.append("g").selectAll("g").data(nodes).join("g")
+    .style("cursor","pointer")
+    .call(d3.drag()
+      .on("start",(e,d)=>{if(!e.active)profileD3Sim.alphaTarget(.3).restart();d.fx=d.x;d.fy=d.y})
+      .on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y})
+      .on("end",(e,d)=>{if(!e.active)profileD3Sim.alphaTarget(0);d.fx=null;d.fy=null}));
+
+  const radius=d=>d.id===facName?18:d.isFac?14:7;
+
+  nodeG.append("circle")
+    .attr("r",radius)
+    .attr("fill",nodeColor)
+    .attr("fill-opacity",d=>d.id===facName?1:0.85)
+    .attr("stroke","#fff").attr("stroke-width",1.5)
+    .on("mousemove",(e,d)=>{
+      tooltip.style.opacity=1;
+      tooltip.style.left=(e.clientX+12)+"px";
+      tooltip.style.top=(e.clientY-30)+"px";
+      const papers=linkMap[facName+"|||"+d.id]||linkMap[d.id+"|||"+facName]||0;
+      tooltip.innerHTML=`<strong style="color:${nodeColor(d)}">${d.id}</strong><br>
+        <span style="color:#888">${d.country}</span>
+        ${d.inst?`<br><span style="color:#aaa;font-size:11px">${d.inst.slice(0,40)}</span>`:""}
+        ${papers>1?`<br><span style="color:#aaa;font-size:11px">${papers} joint papers</span>`:""}`;
+    })
+    .on("mouseleave",()=>{tooltip.style.opacity=0;})
+    .on("click",(e,d)=>{
+      // Focus: zoom to this node
+      e.stopPropagation();
+      if(d.fx!==undefined&&d.fx!==null) return;
+      const scale=2.2;
+      svg.transition().duration(400).call(
+        zoomBeh.transform,
+        d3.zoomIdentity.translate(W/2-scale*d.x, H/2-scale*d.y).scale(scale)
+      );
+    });
+
+  // Labels: only for faculty + center
+  nodeG.filter(d=>d.isFac||d.id===facName)
+    .append("text")
+    .text(d=>d.id.split(" ").pop().slice(0,10))
+    .attr("text-anchor","middle")
+    .attr("dy",d=>-(radius(d)+4))
+    .attr("fill","#222").attr("font-size","9px").attr("font-weight","600")
+    .attr("pointer-events","none");
+
+  // Initials inside center + faculty nodes
+  nodeG.filter(d=>d.isFac||d.id===facName)
+    .append("text").text(d=>ini(d.id))
+    .attr("text-anchor","middle").attr("dominant-baseline","central")
+    .attr("fill","#fff").attr("font-size",d=>d.id===facName?"11px":"9px")
+    .attr("font-weight","700").attr("pointer-events","none");
+
+  profileD3Sim.on("tick",()=>{
+    linkSel.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y)
+           .attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);
+    nodeG.attr("transform",d=>`translate(${d.x},${d.y})`);
+  });
+
+  // Reset zoom on background click
+  svg.on("click",()=>svg.transition().duration(400).call(zoomBeh.transform,d3.zoomIdentity));
+}
+
+// ── DEPARTMENT MAP ───────────────────────────────────────────────────────────
+async function openDeptMap(){
+  document.getElementById("dmap-modal").style.display="flex";
+  if(!worldTopo){
+    try{worldTopo=await fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(r=>r.json());}
+    catch(e){console.error(e);return;}
+  }
+  setTimeout(()=>buildDeptMap(),50);
+}
+function closeDeptMap(){
+  document.getElementById("dmap-modal").style.display="none";
+  if(dnetSim){dnetSim.stop();dnetSim=null;}
+  dnetBuilt=false;
+  switchDeptTab("map");
+}
+
+function buildDeptMap(){
+  const svg=d3.select("#dmap-svg");
+  svg.selectAll("*").remove();
+  const W=900,H=420;
+  svg.attr("viewBox",`0 0 ${W} ${H}`).attr("preserveAspectRatio","xMidYMid meet").style("cursor","grab");
+
+  // ── Build country + city data (fixed: exclude Israeli co-authors) ──
+  const ISRAEL_KEYWORDS=["hebrew university","the hebrew university","huji","tel aviv university",
+    "technion","weizmann","bar-ilan","bar ilan","ben-gurion","ben gurion","university of haifa",
+    "haifa university","open university of israel","reichman","interdisciplinary center",
+    "ariel university","ruppin","sapir college","shenkar","bezalel","truman research",
+    "leonard davis","van leer","israel democracy","idc herzliya","bgu ","bgn ","mount scopus",
+    "givat ram","hadassah academic","ono academic","peres academic","netanya academic",
+    "college of management","jerusalem academy","academic college tel aviv","levine-schur",
+    "faculty of law","hebrew u.","h.u.j.i."];
+  const facNameSet=new Set(Object.keys(facMeta));
+  // Normalize: remove middle initials, strip extra spaces
+  function normN(n){return(n||"").replace(/\s+[A-Z]\.\s*/g," ").replace(/\s+/g," ").trim().toLowerCase();}
+  const facNamesNorm=new Set(Object.keys(facMeta).map(normN));
+  function isIsraeliInst(a){
+    if(a.country==="Israel")return true;
+    const inst=(a.institution||"").toLowerCase();
+    return ISRAEL_KEYWORDS.some(k=>inst.includes(k));
+  }
+  function isFacultyByName(name){
+    const n=normN(name);
+    return facNamesNorm.has(n)||Object.keys(facMeta).some(fn=>isFacultyAuthor(name,fn));
+  }
+  const countryData={};
+
+  allPubs.forEach(pub=>{
+    (pub.authors||[]).forEach(a=>{
+      if(!a.country&&!a.institution)return;
+      // Skip Israeli affiliations (Hebrew University etc.)
+      if(isIsraeliInst(a))return;
+      // Skip faculty members (with name normalization)
+      if(isFacultyByName(a.name))return;
+      const country=a.country||inferCountry(a.institution)||"Unknown";
+      if(country==="Unknown")return; // skip if no country
+      if(!countryData[country])countryData[country]={papers:new Set(),cities:{}};
+      countryData[country].papers.add(pub.id||pub.title);
+      const cityInfo=getInstCity(a.institution||"");
+      const cityKey=cityInfo?cityInfo.city:"Unknown";
+      if(!countryData[country].cities[cityKey])
+        countryData[country].cities[cityKey]={city:cityKey,lat:cityInfo?.lat,lng:cityInfo?.lng,collabs:new Map()};
+      if(!countryData[country].cities[cityKey].collabs.has(a.name))
+        countryData[country].cities[cityKey].collabs.set(a.name,{name:a.name,inst:a.institution||""});
+    });
+  });
+  const countries=Object.entries(countryData).map(([name,d])=>({
+    name,papers:d.papers.size,
+    cities:Object.values(d.cities).map(c=>({...c,collabs:[...c.collabs.values()]}))
+  }));
+  const maxPapers=Math.max(...countries.map(c=>c.papers),1);
+
+  const proj=d3.geoNaturalEarth1().scale(148).translate([W/2,H/2+10]);
+  const path=d3.geoPath().projection(proj);
+  const geo=topojson.feature(worldTopo,worldTopo.objects.countries);
+
+  const defs=svg.append("defs");
+  const glow=defs.append("filter").attr("id","dmglow").attr("x","-50%").attr("y","-50%").attr("width","200%").attr("height","200%");
+  glow.append("feGaussianBlur").attr("stdDeviation",4).attr("result","blur");
+  const fm=glow.append("feMerge");fm.append("feMergeNode").attr("in","blur");fm.append("feMergeNode").attr("in","SourceGraphic");
+
+  // ── Zoom & pan ──────────────────────────────────────────────────────────────
+  const zoomG=svg.append("g");
+  let activeCountry=null,activeCityG=null,activeCountryData=null;
+
+  const zoom=d3.zoom()
+    .scaleExtent([0.8,16])
+    .on("zoom",e=>{
+      zoomG.attr("transform",e.transform);
+      svg.style("cursor",e.transform.k>1?"move":"grab");
+    });
+  svg.call(zoom);
+
+  // ── HTML zoom controls (outside SVG, always fixed position) ─────────────
+  d3.select("#dmap-wrap").selectAll(".dmap-zoom-ctrl").remove();
+  const ctrlDiv=d3.select("#dmap-wrap").append("div").attr("class","dmap-zoom-ctrl")
+    .style("position","absolute").style("top","8px").style("right","12px")
+    .style("display","flex").style("flex-direction","column").style("gap","2px").style("z-index","20");
+
+  [["＋",()=>svg.transition().duration(250).call(zoom.scaleBy,1.6)],
+   ["－",()=>svg.transition().duration(250).call(zoom.scaleBy,0.625)],
+   ["↺",()=>zoomOut()]
+  ].forEach(([lbl,fn])=>{
+    ctrlDiv.append("button").text(lbl)
+      .style("width","28px").style("height","28px").style("border","1px solid var(--border)")
+      .style("background","#fff").style("border-radius","4px").style("cursor","pointer")
+      .style("font-size","14px").style("font-weight","700").style("color","#555")
+      .style("display","flex").style("align-items","center").style("justify-content","center")
+      .on("click",fn);
+  });
+
+  zoomG.append("g").selectAll("path").data(geo.features).join("path")
+    .attr("d",path).attr("fill","#dde8f0").attr("stroke","#c5d5e0").attr("stroke-width",.5);
+
+  const arcG=zoomG.append("g"),dotG=zoomG.append("g");
+  const israelPt=proj([35.2,31.8]);
+  const tooltip=document.getElementById("collab-tooltip");
+
+  countries.forEach(c=>{
+    const coords=COUNTRY_COORDS[c.name];if(!coords)return;
+    const pt=proj(coords);if(!pt)return;
+    const midX=(israelPt[0]+pt[0])/2;
+    const midY=Math.min(israelPt[1],pt[1])-40-Math.abs(israelPt[0]-pt[0])*.1;
+    const lineGen=d3.line().curve(d3.curveCatmullRom.alpha(.5));
+    arcG.append("path").datum([[israelPt[0],israelPt[1]],[midX,midY],[pt[0],pt[1]]])
+      .attr("d",lineGen).attr("fill","none").attr("stroke","#1a9ab5").attr("stroke-linecap","round")
+      .attr("stroke-width",.8+(c.papers/maxPapers)*4).attr("opacity",.25+(c.papers/maxPapers)*.65);
+    const r=3+(c.papers/maxPapers)*9;
+    const totalCollabs=c.cities.reduce((s,x)=>s+x.collabs.length,0);
+    const citiesWithCoords=c.cities.filter(x=>x.lat).length;
+    dotG.append("circle").attr("cx",pt[0]).attr("cy",pt[1]).attr("r",r)
+      .attr("fill","#1a9ab5").attr("stroke","#fff").attr("stroke-width",1.5).style("cursor","pointer")
+      .on("mousemove",e=>{
+        tooltip.style.opacity=1;tooltip.style.left=(e.clientX+12)+"px";tooltip.style.top=(e.clientY-30)+"px";
+        tooltip.innerHTML=`<strong style="color:#1a9ab5">${c.name}</strong><br>
+          <span style="color:#888">${c.papers} papers · ${totalCollabs} collaborators</span><br>
+          <span style="color:#aaa;font-size:11px">${citiesWithCoords>0?"Click to explore cities":"Click for collaborators"}</span>`;
+      })
+      .on("mouseleave",()=>{tooltip.style.opacity=0;})
+      .on("click",(e)=>{e.stopPropagation();zoomToCountry(c,pt);});
+  });
+
+  dotG.append("circle").attr("cx",israelPt[0]).attr("cy",israelPt[1]).attr("r",9)
+    .attr("fill","#e8a020").attr("stroke","#fff").attr("stroke-width",2).attr("filter","url(#dmglow)");
+  dotG.append("text").text("HUJI").attr("x",israelPt[0]).attr("y",israelPt[1]-14)
+    .attr("text-anchor","middle").attr("font-size","10px").attr("fill","#b87010").attr("font-weight","700");
+
+  function zoomToCountry(c,pt){
+    activeCountry=c.name;
+    activeCountryData=c;
+    const scale=COUNTRY_ZOOM_LEVELS[c.name]||5;
+    const tx=W/2-scale*pt[0],ty=H/2-scale*pt[1];
+    svg.transition().duration(650).call(zoom.transform,d3.zoomIdentity.translate(tx,ty).scale(scale));
+    arcG.transition().duration(400).style("opacity",0.1);
+    if(activeCityG){activeCityG.remove();activeCityG=null;}
+    setTimeout(()=>showCityMarkers(c,scale),700);
+    d3.select("#dmap-country-panel").remove();
+    d3.select("#dmap-country-title").remove();
+    d3.select("#dmap-wrap").append("div").attr("id","dmap-country-title")
+      .style("position","absolute").style("top","10px").style("left","50%")
+      .style("transform","translateX(-50%)").style("font-size","13px").style("font-weight","600")
+      .style("color","var(--text)").style("pointer-events","none")
+      .style("background","rgba(255,255,255,.85)").style("padding","2px 10px").style("border-radius","4px")
+      .text(c.name+"  ·  click a city dot");
+    d3.select("#dmap-back-btn").remove();
+    d3.select("#dmap-wrap").append("button").attr("id","dmap-back-btn")
+      .style("position","absolute").style("top","8px").style("left","8px").style("z-index","10")
+      .style("padding","4px 10px").style("border-radius","4px").style("border","1px solid var(--border)")
+      .style("background","#fff").style("cursor","pointer").style("font-size","11px").style("color","var(--text)")
+      .text("← World").on("click",zoomOut);
+  }
+
+  function showCityMarkers(c,zoomScale){
+    if(activeCityG){activeCityG.remove();}
+    activeCityG=zoomG.append("g");
+    const cities=c.cities.filter(x=>x.lat&&x.lng&&x.collabs.length>0);
+    const unknowns=c.cities.find(x=>x.city==="Unknown"&&x.collabs.length>0);
+    if(!cities.length&&!unknowns)return;
+    const maxC=Math.max(...cities.map(x=>x.collabs.length),1);
+
+    // Build nodes with projected coords
+    const nodes=cities.map(city=>{
+      const cpt=proj([city.lng,city.lat]);
+      if(!cpt)return null;
+      const r=Math.max(1.5,(2.5+(city.collabs.length/maxC)*4)/zoomScale);
+      return{city,r,x:cpt[0],y:cpt[1],ox:cpt[0],oy:cpt[1]};
+    }).filter(Boolean);
+
+    if(!nodes.length){
+      if(unknowns&&!cities.length) showCityPanel({city:c.name,collabs:unknowns.collabs},c.name);
+      return;
+    }
+
+    // Force simulation: very gentle spread, minimal movement
+    const minDist=6/zoomScale;
+    d3.forceSimulation(nodes)
+      .force("collide",d3.forceCollide(d=>d.r+minDist/2).strength(0.6).iterations(3))
+      .force("x",d3.forceX(d=>d.ox).strength(0.7))
+      .force("y",d3.forceY(d=>d.oy).strength(0.7))
+      .stop()
+      .tick(40); // run synchronously
+
+    // Draw leader lines and spread dots (no anchor dots)
+    nodes.forEach(n=>{
+      const dist=Math.hypot(n.x-n.ox,n.y-n.oy);
+      if(dist>3/zoomScale){
+        activeCityG.append("line")
+          .attr("x1",n.ox).attr("y1",n.oy).attr("x2",n.x).attr("y2",n.y)
+          .attr("stroke","#d97706").attr("stroke-width",0.6/zoomScale).attr("opacity",.4)
+          .attr("pointer-events","none");
+      }
+    });
+
+    // Draw spread dots
+    nodes.forEach(n=>{
+      activeCityG.append("circle")
+        .attr("cx",n.x).attr("cy",n.y).attr("r",n.r)
+        .attr("fill","#f59e0b").attr("stroke","#fff").attr("stroke-width",1.5/zoomScale)
+        .style("cursor","pointer")
+        .on("mousemove",e=>{
+          tooltip.style.opacity=1;tooltip.style.left=(e.clientX+12)+"px";tooltip.style.top=(e.clientY-30)+"px";
+          tooltip.innerHTML=`<strong style="color:#d97706">${n.city.city}</strong><br>
+            <span style="color:#888">${n.city.collabs.length} collaborator${n.city.collabs.length>1?"s":""} · click for names</span>`;
+        })
+        .on("mouseleave",()=>{tooltip.style.opacity=0;})
+        .on("click",e=>{e.stopPropagation();showCityPanel(n.city,c.name);});
+    });
+
+    if(unknowns&&!cities.length) showCityPanel({city:c.name,collabs:unknowns.collabs},c.name);
+  }
+
+  function showCityPanel(city,countryName){
+    d3.select("#dmap-country-panel").remove();
+    const panel=d3.select("#dmap-wrap").append("div").attr("id","dmap-country-panel")
+      .style("position","absolute").style("top","44px").style("right","16px")
+      .style("background","#fff").style("border","1px solid var(--border)").style("border-radius","6px")
+      .style("padding","14px 16px").style("width","200px").style("box-shadow","0 4px 16px rgba(0,0,0,.1)")
+      .style("max-height","300px").style("overflow-y","auto").style("z-index","10");
+    panel.append("div").style("display","flex").style("justify-content","space-between").style("align-items","center").style("margin-bottom","8px")
+      .html(`<strong style="font-size:13px;color:var(--text)">${city.city}</strong>
+             <span onclick="document.getElementById('dmap-country-panel').remove()" style="cursor:pointer;color:var(--muted);font-size:16px">×</span>`);
+    panel.append("div").style("font-size","10px").style("color","var(--muted)").style("margin-bottom","10px")
+      .text(`${city.collabs.length} collaborator${city.collabs.length>1?"s":""} · ${countryName} · since 2020`);
+    city.collabs.forEach(col=>{
+      const row=panel.append("div").style("margin-bottom","7px").style("padding-bottom","6px").style("border-bottom","1px solid #f0f0f0");
+      row.append("div").style("font-size","12px").style("color","var(--text)").style("font-weight","500").text(col.name);
+      if(col.inst) row.append("div").style("font-size","10px").style("color","var(--muted)").style("margin-top","1px").text(col.inst);
+    });
+  }
+
+  function zoomOut(){
+    activeCountry=null;activeCountryData=null;
+    if(activeCityG){activeCityG.remove();activeCityG=null;}
+    arcG.transition().duration(400).style("opacity",1);
+    ["#dmap-back-btn","#dmap-country-panel","#dmap-country-title"].forEach(id=>d3.select(id).remove());
+    svg.transition().duration(600).call(zoom.transform,d3.zoomIdentity);
+  }
+  svg.on("click",()=>{if(!activeCountry)d3.select("#dmap-country-panel").remove();});
+}
+
+</script>
+</body>
+</html>
