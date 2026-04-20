@@ -284,12 +284,21 @@ def fetch_from_openalex(author_id, from_year, until_year=None):
         SKIP_SOURCES = {"open mind", "zenodo", "figshare", "dryad",
                         "ssrn electronic journal", "osf registries",
                         "osf", "open science framework"}  # OSF ללא preprints
+        OA_SKIP_TITLES = {
+            "cover and front matter", "front matter", "back matter",
+            "issue information", "table of contents", "editorial board",
+            "masthead", "book reviews",
+        }
         def should_skip(w):
             src_name = (((w.get("primary_location") or {}).get("source") or {})
                         .get("display_name","") or "").lower().strip()
             work_type = (w.get("type") or "").lower()
+            title = (w.get("title") or "").lower().strip()
             # סנן ביקורות ספרים
             if work_type in ("book-review", "review"):
+                return True
+            # סנן front matter ו-editorial content לפי כותרת
+            if any(kw in title for kw in OA_SKIP_TITLES):
                 return True
             # OSF: קבל רק preprints, דחה registrations וכו'
             if "osf" in src_name and "preprint" not in src_name:
@@ -428,11 +437,24 @@ def fetch_from_crossref(name, from_year, until_year=None, orcid=None):
     SKIP_JOURNALS = {"open mind", "zenodo", "figshare", "dryad",
                      "osf preprints", "ssrn", "biorxiv", "medrxiv"}
 
+    # כותרות לסינון — front matter, back matter, עמודי שער וכו'
+    SKIP_TITLE_KEYWORDS = {
+        "cover and front matter", "front matter", "back matter",
+        "issue information", "table of contents", "editorial board",
+        "masthead", "board of editors", "board of reviewers",
+        "book reviews",  # סקירות ספרים שנשלפות כ-journal-article
+    }
+
     def extract_item(item):
         """מחלץ שדות מרשומת Crossref כולל ISBN/ISSN ושם ספר לפרקים."""
         work_type = item.get("type", "journal-article")
         # דלג על סוגים לא רלוונטיים
         if work_type in SKIP_TYPES:
+            return None
+
+        # סנן כותרות שאינן פרסומים מחקריים
+        title_check = (item.get("title") or [""])[0].lower().strip() if isinstance(item.get("title"), list) else (item.get("title") or "").lower().strip()
+        if any(kw in title_check for kw in SKIP_TITLE_KEYWORDS):
             return None
 
         doi_val  = item.get("DOI", "")

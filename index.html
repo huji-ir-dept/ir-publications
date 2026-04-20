@@ -666,6 +666,15 @@ function dnetClearFocus(){
   if(dnetFocusFn)dnetFocusFn(null);
 }
 function buildDeptNet(){
+  const SKIP_PUB_TITLES = [
+    "cover and front matter","front matter","back matter",
+    "issue information","table of contents","editorial board",
+    "masthead","book reviews"
+  ];
+  const filteredPubs = allPubs.filter(p=>{
+    const t=(p.title||"").toLowerCase();
+    return !SKIP_PUB_TITLES.some(kw=>t.includes(kw));
+  });
   if(dnetSim){dnetSim.stop();dnetSim=null;}
   const svg=d3.select("#dnet-svg");
   svg.selectAll("*").remove();
@@ -704,7 +713,7 @@ function buildDeptNet(){
   // ── Build faculty-faculty links (strict) ──
   const facLinkMap={};
   const facPapers={};
-  allPubs.forEach(pub=>{
+  filteredPubs.forEach(pub=>{
     const fa=pub.faculty_author; if(!fa) return;
     facPapers[fa]=(facPapers[fa]||0)+1;
     const authors = pub.authors||[];
@@ -722,7 +731,7 @@ function buildDeptNet(){
 
   // ── Build external collaborator map (ALL unique external collabs) ──
   const extMap={};  // id → {id, country, inst, facsSet, count}
-  allPubs.forEach(pub=>{
+  filteredPubs.forEach(pub=>{
     const fa=pub.faculty_author; if(!fa) return;
     const authors = pub.authors||[];
     const cappedAuthors = authors.length > MAX_AUTHORS_PUB ? authors.slice(0, MAX_AUTHORS_PUB) : authors;
@@ -1299,6 +1308,16 @@ function closeProfile(){
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeProfile();closeDeptMap();}});
 
 function buildProfileNet(pubs, facName){
+  // סנן front matter, editorial board, וכו' — אינם פרסומים מחקריים
+  const SKIP_PUB_TITLES = [
+    "cover and front matter","front matter","back matter",
+    "issue information","table of contents","editorial board",
+    "masthead","book reviews"
+  ];
+  pubs = pubs.filter(p=>{
+    const t=(p.title||"").toLowerCase();
+    return !SKIP_PUB_TITLES.some(kw=>t.includes(kw));
+  });
   if(profileD3Sim){profileD3Sim.stop(); profileD3Sim=null;}
   const svg=d3.select("#pnet-svg");
   svg.selectAll("*").remove();
@@ -1576,6 +1595,15 @@ function closeDeptMap(){
 }
 
 function buildDeptMap(){
+  const SKIP_MAP_TITLES = [
+    "cover and front matter","front matter","back matter",
+    "issue information","table of contents","editorial board",
+    "masthead","book reviews"
+  ];
+  const mapPubs = allPubs.filter(p=>{
+    const t=(p.title||"").toLowerCase();
+    return !SKIP_MAP_TITLES.some(kw=>t.includes(kw));
+  });
   const svg=d3.select("#dmap-svg");
   svg.selectAll("*").remove();
   const W=900,H=420;
@@ -1605,7 +1633,7 @@ function buildDeptMap(){
   }
   const countryData={};
 
-  allPubs.forEach(pub=>{
+  mapPubs.forEach(pub=>{
     const mapAuthors = (pub.authors||[]).length > 20 ? (pub.authors||[]).slice(0,20) : (pub.authors||[]);
     mapAuthors.forEach(a=>{
       if(!a.country&&!a.institution)return;
