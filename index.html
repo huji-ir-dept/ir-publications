@@ -695,13 +695,17 @@ function buildDeptNet(){
       "bezalel","shenkar","sapir college","ort braude","hebrew college"].some(k=>inst.includes(k));
   }
 
+  const MAX_AUTHORS_PUB = 20; // מאמרים עם יותר מ-20 כותבים = סקרים/רב-מחבריים, נחתוך
+
   // ── Build faculty-faculty links (strict) ──
   const facLinkMap={};
   const facPapers={};
   allPubs.forEach(pub=>{
     const fa=pub.faculty_author; if(!fa) return;
     facPapers[fa]=(facPapers[fa]||0)+1;
-    (pub.authors||[]).forEach(a=>{
+    const authors = pub.authors||[];
+    const cappedAuthors = authors.length > MAX_AUTHORS_PUB ? authors.slice(0, MAX_AUTHORS_PUB) : authors;
+    cappedAuthors.forEach(a=>{
       if(!a.name) return;
       const cleaned=cleanAuthorName(a.name);
       const otherFac=facList.find(fn=>fn!==fa&&strictFacMatch(cleaned,fn));
@@ -716,7 +720,9 @@ function buildDeptNet(){
   const extMap={};  // id → {id, country, inst, facsSet, count}
   allPubs.forEach(pub=>{
     const fa=pub.faculty_author; if(!fa) return;
-    (pub.authors||[]).forEach(a=>{
+    const authors = pub.authors||[];
+    const cappedAuthors = authors.length > MAX_AUTHORS_PUB ? authors.slice(0, MAX_AUTHORS_PUB) : authors;
+    cappedAuthors.forEach(a=>{
       if(!a.name) return;
       const cleaned=cleanAuthorName(a.name);
       if(!cleaned || cleaned.length<3) return;
@@ -1318,8 +1324,24 @@ function buildProfileNet(pubs, facName){
   // Name → canonical name lookup (for link building)
   const nameToCanonical={};
 
+  function normalizeForMerge(name){
+    // Convert "Haftel, Y." → "y haftel", "Y.C. Haftel" → "y haftel", "Yoram Haftel" → "yoram haftel"
+    let n = name.toLowerCase().trim();
+    // "Last, First" → "first last"
+    const commaMatch = n.match(/^([a-z\-']+),\s*(.+)$/);
+    if(commaMatch) n = commaMatch[2] + " " + commaMatch[1];
+    // Remove middle initials/names: keep only first token + last token
+    const parts = n.split(/\s+/).filter(p=>p.length>0);
+    if(parts.length > 2){
+      // keep first initial/name + last name
+      n = parts[0] + " " + parts[parts.length-1];
+    }
+    // Reduce initials: "y." → "y"
+    n = n.replace(/\./g,"").trim();
+    return n;
+  }
+
   function getCanonical(cleaned, authorObj){
-    // Check cache first
     if(nameToCanonical[cleaned]) return nameToCanonical[cleaned];
     // Match against faculty (most reliable)
     const facMatch=allFacNames.find(fn=>isFacultyAuthor(cleaned,fn));
@@ -1327,30 +1349,42 @@ function buildProfileNet(pubs, facName){
       nameToCanonical[cleaned]=facMatch;
       return facMatch;
     }
-    // For external authors: try to merge near-duplicate names
-    // e.g. "J. Smith" and "John Smith" should be the same node
-    // Check if any existing canonical in authorMap is likely the same person
-    const cleanedLast=cleaned.split(/\s+/).pop();
+    // Try to merge with existing external author nodes
+    const normCleaned = normalizeForMerge(cleaned);
+    const cleanedLast = normCleaned.split(/\s+/).pop();
+    const cleanedFirstRaw = normCleaned.split(/\s+/)[0];
     for(const existing of Object.keys(authorMap)){
-      const existingLast=existing.split(/\s+/).pop();
-      if(cleanedLast===existingLast && cleanedLast.length>3){
-        // Same last name — check if first name/initial compatible
-        const cleanedFirst=cleaned.split(/\s+/)[0];
-        const existingFirst=existing.split(/\s+/)[0];
-        if(cleanedFirst===existingFirst||
-           cleanedFirst===existingFirst[0]+"."||
-           existingFirst===cleanedFirst[0]+"."){
-          nameToCanonical[cleaned]=existing;
-          return existing;
-        }
+      if(existing===cleaned) continue;
+      const normExisting = normalizeForMerge(existing);
+      const existingLast = normExisting.split(/\s+/).pop();
+      const existingFirstRaw = normExisting.split(/\s+/)[0];
+      if(cleanedLast !== existingLast || cleanedLast.length < 4) continue;
+      // Last names match — check first name/initial compatibility
+      const cf = cleanedFirstRaw.replace(/\./g,"");
+      const ef = existingFirstRaw.replace(/\./g,"");
+      if(cf===ef ||                     // identical
+         cf===ef[0] || ef===cf[0] ||   // one is initial of the other
+         (cf.length>1 && ef.length>1 && cf[0]===ef[0])){ // same first initial, longer names
+        nameToCanonical[cleaned]=existing;
+        return existing;
       }
     }
     nameToCanonical[cleaned]=cleaned;
     return cleaned;
   }
 
+  // ── סנן מאמרים עם רשימת כותבים ענקית (סקרים, רב-מחבריים) ──────
+  // מאמר עם 25+ כותבים הוא כנראה סקר/מחקר שיתופי גדול — נכלל את הפרסום
+  // אבל לא נוסיף את כל הכותבים לרשת (רק 1-2 הראשונים + last)
+  const MAX_AUTHORS_PER_PUB = 20;
+
   pubs.forEach(pub=>{
-    (pub.authors||[]).forEach(a=>{
+    let pubAuthors = pub.authors || [];
+    // אם יש יותר מ-MAX_AUTHORS_PER_PUB — קח את N הראשונים בלבד
+    if(pubAuthors.length > MAX_AUTHORS_PER_PUB){
+      pubAuthors = pubAuthors.slice(0, MAX_AUTHORS_PER_PUB);
+    }
+    pubAuthors.forEach(a=>{
       if(!a.name) return;
       const cleaned=cleanAuthorName(a.name);
       if(!cleaned||/^\d+$/.test(cleaned)||cleaned.length<2) return;
@@ -1392,7 +1426,9 @@ function buildProfileNet(pubs, facName){
   const linkMap={};
   pubs.forEach(pub=>{
     const coauthors=[];
-    (pub.authors||[]).forEach(a=>{
+    let pubAuthors = pub.authors || [];
+    if(pubAuthors.length > MAX_AUTHORS_PER_PUB) pubAuthors = pubAuthors.slice(0, MAX_AUTHORS_PER_PUB);
+    pubAuthors.forEach(a=>{
       if(!a.name)return;
       const cleaned=cleanAuthorName(a.name);
       if(!cleaned)return;
@@ -1560,7 +1596,8 @@ function buildDeptMap(){
   const countryData={};
 
   allPubs.forEach(pub=>{
-    (pub.authors||[]).forEach(a=>{
+    const mapAuthors = (pub.authors||[]).length > 20 ? (pub.authors||[]).slice(0,20) : (pub.authors||[]);
+    mapAuthors.forEach(a=>{
       if(!a.country&&!a.institution)return;
       // Skip Israeli affiliations (Hebrew University etc.)
       if(isIsraeliInst(a))return;
