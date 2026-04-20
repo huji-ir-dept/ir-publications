@@ -337,8 +337,47 @@ def verify_huji_works(works, ror):
     return verified
 
 def normalize_openalex(work, faculty_name):
-    authors = [{"name": a.get("author", {}).get("display_name", "")}
-               for a in work.get("authorships", [])]
+    # שמור שם + מוסד + מדינה ישירות מהנתונים של OpenAlex
+    # (אחרת המידע אובד ו-enrich_countries צריך לשחזר אותו)
+    COUNTRY_CODES = {
+        "US":"United States","GB":"United Kingdom","DE":"Germany","FR":"France",
+        "CA":"Canada","AU":"Australia","NL":"Netherlands","IL":"Israel","SE":"Sweden",
+        "NO":"Norway","DK":"Denmark","FI":"Finland","CH":"Switzerland","AT":"Austria",
+        "BE":"Belgium","IT":"Italy","ES":"Spain","PT":"Portugal","PL":"Poland",
+        "CZ":"Czech Republic","HU":"Hungary","RO":"Romania","TR":"Turkey","RU":"Russia",
+        "CN":"China","JP":"Japan","KR":"South Korea","IN":"India","BR":"Brazil",
+        "MX":"Mexico","AR":"Argentina","ZA":"South Africa","NG":"Nigeria","EG":"Egypt",
+        "JO":"Jordan","LB":"Lebanon","PS":"Palestine","HK":"Hong Kong","SG":"Singapore",
+        "NZ":"New Zealand","IE":"Ireland","GR":"Greece","UA":"Ukraine","CL":"Chile",
+        "CO":"Colombia","PE":"Peru","VE":"Venezuela","SE":"Sweden","UA":"Ukraine",
+    }
+    HUJI_KEYWORDS = ["hebrew university","huji","hebrew college"]
+
+    authors = []
+    for a in work.get("authorships", []):
+        name = (a.get("author") or {}).get("display_name", "")
+        if not name:
+            continue
+        institutions = a.get("institutions") or []
+        country = None
+        institution = None
+        for inst in institutions:
+            code = inst.get("country_code","")
+            inst_name = inst.get("display_name","") or ""
+            # תקן Hebrew College → Hebrew University
+            if inst_name.lower().strip() in ("hebrew college","the hebrew college"):
+                inst_name = "Hebrew University of Jerusalem"
+                code = "IL"
+            if code:
+                country = COUNTRY_CODES.get(code, code)
+                institution = inst_name
+                break
+        author_entry = {"name": name}
+        if country:
+            author_entry["country"] = country
+        if institution:
+            author_entry["institution"] = institution
+        authors.append(author_entry)
     loc    = work.get("primary_location") or {}
     source = loc.get("source") or {}
     doi    = work.get("doi", "") or ""
@@ -772,9 +811,16 @@ def main():
                     break
         print(f"  נמצאו שמות ספרים: {found_bt}/{len(missing_book_title)}")
 
-    # ── העשרת אבסטרקטים וכותבים חסרים לפי DOI ────────────────────
-    needs_enrichment = [w for w in all_works if w.get("doi") and
-                        (not w.get("abstract") or len(w.get("authors",[])) <= 1)]
+    # ── העשרת אבסטרקטים, כותבים ומוסדות לפי DOI ────────────────────
+    # (1) פרסומים עם ≤1 כותב — צריך את רשימת הכותבים המלאה
+    # (2) פרסומים עם כותבים אך ללא שיוך מוסדי — צריך מוסד ומדינה
+    needs_enrichment = [
+        w for w in all_works if w.get("doi") and (
+            not w.get("abstract") or
+            len(w.get("authors",[])) <= 1 or
+            any(not a.get("country") and not a.get("institution") for a in w.get("authors",[]))
+        )
+    ]
     if needs_enrichment:
         print(f"\nמעשיר אבסטרקטים וכותבים ל-{len(needs_enrichment)} פרסומים...", flush=True)
         found_abs = 0
@@ -802,13 +848,47 @@ def main():
                         w["abstract"] = cr_abs
                         found_abs += 1
 
-            # עדכן כותבים אם יש יותר ב-OpenAlex
-            oa_authors = [{"name": a.get("author",{}).get("display_name","")}
-                          for a in oa_data.get("authorships",[])
-                          if a.get("author",{}).get("display_name")]
+            # עדכן כותבים אם יש יותר ב-OpenAlex — שמור גם מוסד ומדינה
+            COUNTRY_CODES = {
+                "US":"United States","GB":"United Kingdom","DE":"Germany","FR":"France",
+                "CA":"Canada","AU":"Australia","NL":"Netherlands","IL":"Israel","SE":"Sweden",
+                "NO":"Norway","DK":"Denmark","FI":"Finland","CH":"Switzerland","AT":"Austria",
+                "BE":"Belgium","IT":"Italy","ES":"Spain","PT":"Portugal","PL":"Poland",
+                "CZ":"Czech Republic","HU":"Hungary","TR":"Turkey","RU":"Russia",
+                "CN":"China","JP":"Japan","KR":"South Korea","IN":"India","BR":"Brazil",
+                "MX":"Mexico","AR":"Argentina","ZA":"South Africa","EG":"Egypt",
+                "JO":"Jordan","LB":"Lebanon","SG":"Singapore","HK":"Hong Kong",
+                "IE":"Ireland","GR":"Greece","UA":"Ukraine","CL":"Chile","CO":"Colombia",
+            }
+            oa_authors = []
+            for a in oa_data.get("authorships",[]):
+                name = (a.get("author") or {}).get("display_name","")
+                if not name: continue
+                entry = {"name": name}
+                for inst in (a.get("institutions") or []):
+                    code = inst.get("country_code","")
+                    inst_name = inst.get("display_name","") or ""
+                    if inst_name.lower().strip() in ("hebrew college","the hebrew college"):
+                        inst_name = "Hebrew University of Jerusalem"
+                        code = "IL"
+                    if code:
+                        entry["country"] = COUNTRY_CODES.get(code, code)
+                        entry["institution"] = inst_name
+                        break
+                oa_authors.append(entry)
             if len(oa_authors) > len(w.get("authors",[])):
                 w["authors"] = oa_authors
                 found_auth += 1
+            elif oa_authors:
+                # גם אם מספר הכותבים זהה, עדכן מוסד ומדינה לכותבים קיימים
+                existing = {a["name"]: a for a in w.get("authors",[])}
+                for oa_a in oa_authors:
+                    name = oa_a["name"]
+                    if name in existing:
+                        if not existing[name].get("country") and oa_a.get("country"):
+                            existing[name]["country"] = oa_a["country"]
+                        if not existing[name].get("institution") and oa_a.get("institution"):
+                            existing[name]["institution"] = oa_a["institution"]
 
             # עדכן volume/issue/pages
             biblio = oa_data.get("biblio") or {}

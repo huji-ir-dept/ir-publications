@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-04-20T11:37:40.462615Z",
+  "generated_at": "2026-04-20T13:04:43.640674Z",
   "until_year": null,
   "department": "Department of International Relations",
   "institution": "Hebrew University of Jerusalem",
-  "total_pubs": 626,
+  "total_pubs": 639,
   "faculty_meta": [
     {
       "name": "Daniel Schwartz",
@@ -350,7 +350,7 @@
         "university of toronto"
       ],
       "openalex_id": "https://openalex.org/A5013936660",
-      "cited_total": 9881
+      "cited_total": 9882
     },
     {
       "name": "Alfred Tovias",
@@ -3506,7 +3506,8 @@
       "authors": [
         {
           "name": "Megan Gorges",
-          "institution": "Harvard Business School"
+          "country": "United States",
+          "institution": "Harvard University"
         },
         {
           "name": "Roni Porat",
@@ -3628,6 +3629,44 @@
       "pages": "226–248"
     },
     {
+      "id": "crossref-10.1093-isagsq-ksad070",
+      "title": "Communities of Practice in World Politics: Advancing a Research Agenda",
+      "year": 2024,
+      "date": "2024-01-01",
+      "journal": "Global Studies Quarterly",
+      "book_title": "",
+      "type": "journal-article",
+      "doi": "https://doi.org/10.1093/isagsq/ksad070",
+      "pdf_url": "https://academic.oup.com/isagsq/article-pdf/4/1/ksad070/56614198/ksad070.pdf",
+      "abstract": "Abstract This special forum focuses on international communities of practice (CoP) as a concept and an object of inquiry in International Relations (IR). The Introduction discusses the concept’s origins and how it has entered the field of IR. It addresses why and how CoPs matter to IR scholars by looking at how structure, agency, processes, institutions, and knowledge manifest themselves in communities. This special forum’s main contributions are: (1) capturing the political and economic effects of shared knowledge creation and diffusion through practices; (2) identifying the sources of knowledge production and learning, as well as the normative and political contestation within and between CoPs; (3) studying the social processes that originate at the boundaries between CoPs; (4) examining how people and processes generate, transform, and communicate knowledge; and (5) exploring how CoPs cultivate global governance’s norms, values, and practices from the bottom up. The Introduction also helps distinguish CoP from other relational concepts in IR such as networks, fields, regimes, and epistemic or security communities. It ends by way of situating the contributions to the special forum and outlining a research agenda on CoPs in world politics.",
+      "cited_by": 42,
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        },
+        {
+          "name": "Niklas Bremberg",
+          "country": "Sweden",
+          "institution": "Stockholm University"
+        },
+        {
+          "name": "Maïka Sondarjee",
+          "country": "Canada",
+          "institution": "University of Ottawa"
+        }
+      ],
+      "isbn": "",
+      "issn": "2634-3797",
+      "volume": "4",
+      "issue": "1",
+      "pages": "",
+      "publisher": "Oxford University Press (OUP)",
+      "source": "crossref",
+      "faculty_author": "Emanuel Adler"
+    },
+    {
       "id": "crossref-10.1080-23739770.2024.2345479",
       "title": "Reinventing Europe: The History of the European Union, 1945 to the Present",
       "year": 2024,
@@ -3710,6 +3749,33 @@
       "publisher": "Springer Nature Singapore",
       "source": "crossref",
       "faculty_author": "Avraham Sela"
+    },
+    {
+      "id": "https://openalex.org/W4388482870",
+      "title": "European Union communities of practice: diplomacy and boundary work in Ukraine",
+      "year": 2023,
+      "date": "2023-11-06",
+      "journal": "International Affairs",
+      "issn": "0020-5850",
+      "type": "article",
+      "doi": "https://doi.org/10.1093/ia/iiad268",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "Journal Article European Union communities of practice: diplomacy and boundary work in Ukraine Get access European Union communities of practice: diplomacy and boundary work in Ukraine. By Maren Hofius. Abingdon and New York: Routledge. 2023. 210pp. £120.00. Isbn978 1 03204 365 4. Available as e-book. Emanuel Adler Emanuel Adler University of Toronto, Canada Search for other works by this author on: Oxford Academic Google Scholar International Affairs, Volume 99, Issue 6, November 2023, Pages 2532–2534, https://doi.org/10.1093/ia/iiad268 Published: 06 November 2023",
+      "cited_by": 6,
+      "volume": "99",
+      "issue": "6",
+      "pages": "2532–2534",
+      "publisher": "Oxford University Press",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        }
+      ],
+      "source": "openalex"
     },
     {
       "id": "https://openalex.org/W4399901574",
@@ -6017,16 +6083,24 @@
       "faculty_author": "Piki Ish-Shalom",
       "authors": [
         {
-          "name": "Arie M. Kacowicz"
+          "name": "Arie M. Kacowicz",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
         },
         {
-          "name": "Exequiel Lacovsky"
+          "name": "Exequiel Lacovsky",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
         },
         {
-          "name": "Keren Sasson"
+          "name": "Keren Sasson",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
         },
         {
-          "name": "Daniel F. Wajner"
+          "name": "Daniel F. Wajner",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
         }
       ],
       "source": "openalex"
@@ -7717,10 +7791,14 @@
       "faculty_author": "Devorah Manekin",
       "authors": [
         {
-          "name": "Emanuel Adler"
+          "name": "Emanuel Adler",
+          "country": "United States",
+          "institution": "University of California, Berkeley"
         },
         {
-          "name": "Federica Bicchi"
+          "name": "Federica Bicchi",
+          "country": "United States",
+          "institution": "University of California, Berkeley"
         }
       ],
       "source": "openalex",
@@ -8411,6 +8489,34 @@
       "isbn": "9783030441128"
     },
     {
+      "id": "crossref-10.1017-s1752971920000226",
+      "title": "Control power as a special case of protean power: thoughts on Peter Katzenstein and Lucia Seybert's<i>Protean Power: Exploring the Uncertain and Unexpected in World Politics</i>",
+      "year": 2020,
+      "date": "2020-01-01",
+      "journal": "International Theory",
+      "book_title": "",
+      "type": "journal-article",
+      "doi": "https://doi.org/10.1017/s1752971920000226",
+      "pdf_url": "",
+      "abstract": "Abstract Human experience of control is an illusion; all forms of power are a special, transient, and unstable case of protean power. Taking risks is governed by critical uncertainty less because of our lack of perfect knowledge than because the world is physically and socially indeterminate. Power, thus, lies not only in agents' potential to dominate each other, but also in acting in concert to turn propensities into reality. Radical uncertainty is, therefore, not necessarily bad news. Whether protean power endangers or protects humanity depends less on calculating risks than on agents practicing common humanity values. I revise Katzenstein's and Seybert's concepts accordingly and illustrate by discussing Artificial Intelligence's challenges to humanity.",
+      "cited_by": 17,
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        }
+      ],
+      "isbn": "",
+      "issn": "1752-9719",
+      "volume": "12",
+      "issue": "3",
+      "pages": "422–434",
+      "publisher": "Cambridge University Press (CUP)",
+      "source": "crossref",
+      "faculty_author": "Emanuel Adler"
+    },
+    {
       "id": "crossref-10.1080-23739770.2020.1798146",
       "title": "Israeli Foreign Policy: A People Shall Not Dwell Alone",
       "year": 2020,
@@ -8452,79 +8558,125 @@
       "cited_by": 0,
       "authors": [
         {
-          "name": "Viola Brisolin"
+          "name": "Viola Brisolin",
+          "country": "United Kingdom",
+          "institution": "University College London"
         },
         {
-          "name": "Harvey Chisick"
+          "name": "Harvey Chisick",
+          "country": "Israel",
+          "institution": "University of Haifa"
         },
         {
-          "name": "John Danvers"
+          "name": "John Danvers",
+          "country": "United Kingdom",
+          "institution": "University of Plymouth"
         },
         {
-          "name": "Jens De Vleminck"
+          "name": "Jens De Vleminck",
+          "country": "Belgium",
+          "institution": "KU Leuven"
         },
         {
-          "name": "Shirley J. Paolini Duncan"
+          "name": "Shirley J. Paolini Duncan",
+          "country": "United States",
+          "institution": "University of Houston - Clear Lake"
         },
         {
-          "name": "Daphna Erdinast‐Vulcan"
+          "name": "Daphna Erdinast‐Vulcan",
+          "country": "Israel",
+          "institution": "University of Haifa"
         },
         {
-          "name": "Kristian Gerner"
+          "name": "Kristian Gerner",
+          "country": "Sweden",
+          "institution": "Lund University"
         },
         {
-          "name": "Omer Gersten"
+          "name": "Omer Gersten",
+          "country": "United States",
+          "institution": "University of California, Berkeley"
         },
         {
-          "name": "Marja Härmänmaa"
+          "name": "Marja Härmänmaa",
+          "country": "Finland",
+          "institution": "University of Helsinki"
         },
         {
-          "name": "Bernard Harris"
+          "name": "Bernard Harris",
+          "country": "United Kingdom",
+          "institution": "University of Southampton"
         },
         {
-          "name": "Grant Havers"
+          "name": "Grant Havers",
+          "country": "Canada",
+          "institution": "Western University"
         },
         {
-          "name": "Noah Heringman"
+          "name": "Noah Heringman",
+          "country": "United States",
+          "institution": "University of Missouri"
         },
         {
           "name": "Horst Jesse"
         },
         {
-          "name": "Cem Karadeli"
+          "name": "Cem Karadeli",
+          "country": "Turkey",
+          "institution": "Çankaya University"
         },
         {
           "name": "Innes Kennedy"
         },
         {
-          "name": "Hugh Lindsay"
+          "name": "Hugh Lindsay",
+          "country": "Australia",
+          "institution": "University of Newcastle Australia"
         },
         {
-          "name": "Babacar M’Baye"
+          "name": "Babacar M’Baye",
+          "country": "United States",
+          "institution": "Kent State University"
         },
         {
-          "name": "William Mengel"
+          "name": "William Mengel",
+          "country": "PR",
+          "institution": "American Military Academy"
         },
         {
-          "name": "Jason C. Robinson"
+          "name": "Jason C. Robinson",
+          "country": "Canada",
+          "institution": "University of Guelph"
         },
         {
-          "name": "Christian Roy"
+          "name": "Christian Roy",
+          "country": "Canada",
+          "institution": "Université de Sherbrooke"
         },
         {
-          "name": "Stanley Shostak"
+          "name": "Stanley Shostak",
+          "country": "United States",
+          "institution": "University of Pittsburgh"
         },
         {
-          "name": "Lora Sigler"
+          "name": "Lora Sigler",
+          "country": "United States",
+          "institution": "California State University System"
         },
         {
-          "name": "Peter Sluglett"
+          "name": "Peter Sluglett",
+          "country": "United States",
+          "institution": "University of Utah"
         },
         {
-          "name": "Tridip Suhrud"
+          "name": "Tridip Suhrud",
+          "country": "India",
+          "institution": "Dhirubhai Ambani Institute of Information and Communication Technology"
         },
         {
-          "name": "Paola S. Timiras"
+          "name": "Paola S. Timiras",
+          "country": "United States",
+          "institution": "University of California, Berkeley"
         },
         {
           "name": "Alfred Tovias",
@@ -8532,22 +8684,34 @@
           "institution": "Hebrew University of Jerusalem"
         },
         {
-          "name": "Christos Tsagalis"
+          "name": "Christos Tsagalis",
+          "country": "Greece",
+          "institution": "National and Kapodistrian University of Athens"
         },
         {
-          "name": "Spencer C. Tucker"
+          "name": "Spencer C. Tucker",
+          "country": "United States",
+          "institution": "Virginia Military Institute"
         },
         {
-          "name": "Ann Ward"
+          "name": "Ann Ward",
+          "country": "Canada",
+          "institution": "University of Regina"
         },
         {
-          "name": "John E. Weakland"
+          "name": "John E. Weakland",
+          "country": "United States",
+          "institution": "Ball State University"
         },
         {
-          "name": "Gabriel Weisberg"
+          "name": "Gabriel Weisberg",
+          "country": "United States",
+          "institution": "University of Minnesota"
         },
         {
-          "name": "K. P. Wessen"
+          "name": "K. P. Wessen",
+          "country": "Australia",
+          "institution": "University of Western Australia"
         }
       ],
       "isbn": "",
@@ -8958,6 +9122,35 @@
       "source": "openalex"
     },
     {
+      "id": "https://openalex.org/W3200765253",
+      "title": "Agential Social Mechanisms",
+      "year": 2019,
+      "date": "2019-02-21",
+      "journal": "Cambridge University Press eBooks",
+      "issn": "",
+      "type": "book-chapter",
+      "doi": "https://doi.org/10.1017/9781108325615.008",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "",
+      "cited_by": 0,
+      "volume": "",
+      "issue": "",
+      "pages": "198–218",
+      "publisher": "Cambridge University Press",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        }
+      ],
+      "source": "openalex",
+      "book_title": "World Ordering",
+      "isbn": "9781108325615"
+    },
+    {
       "id": "https://openalex.org/W3123015918",
       "title": "The Role of International Tribunals in the Development of Historical Narratives",
       "year": 2019,
@@ -8980,6 +9173,33 @@
           "name": "Moshe Hirsch",
           "country": "Israel",
           "institution": "Hebrew University of Jerusalem"
+        }
+      ],
+      "source": "openalex"
+    },
+    {
+      "id": "https://openalex.org/W4210985507",
+      "title": "World Ordering",
+      "year": 2019,
+      "date": "2019-02-15",
+      "journal": "Cambridge University Press eBooks",
+      "issn": "",
+      "type": "book",
+      "doi": "https://doi.org/10.1017/9781108325615",
+      "pdf_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/22555B81D8026E9A991EBCD4DB2F7CD0/9781108419956c1_13-44.pdf/samurai_crabs_and_international_social_orders.pdf",
+      "cover_url": "",
+      "abstract": "Drawing on evolutionary epistemology, process ontology, and a social-cognition approach, this book suggests cognitive evolution, an evolutionary-constructivist social and normative theory of change and stability of international social orders. It argues that practices and their background knowledge survive preferentially, communities of practice serve as their vehicle, and social orders evolve. As an evolutionary theory of world ordering, which does not borrow from the natural sciences, it explains why certain configurations of practices organize and govern social orders epistemically and normatively, and why and how these configurations evolve from one social order to another. Suggesting a multiple and overlapping international social orders' approach, the book uses three running cases of contested orders - Europe's contemporary social order, the cyberspace order, and the corporate order - to illustrate the theory. Based on the concepts of common humanity and epistemological security, the author also submits a normative theory of better practices and of bounded progress.",
+      "cited_by": 158,
+      "volume": "",
+      "issue": "",
+      "pages": "",
+      "publisher": "Cambridge University Press",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
         }
       ],
       "source": "openalex"
@@ -10673,6 +10893,53 @@
           "name": "John Tooby",
           "country": "United States",
           "institution": "University of California, Santa Barbara"
+        }
+      ],
+      "source": "openalex"
+    },
+    {
+      "id": "https://openalex.org/W2731897185",
+      "title": "HOPE IN THE NURSING HOME: RELATION WITH QUALITY OF LIFE, FUNCTION, PAIN, SOCIAL SUPPORT, RELIGIOSITY",
+      "year": 2017,
+      "date": "2017-06-30",
+      "journal": "Innovation in Aging",
+      "issn": "2399-5300",
+      "type": "article",
+      "doi": "https://doi.org/10.1093/geroni/igx004.3076",
+      "pdf_url": "https://academic.oup.com/innovateage/article-pdf/1/suppl_1/854/26123760/igx004.3076.pdf",
+      "cover_url": "",
+      "abstract": "Hope is an important factor influencing the quality and quantity of life in patients with chronic diseases. We aimed to assess the association between hope and quality of life, physical function, pain, social support, and religiosity among nursing home residents. Residents in four homes for the aged in Jerusalem were included in the study. IRB approval and informed consent were obtained. Level of hope was assessed by the Herth Hope Index (score range 12–48); quality of life by the WHO Quality of Life-BREF instrument (physical health, psychological, social relationships, and environment domains); physical function by the Barthel Index; pain by the Short Form McGill Pain Questionnaire; and social support by the Social Support Questionnaire for Transactions (SSQT) and Social Support Questionnaire for Satisfaction (SSQS). Residents defined their religiosity as secular, traditional, or religious. There were 100 participants (63 females, 37 males; mean age 80.9 years); 25 secular, 37 traditional, and 38 religious. The mean Herth Hope Index score was 33 ± 4. Level of hope was correlated with the physical (r=0.479, p<0.001), psychological (r=0.759, p<0.001), social (r=0.567, p<0.001), and environment (r=0.532, p<0.001) domains of quality of life. Hope correlated positively with level of physical function (r=0.205, p=0.04), inversely with pain intensity (r=-0.215, p=0.032), positively with social support (p<0.001) and positively with level of religiosity (r=0.266, p=0.008). In this population, higher quality of life and physical function, lower pain intensity, better social support, and greater religiosity were associated with higher levels of hope, emphasizing the importance of interventions to foster hope.",
+      "cited_by": 1,
+      "volume": "1",
+      "issue": "suppl_1",
+      "pages": "854–855",
+      "publisher": "University of Oxford",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Esther‐Lee Marcus",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
+        },
+        {
+          "name": "A. Turchinsky",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
+        },
+        {
+          "name": "A. Naydich",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
+        },
+        {
+          "name": "P. Cohen-Goichman",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
+        },
+        {
+          "name": "Emanuel Adler",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
         }
       ],
       "source": "openalex"
@@ -14488,282 +14755,364 @@
       "faculty_author": "Yoram Haftel",
       "authors": [
         {
-          "name": "Ignacio Jurado"
+          "name": "Ignacio Jurado",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Sandra Léon"
+          "name": "Sandra Léon",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Stefanie Walter",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Christopher Blair"
+          "name": "Christopher Blair",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Guy Grossman"
+          "name": "Guy Grossman",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Jeremy M. Weinstein"
+          "name": "Jeremy M. Weinstein",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Rachel Myrick"
+          "name": "Rachel Myrick",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Dara Kay Cohen",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Sabrina Karim"
+          "name": "Sabrina Karim",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Dustin Tingley"
+          "name": "Dustin Tingley",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Michael Tomz"
+          "name": "Michael Tomz",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Jordan Mcallister"
+          "name": "Jordan Mcallister",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Keith Schnakenberg"
+          "name": "Keith Schnakenberg",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "N. J. Miller"
+          "name": "N. J. Miller",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Erik Voeten Editor"
+          "name": "Erik Voeten Editor",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Martha Finnemore"
+          "name": "Martha Finnemore",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
           "name": "Kenneth F. Scheve",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Kenneth Schultz"
+          "name": "Kenneth Schultz",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Elana Matthews",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Ḿanaging Editor"
+          "name": "Ḿanaging Editor",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Helen V. Milner",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Rebecca Adler‐Nissen"
+          "name": "Rebecca Adler‐Nissen",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Michael Barnett",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
           "name": "J. Lawrence Broz",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
-          "name": "Allison Carnegie"
+          "name": "Allison Carnegie",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
           "name": "Lars‐Erik Cederman",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Songying Fang"
+          "name": "Songying Fang",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Tanisha M. Fazal"
+          "name": "Tanisha M. Fazal",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Virginia Page Fortna"
+          "name": "Virginia Page Fortna",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
           "name": "Jeffry Frieden",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Judith Goldstein",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
           "name": "Emilie M. Hafner‐Burton",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Stephan Haggard",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
-          "name": "Susan Hyde"
+          "name": "Susan Hyde",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
           "name": "Judith G. Kelley",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Joshua D. Kertzer"
+          "name": "Joshua D. Kertzer",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "David A. Lake",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Edward Mansfi"
+          "name": "Edward Mansfi",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Megumi Naoi"
+          "name": "Megumi Naoi",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Eric Neumayer"
+          "name": "Eric Neumayer",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
           "name": "Jon Pevehouse",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
-          "name": "Dennis Quinn"
+          "name": "Dennis Quinn",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Thomas Risse",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
-          "name": "Nita Rudra"
+          "name": "Nita Rudra",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Elizabeth Saunders"
+          "name": "Elizabeth Saunders",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Christina J. Schneider"
+          "name": "Christina J. Schneider",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Kathryn Sikkink",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
           "name": "Beth A. Simmons",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Joel W. Simmons",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Etel Solingen"
+          "name": "Etel Solingen",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "David Stasavage"
+          "name": "David Stasavage",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Randall W. Stone"
+          "name": "Randall W. Stone",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Jonas Tallberg"
+          "name": "Jonas Tallberg",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Jakana Thomas"
+          "name": "Jakana Thomas",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "James Raymond",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
           "name": "Barbara F. Walter",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
-          "name": "Jessica Weeks"
+          "name": "Jessica Weeks",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Jessica Chen Weiss"
+          "name": "Jessica Chen Weiss",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
-          "name": "Keren Yarhi-Milo"
+          "name": "Keren Yarhi-Milo",
+          "country": "United States",
+          "institution": "Georgetown University"
         },
         {
-          "name": "Emanuel Adler"
+          "name": "Emanuel Adler",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Benjamin J. Cohen",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Peter Gourevitch",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Miles Kahler",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Peter J. Katzenstein",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Robert O. Keohane",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Georgetown University"
         },
         {
           "name": "Stephen D. Krasner",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Lisa L. Martin",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "Senior Advisors",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
           "name": "John Odell",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
-          "name": "Louis Pauly"
+          "name": "Louis Pauly",
+          "country": "United States",
+          "institution": "Walsh University"
         },
         {
           "name": "Ronald Rogowski",
           "country": "United States",
-          "institution": "University of Wisconsin–Madison"
+          "institution": "Walsh University"
         },
         {
-          "name": "Janice Gross Stein"
+          "name": "Janice Gross Stein",
+          "country": "United States",
+          "institution": "Walsh University"
         }
       ],
       "source": "openalex"
@@ -15609,6 +15958,40 @@
       ],
       "source": "openalex",
       "book_title": "Pertenencia y alteridad"
+    },
+    {
+      "id": "https://openalex.org/W2337752286",
+      "title": "International practices",
+      "year": 2011,
+      "date": "2011-08-25",
+      "journal": "Cambridge University Press eBooks",
+      "issn": "",
+      "type": "book-chapter",
+      "doi": "https://doi.org/10.1017/cbo9780511862373.003",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "In this book, we invite students of International Relations (IR) to approach world politics through the lens of its manifold practices. By focusing on what practitioners do, we zoom in on the quotidian unfolding of international life, from multilateral diplomacy to finance trading through environmental negotiations. We analyze the ongoing accomplishments that, put together, constitute the \"big picture\" that is variously described by existing IR theories. Of course, practices have long been a prime object of analysis in the IR discipline. Building on the \"practice turn\" that has recently been taken in social theory, we develop and systematize an interparadigmatic research program that takes competent performances as its main entry point in the study of world politics. Our claim is not that practice offers the universal, grand theory or totalizing ontology of everything social. Instead, taking international practices seriously spells out the many faces of world politics, including power and security, trade and finance, strategy, institutions and organizations, resources, knowledge and discourse, etc. in action, as part of a \"doing\" in and on the world.",
+      "cited_by": 254,
+      "volume": "",
+      "issue": "",
+      "pages": "3–35",
+      "publisher": "Cambridge University Press",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        },
+        {
+          "name": "Vincent Pouliot",
+          "country": "Canada",
+          "institution": "McGill University"
+        }
+      ],
+      "source": "openalex",
+      "book_title": "International Practices",
+      "isbn": "9780511862373"
     },
     {
       "id": "https://openalex.org/W2253172577",
@@ -16547,17 +16930,17 @@
         {
           "name": "Roland Pierik",
           "country": "Netherlands",
-          "institution": "Vrije Universiteit Amsterdam"
+          "institution": "University of Amsterdam"
         },
         {
           "name": "Roland Pierik",
           "country": "Netherlands",
-          "institution": "Vrije Universiteit Amsterdam"
+          "institution": "University of Amsterdam"
         },
         {
           "name": "Roland Pierik",
           "country": "Netherlands",
-          "institution": "Vrije Universiteit Amsterdam"
+          "institution": "University of Amsterdam"
         },
         {
           "name": "Simon Caney"
@@ -16649,6 +17032,33 @@
           "name": "Yoram Z. Haftel",
           "country": "United States",
           "institution": "University of Illinois Chicago"
+        }
+      ],
+      "source": "openalex"
+    },
+    {
+      "id": "https://openalex.org/W2095212067",
+      "title": "Damned If You Do, Damned If You Don't: Performative Power and the Strategy of Conventional and Nuclear Defusing",
+      "year": 2010,
+      "date": "2010-05-21",
+      "journal": "Security Studies",
+      "issn": "0963-6412",
+      "type": "article",
+      "doi": "https://doi.org/10.1080/09636411003796002",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "Abstract This article seeks to initiate a new round of strategic intellectual innovation in an era when threats posed by non-state terrorist organizations and their state supporters do not resemble Cold War threats. Based on an interpretative sociological reading of the concepts of power, security, and rationality, it argues that a \"damned if you do, damned if you don't\" dilemma is to the post-Cold War era what the danger of surprise attack or unintended nuclear war was to the Cold War: the defining structural threat of international politics. The dilemma leaves states confronting asymmetrical warfare with the choice of reacting with force to a terrorist act or practicing appeasement. Neither approach, however, can achieve the goal of putting an end to terrorism. Deterrence sustains the dilemma by providing a rationale for why force should be used and why self-restraint is irrational. This article proposes a third option, defusing, which may be accomplished by denial (preventing provocateurs from dragging states into the use of force) and restructuration (transforming the structure and rules of the situation). Defusing relies on \"performative power\"—the capacity to project a dramatic and credible performance on the world stage and to decouple social actors, their audiences, and their most deeply held strategic beliefs. The force of the argument is illustrated by examples from the global \"war on terror,\" the 2006 Lebanon War, the 2008–09 operation \"Cast Lead\" in Gaza, and the Iranian nuclear crisis. Emanuel Adler is the Andrea and Charles Bronfman Chair in Israeli Studies in the Department of Political Science at the University of Toronto and editor of International Organization. Previously, he was professor of International Relations at the Hebrew University of Jerusalem. His publications include Security Communities, Communitarian International Relations, Convergence of Civilizations, and \"Seizing the Middle Ground: Constructivism in World Politics.\" His current work includes projects on the turn to practice in International Relations, a constructivist reconsideration of strategic logic including deterrence, European cooperative security and pluralistic integration, European civilization as a community of practice, and rationality and the Israeli-Palestinian conflict. For their comments and feedback, I thank the participants of the Research Group in International Security at McGill University and participants at seminars at the Woodrow Wilson School, Princeton University; the Institute for National Security Education and Research, University of Washington; the Institute of National Security Studies, Tel Aviv University; the Political Science Department, Concordia University; and the twenty-fifth annual meeting of the Association for Israel Studies. For their useful critical comments, I also thank Michael Barnett, Timothy Crawford, Stefano Guzzini, Stephen Hamberg, Patrick James, Robert O. Keohane, Jeffrey W. Knopf, Emily Landau, Oded Löwenheim, Amir Lupovici, Jon Mercer, Sophie Meunier, Helen Milner, Jennifer Mitzen, Patrick Morgan, T.V. Paul, Louis Pauly, Vincent Pouliot, James Ron, Thomas Schelling, Janice Stein, Shibley Telhami, James Wirtz, the editors of Security Studies, and four anonymous reviewers. I especially thank Robert Brym and my outstanding research assistant Patricia Greve for their invaluable help in improving this article. Notes 1Throughout, I refer to \"terrorist\" organizations because of lack of a better term and the frequency with which the groups in question engage in terrorist acts. I believe, however, that the concept of terrorism is decreasingly useful. First, analytically, there is the danger of artificially reducing these organizations to one dimension whereas they often are complex political and social movements whose appeal has many different roots. Second, practically, the goal of socially constructing enemy militant organizations as terrorists has backfired. Regarding Hezbollah, Israel believed in its own construction that Hezbollah is a terrorist group, thus, it was militarily unprepared to deal with Hezbollah. While keeping these problems in mind, using the term \"terrorist\" organization seems analytically warranted in the context of this article: the key strategic dilemma of our time—\"damned if you do, damned if you don't\"—is illuminated here by looking at the practice of terrorism. 2Radical revisionist states express dissatisfaction with the status quo and thus would like to change it, if necessary, by disregarding the international system's regulative and constitutive norms. 3Jeffrey C. Alexander, \"Performance and Power\" (working paper, Center for Cultural Sociology, Yale University, New Haven, 2005), http://research.yale.edu/ccs/documents/public/alex_perfrmPower.pdf (accessed 13 July 2008); Jeffrey C. Alexander, Bernhard Giesen, and Jason L. Mast, eds., Social Performance: Symbolic Action, Cultural Pragmatics, and Ritual (Cambridge: Cambridge University Press, 2006). On the notion that terrorists acquire some of their power through performances to an audience, see Mark Juergensmeyer, Terror in the Mind of God, 3rd ed., rev. ed. (Berkeley and Los Angeles: University of California Press, 2003); Mark Juergensmeyer, \"Understanding the New Terrorism,\" Current History 99, no. 636 (April 2000): 158–63; Mark Juergensmeyer, \"Terror as Deadly Theater,\" MIPT Oklahoma City National Memorial Institute for the Prevention of Terrorism Bulletin (First Quarter 2002): 2–3. Juergensmeyer's primary focus, however, is less on terrorism as a strategy to elicit a violent response than on the theatrical side of terrorism intended to impress for terrorism's symbolic significance. My article, thus, adds the strategic aspect to Juergensmeyer's thoughtful and important work. 4The argument that terrorism seeks to provoke target states is not entirely new. See, for example, David A. Lake, \"Rational Extremism: Understanding Terrorism in the Twenty-first Century,\" Dialogue-IO 1, no. 1 (2002): 15–29; David C. Rapoport, \"The Four Waves of Modern Terrorism,\" in Attacking Terrorism: Elements of a Grand Strategy, ed. Audrey Kurth Cronin and James M. Ludes (Washington, DC: Georgetown University Press, 2004), 46–73. 5For the classic argument that reputation for resolve is worth fighting for, see Thomas Schelling, Arms and Influence (New Haven: Yale University Press, 1966). For a critical view, see Jonathan Mercer, Reputation and International Politics (Ithaca: Cornell University Press, 1996). 6Juergensmeyer, Terror in the Mind of God, 124–28, 135–66; Lake, \"Rational Extremism.\" Lake argues that provocation weakens the target country, ultimately making the country willing to negotiate on more favorable terms for the terrorists. Ivan Arreguín-Toft makes a similar argument without, however, referring to social power. See Arreguín-Toft, How the Weak Win Wars: A Theory of Asymmetric Conflict (Cambridge and New York: Cambridge University Press, 2005), 224–25. 7Lake argues, \"Extremists, on the other hand, seek to use terror to provoke the target into a disproportionate response that radicalizes moderates and drives them into the arms of the terrorists, expanding their supporters and allies,\" Lake, \"Rational Extremism,\" 16. See also Andrew Kydd and Barbara Walter, \"The Strategies of Terrorism,\" International Security 31, no. 1 (2006): 49–80. 8On restructuration at the end of the Cold War, see Karin M. Fierke, Changing Games, Changing Strategies: Critical Investigations in Security (Manchester and New York: Manchester University Press, 1998). 9Thomas C. Schelling, The Strategy of Conflict (Cambridge: Harvard University Press, 1960). 10John Mueller, Overblown: How Politicians and the Terrorism Industry Inflate National Security Threats, and Why We Believe Them (New York: Free Press, 2006). 11See, for example, Arreguín-Toft, How the Weak Win Wars; Andrew J.R. Mack, \"Why Big Nations Lose Small Wars: The Politics of Asymmetric Conflict,\" World Politics 27, no. 2 (1975): 175–200; Gil Merom, How Democracies Lose Small Wars: State, Society, and the Failures of France in Algeria, Israel in Lebanon, and the United States in Vietnam (Cambridge: Cambridge University Press, 2003). 12Schelling, The Strategy of Conflict. 13Background knowledge makes strategic games possible in the first place. Strategic games depend on the mutual ascription of \"game worthiness\" by the actors—that is, assuming the other's predisposition toward rational, self-interested, unemotional decision making. See Erving Goffman, Strategic Interaction (Philadelphia: University of Pennsylvania Press, 1969), 96. 14Emanuel Adler and Vincent Pouliot, \"The Practice Turn in International Relations\" (draft manuscript, 2009). 15Schelling, The Strategy of Conflict. 16On diffusion of meanings, see Martha Finnemore and Kathryn Sikkink, \"International Norm Dynamics and Political Change,\" International Organization 52, no. 4 (1998): 887–917. On communicative action, see Thomas Risse, \"'Let's Argue!' Communicative Action in World Politics,\" International Organization 54, no. 1 (2000): 1–39. On speech acts, see Friedrich V. Kratochwil, Rules, Norms, and Decisions. On the Conditions of Practical and Legal Reasoning in International Relations and Domestic Affairs (Cambridge: Cambridge University Press, 1989); Nicholas G. Onuf, World of Our Making: Rules and Rule in Social Theory and International Relations (Columbia: University of South Carolina Press, 1989). On the socialization of actors, see Jeffrey T. Checkel, \"International Institutions and Socialization in Europe: Introduction and Framework,\" International Organization 59, no. 4 (2005): 801–26. On learning, see Emanuel Adler, Communitarian International Relations: The Epistemic Foundations of International Relations (London and New York: Routledge, 2005); Alexander Wendt, Social Theory of International Politics (Cambridge: Cambridge University Press, 1999). 17The work by Karin Fierke and Barry O'Neill points into this direction. Fierke, Changing Games, Changing Strategies; Barry O'Neill, Honor, Symbols, and War (Ann Arbor: University of Michigan Press, 1999). 18From time to time, security studies scholars have acknowledged that non-material elements of power play a role. Kenneth Waltz includes \"political stability and competence\" as elements of power. These, however, remain largely inconsequential for his theory. Kenneth N. Waltz, Theory of International Politics (New York: McGraw-Hill, 1979), 131. 19David A. Baldwin, \"Power Analysis and World-Politics. New Trends Versus Old Tendencies,\" World Politics 31, no. 2 (1979): 161–94; Robert O. Keohane and Joseph S. Nye, Power and Interdependence: World Politics in Transition (Boston: Little, Brown, 1977); Joseph S. Nye, Soft Power: The Means to Success in World Politics, 1st ed. (New York: Public Affairs, 2004). 20On agential and structural power, see Michael N. Barnett and Raymond Duvall, eds., Power in Global Governance (Cambridge: Cambridge University Press, 2005); Stefano Guzzini, \"Structural Power: The Limits of Neorealist Power Analysis,\" International Organization 47, no. 3 (1993): 443–78. 21On the pursuit of instrumental goals, see Jon Elster, The Cement of Society: A Study of Social Order (Cambridge: Cambridge University Press, 1989). On the pursuit of common understanding, see Jürgen Habermas, The Theory of Communicative Action, trans. Thomas McCarthy (Boston: Beacon Press, 1984). 22On knowledge represented as valid or true, see Habermas, The Theory of Communicative Action, 20–21. 23Alexander, \"Performance and Power;\" Juergensmeyer, Terror in the Mind of God. 24Jeffrey C. Alexander, \"From the Depths of Despair: Performance, Counterperformance, and 'September 11,'\" Sociological Theory 22, no. 1 (2004): 90–91. 25Ibid., 92. 26Jeffrey C. Alexander, \"Cultural Pragmatics: Social Performance between Ritual and Strategy,\" Sociological Theory 22, no. 4 (2004): 529. 27On the expansion of security threats, see Stephen M. Walt, \"The Renaissance of Security Studies,\" International Studies Quarterly 35, no. 2 (1991): 211–39; Roland Paris, \"Human Security: Paradigm Shift or Hot Air?,\" International Security 26, no. 2 (2001): 87–102. On the role of identity, norms, and community in shaping security, see Emanuel Adler and Michael Barnett, Security Communities (Cambridge: Cambridge University Press, 1998); Karl. W. Deutsch, et al., Political Community and the North Atlantic Area (Princeton: Princeton University Press, 1957). 28Lawrence Freedman, Deterrence (Cambridge: Polity Press, 2004); Lawrence Freedman, \"Deterrence: A Reply,\" Journal of Strategic Studies 28, no. 5 (2005): 798–801; Patrick M. Morgan, Deterrence Now (Cambridge: Cambridge University Press, 2003); Patrick M. Morgan, \"Taking the Long View of Deterrence,\" Journal of Strategic Studies 28, no. 5 (2005): 751–63. 29Keith Krause and Michael C. Williams, eds., Critical Security Studies: Concepts and Cases (Minneapolis: University of Minnesota Press, 1997); Michael C. Williams, \"Identity and the Politics of Security,\" European Journal of International Relations 4, no. 2 (1998): 204–25; Jennifer Mitzen, \"Ontological Security in World Politics: State Identity and the Security Dilemma,\" European Journal of International Relations 12, no. 3 (2006): 341–70. 30Duncan Snidal, \"Rational Choice and International Relations,\" in Handbook of International Relations, ed. Walter Carlsnaes, Thomas Risse, and Beth Simmons (New York: Sage, 2002), 74 (emphasis in the original). 31For a better understanding of rationality along these lines, see John R. Searle, Mind, Language and Society: Philosophy in the Real World (New York: Basic Books, 1998). 32For an elaboration of the structural changes underlying this development, see Emanuel Adler, \"Complex Deterrence in the Asymmetric-Warfare Era,\" in Complex Deterrence: Strategy in the Global Age, ed. T.V. Paul, Patrick M. Morgan, and James J. Wirtz (Chicago: The University of Chicago Press, 2009), 85–108. This article illuminates the dilemma by looking at one of the most policy-relevant situations in which it arises, namely states confronting threats and attacks from terrorist organizations. 33Adler, \"Complex Deterrence in the Asymmetric-Warfare Era.\" 34Of course, preexisting intersubjective perceptions of victory and defeat (and broader norms) also determine, in part, which performances are accepted as compelling. Killing civilians or blowing up oneself is not a compelling performance in Western states. 35Mueller, Overblown; James H. Lebovic, Deterring International Terrorism and Rogue States (London: Routledge, 2007). 36Juergensmeyer, Terror in the Mind of God, 135. 37On audience costs, see James D. Fearon, \"Domestic Political Audiences and the Escalation of International Disputes,\" American Political Science Review 88, no. 3 (1994): 577–92. 38The predominant empirical pattern is that terrorist leaders set the dilemma and Western leaders fall for it, but the dilemma's logic may also work the other way around. This would require Western leaders provoking terrorist groups to strike back, expecting to benefit from the response. The predominant empirical pattern, however, is explained by the structural and process conditions outlined in this section and is perhaps also (in some cases) due to normative reasons. 39\"Damned if you do, damned if you don't,\" however, is not a goal; terrorists are moved by a variety of goals depending on historical, geographical, cultural, and political contexts. Juergensmeyer, on the other hand, hesitates to refer to past acts of terrorism as \"aimed at an immediate, earthly, or strategic goal. Rather, they were dramatic events, intended to impress for their symbolic significance. As such, they could be analyzed as one would any other symbol, ritual, or sacred drama.\" Juergensmeyer, \"Terror as Deadly Theater,\" 3. 40Bradley Burston, \"The Racist Israeli Fascist in Me,\" Ha'aretz, 16 March 2009, www.haaretz.com/hasen/spages/1064578.html (accessed 16 March 2009). 41Schelling, The Strategy of Conflict, 7. 42Glenn H. Snyder, Deterrence and Defense: Toward a Theory of National Security (Princeton: Princeton University Press, 1961), 14–16. 43Jennifer Mitzen, personal communication with author, 29 October 2006. See also Amir Lupovici, Tel Aviv University, \"Is it Possible to Ride Two Horses at Once? Physical Security, Ontological Security, and the Norm of Deterrence\" (paper presented at the second annual conference for political science research students, University of Haifa, 26 December 2006). 44Freedman, Deterrence, 4–5. 45The social support on which terrorist groups rely cannot be taken as given; they have to use performative power in order to win these narratives. For a related argument, see Arreguín-Toft, How the Weak Win Wars. 46On the difficult moral questions that asymmetric warfare raises for states that respond to provocations by terrorists who cannot be distinguished from non-combatants, see Neta C. Crawford, \"Just War Theory and the U.S. Counterterror War,\" Perspectives on Politics 1, no. 1 (2003): 5–25. 47Freedman, Deterrence, 122. The relationship between the levels of violent response and radicalization may not be linear, however. New polls seem to suggest that the support of terrorism among possible audiences in the Muslim world is actually declining, partly because of increasing casualties among Muslims and also because no practical solutions are being offered. See Scott Shane, \"Rethinking Our Terrorist Fears,\" New York Times, 27 September 2009, http://www.nytimes.com/2009/09/27/weekinreview/27shane.html?ref=weekinreview. Yet since Hamas and Hezbollah are complex social and political movements, as long as they successfully perform welfare functions, the support of their audience may be higher than in other areas, thus making the dilemma particularly severe for Israel. I thank Patricia Greve for helping me see this point more clearly. 48I thank Jennifer Mitzen for helping me sharpen this point. For the leadership role in decoupling terrorists' performances see John Mueller, \"Terrorism and the Dynamics of Threat Exaggeration\" (prepared for presentation at the annual meeting of the American Political Science Association, Washington, D.C., 1–4 September 2005). 49I thank Jennifer Mitzen and Patricia Greve for helping me see this point more clearly. 50From a different perspective, Schelling, in his celebrated conceptualization, posits that the goal of acting \"irrationally\" is to enhance deterrence, not social power. Schelling, The Strategy of Conflict, 16–18. Compare also his discussion of \"commitment\" and leaving the \"last clear chance\" to \"avert mutual damage\" to the other party (ibid., 37–42). 51Doron Rosenblum, \"The Rules,\" Ha'aretz, 14 July 2006, www.haaretz.com/hasen/objects/pages/PrintArticleEn.jhtml?itemNo=738387 (accessed 14 July 2006). 52Zeev Maoz, Strategy of Security Studies no Ha'aretz, 27 July 2006, (accessed 13 October the role in the dilemma Israel and the role between the the Cold that in not a \"damned if you do, damned if you don't\" dilemma for the United the not seek a violent response from the United but and would have more damned if they used force because of the of mutual they to nuclear On the other hand, Hezbollah and other terrorist groups stage terrorist attacks to provoke Israel. because Israeli political and security leaders in as a social and that on its reputation to Israeli leaders for using force for the of deterrence, not for the terrorists' but also and practice into a of their violent response. See also Lupovici, \"Is it Possible to Ride Two Horses at Israel is for an Ha'aretz, December (accessed 26 March 2009). Nations \"Human in and of the United Nations on the Conflict, September 2009, in a European Security December (accessed 2006). to Arreguín-Toft, and particularly states more often asymmetric that are if because these is a that any war be Arreguín-Toft, How the Weak Win \"The The New 2006, (accessed 13 October from The 2 2006. War with Affairs no. (2006): \"The Ha'aretz, 2006, (accessed 2006). \"The Nicholas D. for New York Times, July 2006, (accessed July 2006). The Power Europe: A in Journal of Studies no. 2 (2002): Win an Times, 3 (accessed Security A in a of the European \"The European 2005), (accessed On to terrorism have the of the see and O. a Journal of Studies no. 1 see in the The Politics of International Socialization the Cold War University Press, 2005); Emanuel Adler, \"The of Security Communities of and War European Journal of International Relations no. 2 \"The of Security and Walter, \"The Strategies of Terrorism,\" \"Terrorism and the Dynamics of Threat J. Politics or of International Security no. 4 (2006): For the of in international see Jon Mercer, International Organization no. 1 and Karin M. Fierke, of The Politics of and Political in the Middle European Journal of International Relations no. 1 the of Terrorism on Public (paper presented at the annual meeting of the International Studies Association, New York 2009). and in International Politics,\" Security Studies see Mueller, \"Terrorism and the Dynamics of Threat On response to see \"Terrorism and the of in Terrorism: ed. Lawrence and Terrorism: The the and the Public (London: Routledge, 2003). socially constructing terrorists as see Karin M. Fierke, \"The War on Terrorism: A Critical Studies in International Affairs 16 (2005): Ontological to threats to the of and thus, to an of in the Mitzen, \"Ontological Security in World Politics.\" See also Lupovici, \"Is Possible to Ride Two Horses at why of is the Cold War of to with the of mutual which into a a strategy the dimension of through performative power and the rules of the Mitzen, personal \"Ontological Security in World Politics.\" \"Domestic Political R. with a New York Times, 27 2006, (accessed October 2009). \"Deterrence: A Reply,\" an perspective, this that a strategy in may into thank for this On the other hand, the may be partly through leadership and to and which may have partly to Muslims in American may help to in of terrorist appeal to U.S. to solutions may have a similar and Walter, \"The Strategies of and Fierke, of \"From the Depths of \"Terrorism and the Dynamics of Threat and Walter, \"The Strategies of \"Terrorism and the Dynamics of Threat \"Terrorism and the Dynamics of Threat strategic engage in as their own from the point of of the as to the Goffman, Strategic \"Terrorism as Theater,\" 3. \"Complex Deterrence in the Asymmetric-Warfare Era,\" by denial structural conditions has a to its are to of the strategy of the on terrorist and by A of to a of On the other hand, examples of by strategy of the South into the World War and the to the World the see Freedman, Deterrence, however, may be difficult as Arreguín-Toft argues, \"The of threats can than an can Arreguín-Toft, How the Weak Win \"From to A Study of International Security World Politics no. 1 See also G. John (Princeton: Princeton University Press, D. and Israel in the and no. to March 2009, (accessed 13 2009).",
+      "cited_by": 46,
+      "volume": "19",
+      "issue": "2",
+      "pages": "199–229",
+      "publisher": "Taylor & Francis",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
         }
       ],
       "source": "openalex"
@@ -17194,6 +17604,39 @@
       "source": "openalex"
     },
     {
+      "id": "https://openalex.org/W2284731161",
+      "title": "When security community meets balance of power: overlapping regional mechanisms of security governance",
+      "year": 2009,
+      "date": "2009-04-30",
+      "journal": "Cambridge University Press eBooks",
+      "issn": "",
+      "type": "book-chapter",
+      "doi": "https://doi.org/10.1017/cbo9781139087339.004",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": ". By now arguments about the varieties of international order abound in International Relations. These disputes include arguments about the security mechanisms, institutions, and practices that sustain international orders, including balance of power and alliances, hegemony, security regimes based on regional or global institutions, public, private, and hybrid security networks, as well as different kinds of security communities. The way these orders coexist across time and space, however, has not been adequately theorised. In this article we seek to show (A) that, while analytically and normatively distinct, radically different orders, and in particular the security systems of governance on which they are based (such as balance of power and security community), often coexist or overlap in political discourse and practice. (B) We will attempt to demonstrate that the overlap of security governance systems may have important theoretical and empirical consequences: First, theoretically our argument sees ‘balance of power’ and ‘security community’ not only as analytically distinct structures of security orders, but focuses on them specifically as mechanisms based on a distinct mixture of practices. Second, this move opens up the possibility of a complex (perhaps, as John Ruggie called it, a ‘multiperspectival’) vision of regional security governance. Third, our argument may be able to inform new empirical research on the overlap of several security governance systems and the practices on which they are based. […]",
+      "cited_by": 13,
+      "volume": "",
+      "issue": "",
+      "pages": "59–84",
+      "publisher": "Cambridge University Press",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        },
+        {
+          "name": "Patricia Greve",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        }
+      ],
+      "source": "openalex",
+      "book_title": "Globalising the Regional, Regionalising the Global"
+    },
+    {
       "id": "https://openalex.org/W1495754159",
       "title": "The European Court of Justice and its relations with the European Court of Human Rights: The quest for enhanced reliance, coherence and legitimacy",
       "year": 2009,
@@ -17558,6 +18001,33 @@
           "name": "Piki Ish-Shalom",
           "country": "Israel",
           "institution": "Hebrew University of Jerusalem"
+        }
+      ],
+      "source": "openalex"
+    },
+    {
+      "id": "https://openalex.org/W2140813919",
+      "title": "The Spread of Security Communities: Communities of Practice, Self-Restraint, and NATO's Post—Cold War Transformation",
+      "year": 2008,
+      "date": "2008-05-13",
+      "journal": "European Journal of International Relations",
+      "issn": "1354-0661",
+      "type": "article",
+      "doi": "https://doi.org/10.1177/1354066108089241",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "This article invokes a combination of analytical and normative arguments that highlight the leading role of practices in explaining the expansion of security communities. The analytical argument is that collective meanings, on which peaceful change is based, cognitively evolve — i.e. they are established in individuals' expectations and dispositions and they are institutionalized in practice — because of communities of practice. By that we mean like-minded groups of practitioners who are bound, both informally and contextually, by a shared interest in learning and applying a common practice. The normative argument is that security communities rest in part on the sharing of rational and moral expectations and dispositions of self-restraint. This thesis is illustrated by the example of the successful expansion of security-community identities from a core of North Atlantic Treaty Organization (NATO) states to Central and Eastern European countries during the 1990s, which was facilitated by a `cooperative-security' community of practice that, emerging from the Helsinki Process, endowed NATO with the practices necessary for the spread of self-restraint.",
+      "cited_by": 485,
+      "volume": "14",
+      "issue": "2",
+      "pages": "195–230",
+      "publisher": "SAGE Publishing",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
         }
       ],
       "source": "openalex"
@@ -18541,6 +19011,33 @@
       "source": "openalex"
     },
     {
+      "id": "https://openalex.org/W2018566034",
+      "title": "Barry Buzan's Use of Constructivism to Reconstruct the English School: `Not All the Way Down'",
+      "year": 2005,
+      "date": "2005-08-01",
+      "journal": "Millennium Journal of International Studies",
+      "issn": "0305-8298",
+      "type": "article",
+      "doi": "https://doi.org/10.1177/03058298050340011701",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "",
+      "cited_by": 36,
+      "volume": "34",
+      "issue": "1",
+      "pages": "171–182",
+      "publisher": "SAGE Publishing",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Canada",
+          "institution": "University of Toronto"
+        }
+      ],
+      "source": "openalex"
+    },
+    {
       "id": "https://openalex.org/W1503269370",
       "title": "’Dumping the Anti-dumping Instruments in the Trade Relations Between the European Union and the State of Israel - The European Union’s Perspective",
       "year": 2005,
@@ -18829,6 +19326,40 @@
       "publisher": "Oxford University Press (OUP)",
       "source": "crossref",
       "faculty_author": "Yaacov Vertzberger"
+    },
+    {
+      "id": "https://openalex.org/W2116627490",
+      "title": "Knowledge in power: the epistemic construction of global governance",
+      "year": 2004,
+      "date": "2004-12-23",
+      "journal": "Cambridge University Press eBooks",
+      "issn": "",
+      "type": "book-chapter",
+      "doi": "https://doi.org/10.1017/cbo9780511491207.013",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "This chapter aims to anchor a normative theory of global governance in a reworked conception of epistemes that accounts for the role of productive power and institutional power in setting the conditions of possibility for good (moral) global governance. We outline our argument in three parts. First, we reintroduce a modified conception of episteme into the international relations (IR) literature to argue that power is a disposition (in the sense of ordering or controlling) that depends on knowledge. Power is also productive in the sense of defining the order of global things, to paraphrase Michel Foucault. In addition, we try to show that power's productive capacity is often followed by the development of formal and informal institutions that play a role in fixing meanings, which are necessary for global governance. Second, we put forward a normative theory of the requirements of global governance that builds on these notions. We argue that global governance rests on material capabilities and knowledge, without which there is no governance, and legitimacy and fairness, without which there is no moral governance. Third, we bring these insights to bear on a brief discussion of the effects of epistemes on emerging pockets of global governance and the possibilities and limits of moving global governance in a more sustainable and just direction. We use international trade and the related legal system to illustrate the above relationship.",
+      "cited_by": 120,
+      "volume": "",
+      "issue": "",
+      "pages": "294–318",
+      "publisher": "Cambridge University Press",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
+        },
+        {
+          "name": "Steven Bernstein",
+          "country": "China",
+          "institution": "University of International Relations"
+        }
+      ],
+      "source": "openalex",
+      "book_title": "Power in Global Governance",
+      "isbn": "9780521840248"
     },
     {
       "id": "https://openalex.org/W2322410980",
@@ -19357,6 +19888,33 @@
       "publisher": "SAGE Publications",
       "source": "crossref",
       "faculty_author": "Alfred Tovias"
+    },
+    {
+      "id": "https://openalex.org/W1937327673",
+      "title": "Evolutionary Interpretations of World Politics<i>Evolutionary Interpretations of World Politics</i>. Edited by Williams R. Thompson. (New York and London: Routledge, 2001. Pp. 352. $90.00. cloth, $26.95 paper.)",
+      "year": 2003,
+      "date": "2003-08-01",
+      "journal": "The Journal of Politics",
+      "issn": "0022-3816",
+      "type": "article",
+      "doi": "https://doi.org/10.1111/1468-2508.00219_6",
+      "pdf_url": "",
+      "cover_url": "",
+      "abstract": "",
+      "cited_by": 0,
+      "volume": "65",
+      "issue": "3",
+      "pages": "918–920",
+      "publisher": "University of Chicago Press",
+      "faculty_author": "Emanuel Adler",
+      "authors": [
+        {
+          "name": "Emanuel Adler",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
+        }
+      ],
+      "source": "openalex"
     },
     {
       "id": "https://openalex.org/W2216814303",

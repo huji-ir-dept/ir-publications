@@ -1319,13 +1319,34 @@ function buildProfileNet(pubs, facName){
   const nameToCanonical={};
 
   function getCanonical(cleaned, authorObj){
-    // Check if already seen
+    // Check cache first
     if(nameToCanonical[cleaned]) return nameToCanonical[cleaned];
-    // Match against faculty
+    // Match against faculty (most reliable)
     const facMatch=allFacNames.find(fn=>isFacultyAuthor(cleaned,fn));
-    const canonical=facMatch||cleaned;
-    nameToCanonical[cleaned]=canonical;
-    return canonical;
+    if(facMatch){
+      nameToCanonical[cleaned]=facMatch;
+      return facMatch;
+    }
+    // For external authors: try to merge near-duplicate names
+    // e.g. "J. Smith" and "John Smith" should be the same node
+    // Check if any existing canonical in authorMap is likely the same person
+    const cleanedLast=cleaned.split(/\s+/).pop();
+    for(const existing of Object.keys(authorMap)){
+      const existingLast=existing.split(/\s+/).pop();
+      if(cleanedLast===existingLast && cleanedLast.length>3){
+        // Same last name — check if first name/initial compatible
+        const cleanedFirst=cleaned.split(/\s+/)[0];
+        const existingFirst=existing.split(/\s+/)[0];
+        if(cleanedFirst===existingFirst||
+           cleanedFirst===existingFirst[0]+"."||
+           existingFirst===cleanedFirst[0]+"."){
+          nameToCanonical[cleaned]=existing;
+          return existing;
+        }
+      }
+    }
+    nameToCanonical[cleaned]=cleaned;
+    return cleaned;
   }
 
   pubs.forEach(pub=>{
