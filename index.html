@@ -315,7 +315,11 @@ async function loadData(){
     const d=await r.json();
     allPubs=d.publications||[];
     facMeta={};
-    (d.faculty_meta||[]).forEach(f=>facMeta[f.name]=f);
+    (d.faculty_meta||[]).forEach(f=>{
+      facMeta[f.name]=f;
+      // Also index by variants so "Yoram Z. Haftel" → facMeta["Yoram Haftel"]
+      (f.name_variants||[]).forEach(v=>{ if(v!==f.name) facMeta[v]=f; });
+    });
 
     const years=allPubs.map(p=>p.year).filter(Boolean);
     dataFromYear=years.length?Math.min(...years):2000;
@@ -1388,7 +1392,10 @@ function buildProfileNet(pubs, facName){
       if(!a.name) return;
       const cleaned=cleanAuthorName(a.name);
       if(!cleaned||/^\d+$/.test(cleaned)||cleaned.length<2) return;
-      // Skip self
+      // Skip self — strip middle initials before comparing (handles "Yoram Z. Haftel" vs "Yoram Haftel")
+      const cleanedNoMid = cleaned.replace(/\s+[A-Za-z]\.\s*/g," ").replace(/\s+/g," ").trim();
+      const facNameNoMid = facName.replace(/\s+[A-Za-z]\.\s*/g," ").replace(/\s+/g," ").trim();
+      if(cleanedNoMid.toLowerCase()===facNameNoMid.toLowerCase()) return;
       if(isFacultyAuthor(cleaned, facName)||cleaned===facName) return;
 
       const canonical=getCanonical(cleaned, a);
@@ -1432,6 +1439,9 @@ function buildProfileNet(pubs, facName){
       if(!a.name)return;
       const cleaned=cleanAuthorName(a.name);
       if(!cleaned)return;
+      const cleanedNoMid=cleaned.replace(/\s+[A-Za-z]\.\s*/g," ").replace(/\s+/g," ").trim();
+      const facNameNoMid=facName.replace(/\s+[A-Za-z]\.\s*/g," ").replace(/\s+/g," ").trim();
+      if(cleanedNoMid.toLowerCase()===facNameNoMid.toLowerCase())return;
       if(isFacultyAuthor(cleaned,facName)||cleaned===facName)return;
       const canonical=nameToCanonical[cleaned]||cleaned;
       if(nodeIds.has(canonical)&&canonical!==facName) coauthors.push(canonical);

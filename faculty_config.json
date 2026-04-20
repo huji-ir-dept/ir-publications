@@ -94,7 +94,13 @@
       "email": "Yoram.Haftel@mail.huji.ac.il",
       "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/yvrm_hptl.jpg",
       "active": true,
-      "orcid": "0000-0002-8142-9647"
+      "orcid": "0000-0002-8142-9647",
+      "name_variants": [
+        "Yoram Haftel",
+        "Yoram Z. Haftel",
+        "Y. Haftel",
+        "Y.Z. Haftel"
+      ]
     },
     {
       "name": "Lior Herman",
