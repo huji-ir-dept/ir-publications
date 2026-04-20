@@ -294,12 +294,23 @@ def fetch_from_openalex(author_id, from_year, until_year=None):
                         .get("display_name","") or "").lower().strip()
             work_type = (w.get("type") or "").lower()
             title = (w.get("title") or "").lower().strip()
-            # סנן ביקורות ספרים
+            title_raw = (w.get("title") or "")
+            # סנן ביקורות ספרים לפי סוג
             if work_type in ("book-review", "review"):
                 return True
             # סנן front matter ו-editorial content לפי כותרת
             if any(kw in title for kw in OA_SKIP_TITLES):
                 return True
+            # סנן ביקורות ספרים לפי תבנית כותרת:
+            # "Coleman, The Nelson Touch... Pp. xix, $35.00 ISBN..."
+            if _re.search(r'\bISBN\b', title_raw): return True
+            if _re.search(r'\bPp\.\s+[ivxlcdm\d]', title_raw): return True
+            if _re.search(r'\$\d+\.\d{2}', title_raw): return True
+            # "By [Author]. [Publisher]," — book review format
+            if _re.search(r'\.\s+By\s+[A-Z][a-z]', title_raw): return True
+            if _re.search(r'\bBy\s+[A-Z][a-z]+\s+[A-Z][a-z]+', title_raw): return True
+            # HTML tags in title = usually OpenAlex markup for reviews
+            if _re.search(r'<[bi]>', title_raw): return True
             # OSF: קבל רק preprints, דחה registrations וכו'
             if "osf" in src_name and "preprint" not in src_name:
                 return True
@@ -453,9 +464,16 @@ def fetch_from_crossref(name, from_year, until_year=None, orcid=None):
             return None
 
         # סנן כותרות שאינן פרסומים מחקריים
-        title_check = (item.get("title") or [""])[0].lower().strip() if isinstance(item.get("title"), list) else (item.get("title") or "").lower().strip()
+        title_raw = (item.get("title") or [""])[0] if isinstance(item.get("title"), list) else (item.get("title") or "")
+        title_check = title_raw.lower().strip()
         if any(kw in title_check for kw in SKIP_TITLE_KEYWORDS):
             return None
+        # סנן ביקורות ספרים לפי תבנית כותרת
+        if _re.search(r'\bISBN\b', title_raw): return None
+        if _re.search(r'\bPp\.\s+[ivxlcdm\d]', title_raw): return None
+        if _re.search(r'\$\d+\.\d{2}', title_raw): return None
+        if _re.search(r'\.\s+By\s+[A-Z][a-z]', title_raw): return None
+        if _re.search(r'\bBy\s+[A-Z][a-z]+\s+[A-Z][a-z]+', title_raw): return None
 
         doi_val  = item.get("DOI", "")
         pub_date = item.get("published", {})

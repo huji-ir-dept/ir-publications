@@ -665,16 +665,24 @@ function dnetClearFocus(){
   document.getElementById("dnet-focus-clear").style.display="none";
   if(dnetFocusFn)dnetFocusFn(null);
 }
-function buildDeptNet(){
-  const SKIP_PUB_TITLES = [
-    "cover and front matter","front matter","back matter",
-    "issue information","table of contents","editorial board",
-    "masthead","book reviews"
+function isBookReviewTitle(title){
+  if(!title) return false;
+  // Front matter / editorial
+  const SKIP_KW = [
+    "cover and front matter","front matter","back matter","issue information",
+    "table of contents","editorial board","masthead","book reviews","country/region reports"
   ];
-  const filteredPubs = allPubs.filter(p=>{
-    const t=(p.title||"").toLowerCase();
-    return !SKIP_PUB_TITLES.some(kw=>t.includes(kw));
-  });
+  const tl = title.toLowerCase();
+  if(SKIP_KW.some(kw=>tl.includes(kw))) return true;
+  // Book review citation patterns
+  if(/\bISBN\b/.test(title)) return true;
+  if(/\bPp\.\s+[\divxlcdm]/i.test(title)) return true;
+  if(/\$\d+\.\d{2}/.test(title)) return true;
+  if(/\.\s+By\s+[A-Z][a-z]/.test(title)) return true;
+  if(/\bBy\s+[A-Z][a-z]+\s+[A-Z][a-z]+/.test(title)) return true;
+  if(/<[bi]>/.test(title)) return true;
+  return false;
+  const filteredPubs = allPubs.filter(p=>!isBookReviewTitle(p.title));
   if(dnetSim){dnetSim.stop();dnetSim=null;}
   const svg=d3.select("#dnet-svg");
   svg.selectAll("*").remove();
@@ -1309,15 +1317,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeProfile();clos
 
 function buildProfileNet(pubs, facName){
   // סנן front matter, editorial board, וכו' — אינם פרסומים מחקריים
-  const SKIP_PUB_TITLES = [
-    "cover and front matter","front matter","back matter",
-    "issue information","table of contents","editorial board",
-    "masthead","book reviews"
-  ];
-  pubs = pubs.filter(p=>{
-    const t=(p.title||"").toLowerCase();
-    return !SKIP_PUB_TITLES.some(kw=>t.includes(kw));
-  });
+  pubs = pubs.filter(p=>!isBookReviewTitle(p.title));
   if(profileD3Sim){profileD3Sim.stop(); profileD3Sim=null;}
   const svg=d3.select("#pnet-svg");
   svg.selectAll("*").remove();
@@ -1401,9 +1401,15 @@ function buildProfileNet(pubs, facName){
   // אבל לא נוסיף את כל הכותבים לרשת (רק 1-2 הראשונים + last)
   const MAX_AUTHORS_PER_PUB = 20;
 
-  pubs.forEach(pub=>{
-    let pubAuthors = pub.authors || [];
-    // אם יש יותר מ-MAX_AUTHORS_PER_PUB — קח את N הראשונים בלבד
+  pubs.forEach(p=>{
+    let pubAuthors = p.authors || [];
+    const pub = p;
+    // ספרים ערוכים עם 8+ כותבים = תורמי פרקים, לא שיתופי פעולה ישירים
+    if(p.type==='book' || p.type==='edited-book'){
+      if(pubAuthors.length >= 8) return; // דלג על ספרים ערוכים
+      // continue
+    }
+    // מאמרים עם יותר מ-MAX_AUTHORS_PER_PUB — קח את N הראשונים בלבד
     if(pubAuthors.length > MAX_AUTHORS_PER_PUB){
       pubAuthors = pubAuthors.slice(0, MAX_AUTHORS_PER_PUB);
     }
@@ -1595,15 +1601,7 @@ function closeDeptMap(){
 }
 
 function buildDeptMap(){
-  const SKIP_MAP_TITLES = [
-    "cover and front matter","front matter","back matter",
-    "issue information","table of contents","editorial board",
-    "masthead","book reviews"
-  ];
-  const mapPubs = allPubs.filter(p=>{
-    const t=(p.title||"").toLowerCase();
-    return !SKIP_MAP_TITLES.some(kw=>t.includes(kw));
-  });
+  const mapPubs = allPubs.filter(p=>!isBookReviewTitle(p.title));
   const svg=d3.select("#dmap-svg");
   svg.selectAll("*").remove();
   const W=900,H=420;
