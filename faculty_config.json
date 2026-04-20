@@ -174,7 +174,10 @@
       "email": "Dan.Miodownik@mail.huji.ac.il",
       "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/dan_miodownik.png",
       "active": true,
-      "orcid": "0000-0003-3825-3911"
+      "orcid": "0000-0003-3825-3911",
+      "doi_blacklist": [
+        "https://doi.org/10.1111/j.1600-065x.1997.tb00978.x"
+      ]
     },
     {
       "name": "Devorah Manekin",
@@ -237,18 +240,6 @@
       "orcid": "0000-0002-0665-4131"
     },
     {
-      "name": "Or Rabinowitz",
-      "name_he": "אור רבינוביץ'",
-      "rank": "Dr.",
-      "role": "",
-      "email": "or.rabinowitz-batz@mail.huji.ac.il",
-      "photo_url": "",
-      "active": false,
-      "orcid": "",
-      "skip_openalex": true,
-      "departure_note": "Left the department"
-    },
-    {
       "name": "Oded Steinberg",
       "name_he": "עודד שטיינברג",
       "rank": "Dr.",
@@ -277,6 +268,168 @@
       "photo_url": "https://i.postimg.cc/QN947T4d/temp-Image-HP3l-Uy.avif",
       "orcid": "0000-0003-1862-501X",
       "active": true
+    },
+    {
+      "name": "Or Rabinowitz",
+      "name_he": "אור רבינוביץ'",
+      "name_variants": [
+        "Or Rabinowitz",
+        "Ori Rabinowitz",
+        "Or Rabinowitz-Batz"
+      ],
+      "rank": "Senior Lecturer",
+      "role": "",
+      "email": "or.rabinowitz-batz@mail.huji.ac.il",
+      "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/or_rabinowitz.jpg",
+      "active": true,
+      "orcid": "0000-0002-7551-831X"
+    },
+    {
+      "name": "Emanuel Adler",
+      "name_he": "עמנואל אדלר",
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "0000-0003-3464-2143",
+      "require_institutions": [
+        "hebrew university",
+        "university of toronto"
+      ]
+    },
+    {
+      "name": "Alfred Tovias",
+      "name_he": "אלפרד טוביאס",
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true
+    },
+    {
+      "name": "Uri Bialer",
+      "name_he": "אורי ביאלר",
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true
+    },
+    {
+      "name": "Joseph Heller",
+      "name_he": "יוסף הלר",
+      "name_variants": [
+        "Joseph Heller",
+        "Yosef Heller",
+        "Josef Heller",
+        "J. Heller"
+      ],
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": false,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true,
+      "skip_openalex": true,
+      "skip_reason": "Disambiguation: two Joseph Hellers at HUJI (historian vs zoologist) — use Crossref only"
+    },
+    {
+      "name": "Michla Pomerance",
+      "name_he": "מיכלה פומרנץ",
+      "name_variants": [
+        "Michla Pomerance",
+        "Michla Pomerance-Slonim"
+      ],
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true
+    },
+    {
+      "name": "Amnon Sella",
+      "name_he": "אמנון סלע",
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true
+    },
+    {
+      "name": "Sasson Sofer",
+      "name_he": "ששון סופר",
+      "rank": "Associate Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true
+    },
+    {
+      "name": "Rose Norman",
+      "name_he": "רוז נורמן",
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "skip_openalex": true,
+      "skip_crossref": true,
+      "skip_reason": "No publications found in any database"
+    },
+    {
+      "name": "Avraham Sela",
+      "name_he": "אברהם סלע",
+      "name_variants": [
+        "Avraham Sela",
+        "A. Sela"
+      ],
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true
+    },
+    {
+      "name": "Yaacov Vertzberger",
+      "name_he": "יעקב ורצברגר",
+      "name_variants": [
+        "Yaacov Vertzberger",
+        "Yaakov Vertzberger",
+        "Y. Vertzberger",
+        "Y.Y.I. Vertzberger"
+      ],
+      "rank": "Professor",
+      "role": "Emeritus",
+      "email": "yver@mscc.huji.ac.il",
+      "photo_url": "",
+      "active": true,
+      "retired": true,
+      "orcid": "",
+      "require_huji_affiliation": true
     }
   ]
 }
