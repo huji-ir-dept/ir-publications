@@ -674,12 +674,10 @@ function isBookReviewTitle(title){
   ];
   const tl = title.toLowerCase();
   if(SKIP_KW.some(kw=>tl.includes(kw))) return true;
-  // Book review citation patterns
+  // Book review citation patterns — clear signals only
   if(/\bISBN\b/.test(title)) return true;
   if(/\bPp\.\s+[\divxlcdm]/i.test(title)) return true;
   if(/\$\d+\.\d{2}/.test(title)) return true;
-  if(/\.\s+By\s+[A-Z][a-z]/.test(title)) return true;
-  if(/\bBy\s+[A-Z][a-z]+\s+[A-Z][a-z]+/.test(title)) return true;
   if(/<[bi]>/.test(title)) return true;
   return false;
   const filteredPubs = allPubs.filter(p=>!isBookReviewTitle(p.title));
