@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T13:04:43.640674Z",
+  "generated_at": "2026-05-01T10:59:03.148264Z",
   "until_year": null,
   "department": "Department of International Relations",
   "institution": "Hebrew University of Jerusalem",
@@ -27,7 +27,7 @@
       "active": true,
       "orcid": "0000-0001-6410-1212",
       "openalex_id": "https://openalex.org/A5057059805",
-      "cited_total": 276
+      "cited_total": 278
     },
     {
       "name": "Piki Ish-Shalom",
@@ -63,7 +63,7 @@
       "active": true,
       "orcid": "0000-0002-2340-1398",
       "openalex_id": "https://openalex.org/A5040889244",
-      "cited_total": 863
+      "cited_total": 864
     },
     {
       "name": "Orit Gazit-Lederman",
@@ -85,7 +85,7 @@
       "active": true,
       "orcid": "0000-0002-0083-2953",
       "openalex_id": "https://openalex.org/A5012930514",
-      "cited_total": 374
+      "cited_total": 376
     },
     {
       "name": "Moshe Hirsch",
@@ -108,6 +108,12 @@
       "photo_url": "https://en.ir.huji.ac.il/sites/default/files/styles/profile_thumbnail/public/iren/files/yvrm_hptl.jpg",
       "active": true,
       "orcid": "0000-0002-8142-9647",
+      "name_variants": [
+        "Yoram Haftel",
+        "Yoram Z. Haftel",
+        "Y. Haftel",
+        "Y.Z. Haftel"
+      ],
       "openalex_id": "https://openalex.org/A5009916137",
       "cited_total": 1507
     },
@@ -121,7 +127,7 @@
       "active": true,
       "orcid": "0000-0002-5201-3677",
       "openalex_id": "https://openalex.org/A5055792458",
-      "cited_total": 475
+      "cited_total": 476
     },
     {
       "name": "Guy Harpaz",
@@ -133,7 +139,7 @@
       "active": true,
       "orcid": "0000-0002-8416-6942",
       "openalex_id": "https://openalex.org/A5021898304",
-      "cited_total": 249
+      "cited_total": 250
     },
     {
       "name": "Daniel Wajner",
@@ -145,7 +151,7 @@
       "active": true,
       "orcid": "0000-0002-9038-0478",
       "openalex_id": "https://openalex.org/A5035755769",
-      "cited_total": 488
+      "cited_total": 493
     },
     {
       "name": "Lior Lehrs",
@@ -157,7 +163,7 @@
       "active": true,
       "orcid": "0000-0002-6488-4760",
       "openalex_id": "https://openalex.org/A5078547448",
-      "cited_total": 78
+      "cited_total": 79
     },
     {
       "name": "Oded Lowenheim",
@@ -208,7 +214,7 @@
         "https://doi.org/10.1111/j.1600-065x.1997.tb00978.x"
       ],
       "openalex_id": "https://openalex.org/A5039205717",
-      "cited_total": 1265
+      "cited_total": 1266
     },
     {
       "name": "Devorah Manekin",
@@ -220,7 +226,7 @@
       "active": true,
       "orcid": "0000-0002-5651-3396",
       "openalex_id": "https://openalex.org/A5072703485",
-      "cited_total": 644
+      "cited_total": 648
     },
     {
       "name": "Daniel Sobelman",
@@ -232,7 +238,7 @@
       "active": true,
       "orcid": "0000-0002-8679-9356",
       "openalex_id": "https://openalex.org/A5002803075",
-      "cited_total": 95
+      "cited_total": 96
     },
     {
       "name": "Omer Solodoch",
@@ -244,7 +250,7 @@
       "active": true,
       "orcid": "0000-0003-0347-5434",
       "openalex_id": "https://openalex.org/A5059002840",
-      "cited_total": 201
+      "cited_total": 202
     },
     {
       "name": "Arie Kacowicz",
@@ -268,7 +274,7 @@
       "active": true,
       "orcid": "0000-0002-2780-7440",
       "openalex_id": "https://openalex.org/A5018836403",
-      "cited_total": 264
+      "cited_total": 267
     },
     {
       "name": "Roni Porat",
@@ -280,7 +286,7 @@
       "active": true,
       "orcid": "0000-0002-0665-4131",
       "openalex_id": "https://openalex.org/A5021218068",
-      "cited_total": 2380
+      "cited_total": 2390
     },
     {
       "name": "Oded Steinberg",
@@ -350,7 +356,7 @@
         "university of toronto"
       ],
       "openalex_id": "https://openalex.org/A5013936660",
-      "cited_total": 9882
+      "cited_total": 9887
     },
     {
       "name": "Alfred Tovias",
@@ -364,7 +370,7 @@
       "orcid": "",
       "require_huji_affiliation": true,
       "openalex_id": "https://openalex.org/A5077067154",
-      "cited_total": 503
+      "cited_total": 504
     },
     {
       "name": "Uri Bialer",
@@ -424,7 +430,7 @@
       "orcid": "",
       "require_huji_affiliation": true,
       "openalex_id": "https://openalex.org/A5061744041",
-      "cited_total": 270
+      "cited_total": 271
     },
     {
       "name": "Rose Norman",
@@ -1897,28 +1903,6 @@
           "name": "Clareta Treger"
         }
       ]
-    },
-    {
-      "id": "manual-megiddo-2025-windmills",
-      "title": "Windmills of the Mind: Comments on Mattias Mahlmann's 'Mind and Rights'",
-      "year": 2025,
-      "date": "2025-01-01",
-      "journal": "Jerusalem Review of Legal Studies",
-      "volume": "31",
-      "pages": "52",
-      "type": "article",
-      "doi": "",
-      "faculty_author": "Tamar Megiddo",
-      "authors": [
-        {
-          "name": "Tamar Megiddo",
-          "country": "Israel",
-          "institution": "Hebrew University of Jerusalem"
-        }
-      ],
-      "abstract": "",
-      "cited_by": 0,
-      "source": "manual"
     },
     {
       "id": "https://openalex.org/W4402864106",
@@ -4258,13 +4242,39 @@
       "faculty_author": "Tamar Megiddo",
       "authors": [
         {
-          "name": "Tamar Megiddo"
+          "name": "Shiri Krebs",
+          "country": "United Kingdom",
+          "institution": "Royal Society"
         },
         {
-          "name": "Ronit Levine-Schnur"
+          "name": "Ronald Alcala",
+          "country": "United States",
+          "institution": "United States Military Academy"
         },
         {
-          "name": "Yael Berda"
+          "name": "Ka Lok Yip",
+          "country": "QA",
+          "institution": "Hamad bin Khalifa University"
+        },
+        {
+          "name": "Yahli Shereshevsky",
+          "country": "Israel",
+          "institution": "University of Haifa"
+        },
+        {
+          "name": "Ronit Levine‐Schnur",
+          "country": "Israel",
+          "institution": "Tel Aviv University"
+        },
+        {
+          "name": "Tamar Megiddo",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
+        },
+        {
+          "name": "Yael Berda",
+          "country": "Israel",
+          "institution": "Hebrew University of Jerusalem"
         }
       ],
       "source": "openalex"
@@ -4726,28 +4736,6 @@
       "publisher": "Oxford University Press (OUP)",
       "source": "crossref",
       "faculty_author": "Avraham Sela"
-    },
-    {
-      "id": "manual-megiddo-2023-legal-issues",
-      "title": "Legal Issues Concerning the Territory and Borders of the State of Israel",
-      "year": 2023,
-      "date": "2023-01-01",
-      "journal": "",
-      "book_title": "International Law",
-      "type": "book-chapter",
-      "doi": "",
-      "faculty_author": "Tamar Megiddo",
-      "authors": [
-        {
-          "name": "Tamar Megiddo",
-          "country": "Israel",
-          "institution": "Hebrew University of Jerusalem"
-        }
-      ],
-      "abstract": "",
-      "cited_by": 0,
-      "source": "manual",
-      "note": "In Hebrew. In: Yaël Ronen (ed.), International Law, 3rd ed."
     },
     {
       "id": "https://openalex.org/W4312037646",
@@ -8742,28 +8730,6 @@
       "faculty_author": "Alfred Tovias"
     },
     {
-      "id": "manual-megiddo-2020-online",
-      "title": "Online Activism, Digital Domination & the Rule of Trolls",
-      "year": 2020,
-      "date": "2020-01-01",
-      "journal": "Columbia Journal of Transnational Law",
-      "volume": "58",
-      "pages": "394",
-      "type": "article",
-      "doi": "",
-      "faculty_author": "Tamar Megiddo",
-      "authors": [
-        {
-          "name": "Tamar Megiddo",
-          "country": "Israel",
-          "institution": "Hebrew University of Jerusalem"
-        }
-      ],
-      "abstract": "",
-      "cited_by": 0,
-      "source": "manual"
-    },
-    {
       "id": "https://openalex.org/W4232516797",
       "title": "Chapter 2. Roman Decline and Teutonic Rejuvenation: The Racial German and English Gemeinschaft of Scholars (1850–90)",
       "year": 2019,
@@ -9842,72 +9808,6 @@
       "publisher": "Springer Nature Singapore",
       "source": "crossref",
       "faculty_author": "Avraham Sela"
-    },
-    {
-      "id": "manual-megiddo-2019-methodological",
-      "title": "Methodological Individualism",
-      "year": 2019,
-      "date": "2019-01-01",
-      "journal": "Harvard International Law Journal",
-      "volume": "60",
-      "pages": "219",
-      "type": "article",
-      "doi": "",
-      "faculty_author": "Tamar Megiddo",
-      "authors": [
-        {
-          "name": "Tamar Megiddo",
-          "country": "Israel",
-          "institution": "Hebrew University of Jerusalem"
-        }
-      ],
-      "abstract": "",
-      "cited_by": 0,
-      "source": "manual"
-    },
-    {
-      "id": "manual-megiddo-2019-fragmentation",
-      "title": "Beyond Fragmentation: On International Law's Integrationist Forces",
-      "year": 2019,
-      "date": "2019-01-01",
-      "journal": "Yale Journal of International Law",
-      "volume": "44",
-      "pages": "115",
-      "type": "article",
-      "doi": "",
-      "faculty_author": "Tamar Megiddo",
-      "authors": [
-        {
-          "name": "Tamar Megiddo",
-          "country": "Israel",
-          "institution": "Hebrew University of Jerusalem"
-        }
-      ],
-      "abstract": "",
-      "cited_by": 0,
-      "source": "manual"
-    },
-    {
-      "id": "manual-megiddo-2019-domestic",
-      "title": "The Domestic Standing of International Law: A Non-State Account",
-      "year": 2019,
-      "date": "2019-01-01",
-      "journal": "Columbia Journal of Transnational Law",
-      "volume": "57",
-      "pages": "494",
-      "type": "article",
-      "doi": "",
-      "faculty_author": "Tamar Megiddo",
-      "authors": [
-        {
-          "name": "Tamar Megiddo",
-          "country": "Israel",
-          "institution": "Hebrew University of Jerusalem"
-        }
-      ],
-      "abstract": "",
-      "cited_by": 0,
-      "source": "manual"
     },
     {
       "id": "https://openalex.org/W2989524509",
@@ -18004,31 +17904,6 @@
       "volume": "65",
       "issue": "9-10",
       "pages": "1462–1470"
-    },
-    {
-      "id": "manual-megiddo-2009-kosovo",
-      "title": "Lessons from Kosovo: The Law of Statehood and Palestinian Unilateral Independence",
-      "year": 2009,
-      "date": "2009-01-01",
-      "journal": "Journal of International Law & International Relations",
-      "volume": "5",
-      "pages": "89",
-      "type": "article",
-      "doi": "",
-      "faculty_author": "Tamar Megiddo",
-      "authors": [
-        {
-          "name": "Tamar Megiddo",
-          "country": "Israel",
-          "institution": "Hebrew University of Jerusalem"
-        },
-        {
-          "name": "Zohar Nevo"
-        }
-      ],
-      "abstract": "",
-      "cited_by": 0,
-      "source": "manual"
     },
     {
       "id": "https://openalex.org/W2113933955",
